@@ -15,9 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author ASUS
  */
-public class ComplexNumberTest {
+public class EntityTest {
     
-    public ComplexNumberTest() {
+    public EntityTest() {
+        
+        
+        
     }
     
     @BeforeAll

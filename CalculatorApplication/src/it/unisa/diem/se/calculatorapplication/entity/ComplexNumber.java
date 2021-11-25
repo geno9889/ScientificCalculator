@@ -10,4 +10,28 @@ package it.unisa.diem.se.calculatorapplication.entity;
  */
 public class ComplexNumber {
 
+    double real, img;
+	
+    ComplexNumber(double r, double i){
+	this.real = r;
+	this.img = i;
+   }
+
+    public double getReal() {
+        return real;
+    }
+
+    public double getImg() {
+        return img;
+    }
+
+    public void setReal(double real) {
+        this.real = real;
+    }
+
+    public void setImg(double img) {
+        this.img = img;
+    }
+    
+    
 }
