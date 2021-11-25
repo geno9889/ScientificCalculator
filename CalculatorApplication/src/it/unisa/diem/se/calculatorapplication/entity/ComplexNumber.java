@@ -9,5 +9,5 @@ package it.unisa.diem.se.calculatorapplication.entity;
  * @author Giuseppe
  */
 public class ComplexNumber {
-    
+
 }
