@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package it.unisa.diem.se.calculatorapplication.entity;
+package it.unisa.diem.se.calculatorapplicationtest.entity;
 
+import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
