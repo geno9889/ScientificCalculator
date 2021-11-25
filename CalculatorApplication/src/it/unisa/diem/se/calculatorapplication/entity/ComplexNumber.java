@@ -10,28 +10,45 @@ package it.unisa.diem.se.calculatorapplication.entity;
  */
 public class ComplexNumber {
 
-    double real, img;
-	
-    ComplexNumber(double r, double i){
-	this.real = r;
-	this.img = i;
-   }
-
-    public double getReal() {
-        return real;
+    private float real, imaginary;
+    
+    public ComplexNumber (float real) {
+        this.real = real;
+        this.imaginary = 0;
     }
-
-    public double getImg() {
-        return img;
+    
+    public ComplexNumber (float real, float imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
     }
-
-    public void setReal(double real) {
+    
+    public float getReal () {
+        return (real);
+    }
+    
+    public void setReal (float real) {
         this.real = real;
     }
-
-    public void setImg(double img) {
-        this.img = img;
+    
+    public float getImaginary () {
+        return (imaginary);
     }
     
+    public void setImaginary (float imaginary) {
+        this.imaginary = imaginary;
+    }
     
+     
+    /*public String toString () {
+        String string;
+        
+        string = String.format ("%.2f + %.2fi", real, imaginary);
+        
+        return (string);
+    }
+    
+    public void print () {
+        System.out.println (toString ());
+    }
+    */
 }
