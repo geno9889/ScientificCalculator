@@ -7,50 +7,69 @@ package it.unisa.diem.se.calculatorapplication.service;
 
 import java.util.List;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
-import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  *
- * @author Giuseppe
+ * @author marcograziano
  */
+
+@Getter
+@EqualsAndHashCode
+@ToString
+
 public class MathematicalOperations implements SingleOperationsInterface{
     
-    private ArrayList<String> operations = new ArrayList();
+    private HashMap<String,String> operations;
 
     public MathematicalOperations() {
-        this.operations.add("+");
-        this.operations.add("-");
-        this.operations.add("*");
-        this.operations.add("/");
-    }
-
-    public ArrayList<String> getOperations() {
-        return operations;
+        this.operations = new HashMap();
+        this.operations.put("+", "sum");
+        this.operations.put("-", "substraction");
+        this.operations.put("*", "moltiplication");
+        this.operations.put("/", "division");
     }
 
     @Override
     public boolean executeifExists(String operation, Stack stackNumbers) {
-        if (operation.length()==1){
-            if (operation.contentEquals(operations.get(0))){
-               // ComplexNumbers.sum(stackNumbers.elementAt(1),stackNumbers.elementAt(0));
-                return true;
+        if (operations.containsKey(operation)){
+            ComplexNumber temp = new ComplexNumber(0);
+            try {
+                Method m = ComplexNumber.class.getClass().getMethod(operations.get(operation));
+                m.invoke(temp, stackNumbers.elementAt(1), stackNumbers.elementAt(0));
+                Method m1 = getClass().getMethod(operation);
+                m1.invoke(temp, stackNumbers);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else if(operation.contentEquals(operations.get(1))){
-               // ComplexNumbers.substraction(stackNumbers.elementAt(1),stackNumbers.elementAt(0));
-                return true;
-            }
-            else if(operation.contentEquals(operations.get(2))){
-               // ComplexNumbers.multiplication(stackNumbers.elementAt(1),stackNumbers.elementAt(0));
-                return true;
-            }
-            
+            return true;
         }
         return false;
     }
     
-    
+    private void sum(ComplexNumber result, Stack stackNumbers){
+        stackNumbers.pop();
+        stackNumbers.pop();
+        stackNumbers.push(result);
+    }
 }
+
 
 
 

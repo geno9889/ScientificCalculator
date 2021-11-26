@@ -5,7 +5,7 @@
  */
 package it.unisa.diem.se.calculatorapplicationtest.service;
 
-import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
+import it.unisa.diem.se.calculatorapplication.impl.*;
 import java.util.ArrayList;
 import java.util.Stack;
 import org.junit.After;
@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
  *
  * @author marcograziano
  */
+
 public class MathematicalOperationsTest {
     private MathematicalOperations a;
     private Stack stack;
@@ -54,13 +55,13 @@ public class MathematicalOperationsTest {
     //
     // @Test
     // public void hello() {}
-    
+    /*
     @Test
     public void TestGetOperations() {
         ArrayList<String> s = a.getOperations();
         assertNotNull(s);
     }
-    
+    */
     @Test
     public void TestExecuteifExistsFalse() {
         Boolean r = a.executeifExists(op0,stack);
