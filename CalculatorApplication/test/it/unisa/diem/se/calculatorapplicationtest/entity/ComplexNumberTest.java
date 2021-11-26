@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class ComplexNumberTest {
     
-    ComplexNumber complexNumber1, complexNumber2;
+    private ComplexNumber complexNumber1, complexNumber2;
          
         
     @Before
@@ -44,22 +44,7 @@ public class ComplexNumberTest {
     // @Test
     // public void hello() {}
     
-    @Test
-        public void testGetters () {
-        assertNotNull(complexNumber1.getReal());
-        assertNotNull(complexNumber1.getImaginary());
-        assertNotNull(complexNumber2.getReal());
-        assertNotNull(complexNumber2.getImaginary());
-    }
-    
-    @Test
-        public void testSetters () {
-        ComplexNumber complexNumber3 = new ComplexNumber(1);
-        assertNotNull(complexNumber3);
-        complexNumber3.setReal(78);
-        complexNumber3.setImaginary(78);
-        assertNotNull(complexNumber3);
-    }
+   
         
         
 }

@@ -4,51 +4,33 @@
  */
 package it.unisa.diem.se.calculatorapplication.entity;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  *
  * @author Giuseppe
  */
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+
 public class ComplexNumber {
 
-    private float real, imaginary;
+    private double real, imaginary;
     
-    public ComplexNumber (float real) {
+    public ComplexNumber (double real) {
         this.real = real;
-        this.imaginary = 0;
+        this.imaginary = 0.0;
     }
     
-    public ComplexNumber (float real, float imaginary) {
+    public ComplexNumber (double real, double imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
-    
-    public float getReal () {
-        return (real);
-    }
-    
-    public void setReal (float real) {
-        this.real = real;
-    }
-    
-    public float getImaginary () {
-        return (imaginary);
-    }
-    
-    public void setImaginary (float imaginary) {
-        this.imaginary = imaginary;
-    }
-    
-     
-    /*public String toString () {
-        String string;
-        
-        string = String.format ("%.2f + %.2fi", real, imaginary);
-        
-        return (string);
-    }
-    
-    public void print () {
-        System.out.println (toString ());
-    }
-    */
+       
 }
