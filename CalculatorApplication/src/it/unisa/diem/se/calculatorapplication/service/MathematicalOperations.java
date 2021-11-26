@@ -5,7 +5,6 @@
 
 package it.unisa.diem.se.calculatorapplication.service;
 
-import java.util.List;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -25,7 +24,6 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-
 public class MathematicalOperations implements SingleOperationsInterface{
     
     private HashMap<String,String> operations;
@@ -40,22 +38,12 @@ public class MathematicalOperations implements SingleOperationsInterface{
 
     @Override
     public boolean executeifExists(String operation, Stack stackNumbers) {
+        Method m1;
         if (operations.containsKey(operation)){
-            ComplexNumber temp = new ComplexNumber(0);
             try {
-                Method m = ComplexNumber.class.getClass().getMethod(operations.get(operation));
-                m.invoke(temp, stackNumbers.elementAt(1), stackNumbers.elementAt(0));
-                Method m1 = getClass().getMethod(operation);
-                m1.invoke(temp, stackNumbers);
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
+                m1 = MathematicalOperations.class.getDeclaredMethod(operations.get(operation), String.class, Stack.class);
+                m1.invoke(this, operation, stackNumbers);
+            } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
             }
             return true;
@@ -63,13 +51,14 @@ public class MathematicalOperations implements SingleOperationsInterface{
         return false;
     }
     
-    private void sum(ComplexNumber result, Stack stackNumbers){
-        stackNumbers.pop();
-        stackNumbers.pop();
-        stackNumbers.push(result);
+    private void sum(String operation, Stack stackNumbers){
+        
+        ComplexNumber temp;
+        temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
+        stackNumbers.push(temp);
+        
     }
 }
-
 
 
 
