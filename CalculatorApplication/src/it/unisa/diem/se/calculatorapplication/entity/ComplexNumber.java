@@ -32,5 +32,11 @@ public class ComplexNumber {
         this.real = real;
         this.imaginary = imaginary;
     }
-       
+     
+    public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2){
+        ComplexNumber temp = new ComplexNumber(0, 0);
+        temp.real = c1.real + c2.real;
+        temp.imaginary = c1.imaginary + c2.imaginary;
+        return temp;
+    }
 }
