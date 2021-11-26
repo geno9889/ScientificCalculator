@@ -5,8 +5,8 @@
  */
 package it.unisa.diem.se.calculatorapplicationtest.service;
 
+import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.*;
-import java.util.ArrayList;
 import java.util.Stack;
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 public class MathematicalOperationsTest {
     private MathematicalOperations a;
-    private Stack stack;
+    private Stack <ComplexNumber> stack;
     private String op0;
     private String op1;
     
@@ -29,8 +29,8 @@ public class MathematicalOperationsTest {
         a = new MathematicalOperations();
         assertNotNull(a);
         stack = new Stack();
-        stack.add(1);
-        stack.add(2);
+        stack.add(new ComplexNumber(1));
+        stack.add(new ComplexNumber(2));
         assertNotNull(stack);
         op0 = "nogood";
         assertNotNull(op0);
@@ -55,13 +55,7 @@ public class MathematicalOperationsTest {
     //
     // @Test
     // public void hello() {}
-    /*
-    @Test
-    public void TestGetOperations() {
-        ArrayList<String> s = a.getOperations();
-        assertNotNull(s);
-    }
-    */
+    
     @Test
     public void TestExecuteifExistsFalse() {
         Boolean r = a.executeifExists(op0,stack);
@@ -72,6 +66,7 @@ public class MathematicalOperationsTest {
     public void TestExecuteifExistsSum() {
         Boolean r = a.executeifExists(op1,stack);
         assertTrue(r);
+        assertEquals(new ComplexNumber(3),stack.peek());
     }
     
 }
