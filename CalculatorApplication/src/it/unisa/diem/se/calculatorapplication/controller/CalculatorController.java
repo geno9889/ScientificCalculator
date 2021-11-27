@@ -50,10 +50,9 @@ public class CalculatorController {
                     break;
                 }
             }
-            if(!existsOperation){
-                throw new InvalidInputException("Operation not supported");
+            if(existsOperation == false){
+                throw new InvalidInputException("Invalid input");
             }
-            throw new InvalidInputException("Invalid format of complex number");
         }
     }
     
@@ -93,7 +92,6 @@ public class CalculatorController {
                 stackNumbers.add(new ComplexNumber(new Double(input), new Double(0)));
                 return true;
             }
-            
         }
         return false;
     }
