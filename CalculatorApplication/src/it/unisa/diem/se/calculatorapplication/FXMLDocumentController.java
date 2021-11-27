@@ -49,11 +49,11 @@ public class FXMLDocumentController implements Initializable {
    @FXML
     private void insertValue(ActionEvent event) {
         CalculatorController c = new CalculatorController();
-        if(c.insertOrExecute(txtfield.getText()) == true){
+        /*if(c.insertOrExecute(txtfield.getText()) == true){
            for(int i = c.getStackNumbers().size()-1; i==0 ; i++)
                stackNumbers.add(c.getStackNumbers().get(i));
            
-            }
+            }*/
         }
     }
     

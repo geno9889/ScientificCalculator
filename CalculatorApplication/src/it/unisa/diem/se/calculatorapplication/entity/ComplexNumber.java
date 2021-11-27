@@ -24,7 +24,7 @@ public class ComplexNumber {
 
     private double real, imaginary;
     
-    public ComplexNumber (float real) {
+    public ComplexNumber (double real) {
         this.real = real;
         this.imaginary = 0.0;
     }
