@@ -52,13 +52,22 @@ public class MathematicalOperations implements SingleOperationsInterface{
         return false;
     }
     
-    private void sum(String operation, Stack stackNumbers) throws StackBadSizeException{
+    private void sum(String operation, Stack stackNumbers) throws StackBadSizeException{ 
+        ComplexNumber temp;
+        if(stackNumbers.size()==1){
+            throw new StackBadSizeException("Stack can't do operation " + operation + "with only one argument\n");
+        }
+        temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
+        stackNumbers.push(temp);
+    }
+    
+    private void substraction(String operation, Stack stackNumbers) throws StackBadSizeException{
         
         ComplexNumber temp;
         if(stackNumbers.size()==1){
-            throw new StackBadSizeException("Stack with only one argument\n");
+            throw new StackBadSizeException("Stack can't do operation " + operation + "with only one argument\n");
         }
-        temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
+        temp = ComplexNumber.substraction((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
         
     }

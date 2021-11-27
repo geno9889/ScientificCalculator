@@ -9,9 +9,11 @@ import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.*;
 import java.util.Stack;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -19,36 +21,32 @@ import static org.junit.Assert.*;
  */
 
 public class MathematicalOperationsTest {
-    private MathematicalOperations a;
-    private Stack <ComplexNumber> stack;
-    private String op0;
-    private String op1;
+    private static MathematicalOperations a;
+    private static Stack <ComplexNumber> stack;
     
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         a = new MathematicalOperations();
-        assertNotNull(a);
-        stack = new Stack();
-        stack.push(new ComplexNumber(1));
-        assertNotNull(stack);
-        op0 = "nogood";
-        assertNotNull(op0);
-        op1 = "+";
-        assertNotNull(op1);
+        assertNotNull("MathematicalOperation initialization error",a);
+        stack = new Stack(); 
+        assertNotNull("Stack initialization error",stack);
     }
     
     @After
-    public void tearDown() {
+    public void clearStack() {
+        stack.clear();
+        assertEquals("Stack clear error",stack.size(),0);
+    }
+    
+    @AfterClass
+    public static void tearDown() {
         a = null;
         stack = null;
-        op0 = null;
-        op1 = null;
-        assertNull(a);
-        assertNull(stack);
-        assertNull(op0);
-        assertNull(op1);
+        assertNull("MathematicalOperation deallocation error",a);
+        assertNull("Stack deallocation error",stack);
+        
     }
-
+    
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
@@ -57,24 +55,36 @@ public class MathematicalOperationsTest {
     
     @Test
     public void testExecuteifExistsEmpty() {
-        stack.pop();
-        Boolean r = a.executeifExists(op0,stack);
-        assertFalse(r);
+        Boolean r = a.executeifExists("nogood",stack);
+        assertFalse("Empty stack check failed",r);
     }
     
     @Test
     public void testExecuteifExistsFalse() {
+        stack.push(new ComplexNumber(1));
         stack.push(new ComplexNumber(2));
-        Boolean r = a.executeifExists(op0,stack);
-        assertFalse(r);
+        Boolean r = a.executeifExists("nogood",stack);
+        assertFalse("Wrong operation check failed",r);
     }
     
     @Test
     public void testExecuteifExistsSum() {
+        stack.push(new ComplexNumber(1));
         stack.push(new ComplexNumber(2));
-        Boolean r = a.executeifExists(op1,stack);
+        Boolean r = a.executeifExists("+",stack);
         assertTrue(r);
-        assertEquals(new ComplexNumber(3),stack.peek());
+        assertEquals("Sum execution error",new ComplexNumber(3),stack.peek());
+        assertEquals("Stack resize error",1,stack.size());
+    }
+    
+    @Test
+    public void testExecuteifExistsSubstraction() {
+        stack.push(new ComplexNumber(1));
+        stack.push(new ComplexNumber(2));
+        Boolean r = a.executeifExists("-",stack);
+        assertTrue(r);
+        assertEquals("Substraction execution error",new ComplexNumber(1),stack.peek());
+        assertEquals("Stack resize error",1,stack.size());
     }
     
 }
