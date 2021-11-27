@@ -52,6 +52,7 @@ public class FXMLDocumentController implements Initializable {
         if(c.insertOrExecute(txtfield.getText()) == true){
            for(int i = c.getStackNumbers().size()-1; i==0 ; i++)
                stackNumbers.add(c.getStackNumbers().get(i));
+           
             }
         }
     }
