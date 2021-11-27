@@ -4,6 +4,7 @@
  */
 package it.unisa.diem.se.calculatorapplication.entity;
 
+import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class ComplexNumber {
 
     private double real, imaginary;
     
-    public ComplexNumber (double real) {
+    public ComplexNumber (float real) {
         this.real = real;
         this.imaginary = 0.0;
     }
@@ -41,10 +42,13 @@ public class ComplexNumber {
     }
     
     public static ComplexNumber substraction(ComplexNumber c1, ComplexNumber c2){
-        ComplexNumber temp = new ComplexNumber(0, 0);
-        temp.real = c1.real - c2.real;
-        temp.imaginary = c1.imaginary - c2.imaginary;
-        return temp;
+        BigDecimal real1 = BigDecimal.valueOf(c1.real);
+        BigDecimal real2 = BigDecimal.valueOf(c2.real);
+        BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
+        BigDecimal imaginary2 = BigDecimal.valueOf(c2.imaginary);
+        BigDecimal substractionReal = real1.subtract(real2);
+        BigDecimal substractionImaginary = imaginary1.subtract(imaginary2);
+        return new ComplexNumber(substractionReal.doubleValue(), substractionImaginary.doubleValue());
     
     }
 }
