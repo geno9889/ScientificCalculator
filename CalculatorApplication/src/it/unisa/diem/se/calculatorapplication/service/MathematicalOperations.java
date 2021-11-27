@@ -32,46 +32,43 @@ public class MathematicalOperations implements SingleOperationsInterface{
         this.operations = new HashMap();
         this.operations.put("+", "sum");
         this.operations.put("-", "substraction");
-        this.operations.put("*", "moltiplication");
+        this.operations.put("*", "multiplication");
         this.operations.put("/", "division");
     }
 
     @Override
-    public boolean executeifExists(String operation, Stack stackNumbers) {
+    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
         Method m1;
         
-        if (operations.containsKey(operation) && !stackNumbers.isEmpty()){
+        if (operations.containsKey(operation)){
             try {
-                m1 = MathematicalOperations.class.getDeclaredMethod(operations.get(operation), String.class, Stack.class);
-                m1.invoke(this, operation, stackNumbers);
+                m1 = MathematicalOperations.class.getDeclaredMethod(operations.get(operation), Stack.class);
+                m1.invoke(this, stackNumbers);
             } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+                throw new StackBadSizeException("Stack can't do operation " + operations.get(operation) + "with only one argument\n");
             }
             return true;
         }
         return false;
     }
     
-    private void sum(String operation, Stack stackNumbers) throws StackBadSizeException{ 
+    private void sum(Stack stackNumbers){       
         ComplexNumber temp;
-        if(stackNumbers.size()==1){
-            throw new StackBadSizeException("Stack can't do operation " + operation + "with only one argument\n");
-        }
         temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
     
-    private void substraction(String operation, Stack stackNumbers) throws StackBadSizeException{
-        
+    private void substraction(Stack stackNumbers){
         ComplexNumber temp;
-        if(stackNumbers.size()==1){
-            throw new StackBadSizeException("Stack can't do operation " + operation + "with only one argument\n");
-        }
         temp = ComplexNumber.substraction((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
-        
     }
     
+    private void multiplication(Stack stackNumbers){
+        ComplexNumber temp;
+        temp = ComplexNumber.multiplication((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
+        stackNumbers.push(temp);
+    }
 }
 
 
