@@ -33,68 +33,12 @@ public class ComplexNumberSumTest {
     
     
     @Test
-    public void testSumAllNegativeValue() {
+    public void testSumAllNegative() {
         complexNumber1 = new ComplexNumber(-10,-10);
         complexNumber2 = new ComplexNumber(-20,-20);
         assertEquals("sum failed",new ComplexNumber(-30,-30),ComplexNumber.sum(complexNumber1,complexNumber2));
     }
     
-    @Test
-    public void testSumRealPartIsZero() {
-        complexNumber1 = new ComplexNumber(0,-10);
-        complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("sum failed",new ComplexNumber(-20,-30),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-       
-    @Test
-    public void testSumRealPartIsPositive() {
-        complexNumber1 = new ComplexNumber(10,-10);
-        complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("sum failed",new ComplexNumber(-10,-30),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-    
-    @Test
-    public void testSumImaginaryPartIsZero() {
-        complexNumber1 = new ComplexNumber(-10,0);
-        complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("sum failed",new ComplexNumber(-30,-20),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-    
-    @Test
-    public void testSumImaginaryPartIsPositive() {
-        complexNumber1 = new ComplexNumber(-10,10);
-        complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("sum failed",new ComplexNumber(-30,-10),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-    
-    @Test
-    public void testSumRealPartIsZeroSecondComplexNumber() {
-        complexNumber1 = new ComplexNumber(-10,-10);
-        complexNumber2 = new ComplexNumber(0,-20);
-        assertEquals("sum failed",new ComplexNumber(-10,-30),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-    
-    @Test
-    public void testSumRealPartIsPositiveSecondComplexNumber() {
-        complexNumber1 = new ComplexNumber(-10,-10);
-        complexNumber2 = new ComplexNumber(10,-20);
-        assertEquals("sum failed",new ComplexNumber(0,-30),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-    
-    @Test
-    public void testSumImaginaryPartIsZeroSecondComplexNumber() {
-        complexNumber1 = new ComplexNumber(-10,-10);
-        complexNumber2 = new ComplexNumber(-20,0);
-        assertEquals("sum failed",new ComplexNumber(-30,-10),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-    
-    @Test
-    public void testSumImaginaryPartIsPositiveSecondComplexNumber() {
-        complexNumber1 = new ComplexNumber(-10,-10);
-        complexNumber2 = new ComplexNumber(-20,20);
-        assertEquals("sum failed",new ComplexNumber(-30,10),ComplexNumber.sum(complexNumber1,complexNumber2));
-    }
-      
     @Test
     public void testSumAllPositive() {
         complexNumber1 = new ComplexNumber(10,10);
@@ -103,13 +47,38 @@ public class ComplexNumberSumTest {
     }
     
     @Test
-    public void testSumFirstComplexNumberIsAllPositive() {
+    public void testSumOnePositiveOneNegative() {
         complexNumber1 = new ComplexNumber(10,10);
         complexNumber2 = new ComplexNumber(-20,-20);
         assertEquals("sum failed",new ComplexNumber(-10,-10),ComplexNumber.sum(complexNumber1,complexNumber2));
     }
+
+    @Test
+    public void testSumOppositeSign() {
+        complexNumber1 = new ComplexNumber(10,-10);
+        complexNumber2 = new ComplexNumber(-20,20);
+        assertEquals("sum failed",new ComplexNumber(-10,10),ComplexNumber.sum(complexNumber1,complexNumber2));
+    }
+    
+    @Test
+    public void testSumAllFloat() {
+        complexNumber1 = new ComplexNumber(10.1,10.1);
+        complexNumber2 = new ComplexNumber(20.1,20.1);
+        assertEquals("sum failed",new ComplexNumber(30.2,30.2),ComplexNumber.sum(complexNumber1,complexNumber2));
+    }
+    
+    @Test
+    public void testSumFloatWithDifferentNumberOfDecimal() {
+        complexNumber1 = new ComplexNumber(10.01,10.1);
+        complexNumber2 = new ComplexNumber(20.1,20.001);
+        assertEquals("sum failed",new ComplexNumber(30.11,30.101),ComplexNumber.sum(complexNumber1,complexNumber2));
+    }
         
-        
-        
-        
+    @Test
+    public void testSumOneFloatOneInt() {
+        complexNumber1 = new ComplexNumber(10,10);
+        complexNumber2 = new ComplexNumber(20.1,20.01);
+        assertEquals("sum failed",new ComplexNumber(30.1,30.01),ComplexNumber.sum(complexNumber1,complexNumber2));
+    }
+
 }
