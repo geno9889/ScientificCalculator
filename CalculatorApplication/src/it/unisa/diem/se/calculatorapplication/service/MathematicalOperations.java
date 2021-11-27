@@ -62,6 +62,7 @@ public class MathematicalOperations implements SingleOperationsInterface{
         stackNumbers.push(temp);
         
     }
+    
 }
 
 

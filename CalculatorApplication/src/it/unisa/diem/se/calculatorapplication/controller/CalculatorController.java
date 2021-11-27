@@ -34,8 +34,8 @@ public class CalculatorController {
         singleOperations.add(new MathematicalOperations());
     }
     
-    public Stack insertOrExecute(String input){
-        return stackNumbers;
+    public boolean insertOrExecute(String input){
+        return true;
     }
     
 }
