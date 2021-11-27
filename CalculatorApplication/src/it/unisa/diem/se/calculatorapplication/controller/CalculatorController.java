@@ -7,6 +7,7 @@ package it.unisa.diem.se.calculatorapplication.controller;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
+import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -36,14 +37,21 @@ public class CalculatorController {
         singleOperations.add(new MathematicalOperations());
     }
     
-    public void insertOrExecute(String input) throws InvalidInputException{
+    public void insertOrExecute(String input) throws InvalidInputException, StackBadSizeException{
         if(input == null || input.isEmpty()){
             throw new InvalidInputException("Input cannot be empty");
         }
         input = input.replaceAll("\\s", "");
+        boolean existsOperation = false;
         if(!insertComplexNumber(input)){
             for(SingleOperationsInterface op : singleOperations){
-                op.executeifExists(input, stackNumbers);
+                if(op.executeifExists(input, stackNumbers)){
+                    existsOperation = true;
+                    break;
+                }
+            }
+            if(!existsOperation){
+                throw new InvalidInputException("Operation not supported");
             }
             throw new InvalidInputException("Invalid format of complex number");
         }
