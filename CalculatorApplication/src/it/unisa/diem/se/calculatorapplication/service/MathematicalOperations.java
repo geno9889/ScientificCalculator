@@ -39,7 +39,8 @@ public class MathematicalOperations implements SingleOperationsInterface{
     @Override
     public boolean executeifExists(String operation, Stack stackNumbers) {
         Method m1;
-        if (operations.containsKey(operation)){
+        
+        if (operations.containsKey(operation) && !stackNumbers.isEmpty()){
             try {
                 m1 = MathematicalOperations.class.getDeclaredMethod(operations.get(operation), String.class, Stack.class);
                 m1.invoke(this, operation, stackNumbers);
@@ -51,9 +52,12 @@ public class MathematicalOperations implements SingleOperationsInterface{
         return false;
     }
     
-    private void sum(String operation, Stack stackNumbers){
+    private void sum(String operation, Stack stackNumbers) throws StackBadSizeException{
         
         ComplexNumber temp;
+        if(stackNumbers.size()==1){
+            throw new StackBadSizeException("Stack with only one argument\n");
+        }
         temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
         

@@ -29,8 +29,7 @@ public class MathematicalOperationsTest {
         a = new MathematicalOperations();
         assertNotNull(a);
         stack = new Stack();
-        stack.add(new ComplexNumber(1));
-        stack.add(new ComplexNumber(2));
+        stack.push(new ComplexNumber(1));
         assertNotNull(stack);
         op0 = "nogood";
         assertNotNull(op0);
@@ -57,13 +56,22 @@ public class MathematicalOperationsTest {
     // public void hello() {}
     
     @Test
-    public void TestExecuteifExistsFalse() {
+    public void testExecuteifExistsEmpty() {
+        stack.pop();
         Boolean r = a.executeifExists(op0,stack);
         assertFalse(r);
     }
     
     @Test
-    public void TestExecuteifExistsSum() {
+    public void testExecuteifExistsFalse() {
+        stack.push(new ComplexNumber(2));
+        Boolean r = a.executeifExists(op0,stack);
+        assertFalse(r);
+    }
+    
+    @Test
+    public void testExecuteifExistsSum() {
+        stack.push(new ComplexNumber(2));
         Boolean r = a.executeifExists(op1,stack);
         assertTrue(r);
         assertEquals(new ComplexNumber(3),stack.peek());
