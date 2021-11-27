@@ -34,11 +34,16 @@ public class ComplexNumber {
         this.imaginary = imaginary;
     }
      
+
     public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2){
-        ComplexNumber temp = new ComplexNumber(0, 0);
-        temp.real = c1.real + c2.real;
-        temp.imaginary = c1.imaginary + c2.imaginary;
-        return temp;
+        BigDecimal real1 = BigDecimal.valueOf(c1.real);
+        BigDecimal real2 = BigDecimal.valueOf(c2.real);
+        BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
+        BigDecimal imaginary2 = BigDecimal.valueOf(c2.imaginary);
+        BigDecimal substractionReal = real1.add(real2);
+        BigDecimal substractionImaginary = imaginary1.add(imaginary2);
+        return new ComplexNumber(substractionReal.doubleValue(), substractionImaginary.doubleValue());
+    
     }
     
     public static ComplexNumber substraction(ComplexNumber c1, ComplexNumber c2){
