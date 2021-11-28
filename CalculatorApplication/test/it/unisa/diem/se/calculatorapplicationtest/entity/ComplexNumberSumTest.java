@@ -20,65 +20,80 @@ public class ComplexNumberSumTest {
     
     private static ComplexNumber complexNumber1, complexNumber2;
          
-        
     @BeforeClass
     public static void setUp() {        
         complexNumber1 = new ComplexNumber(10,2);
         assertNotNull (complexNumber1);
-        assertEquals("wrong complex number", new ComplexNumber(10,2), complexNumber1);
+        assertEquals("Real part not expected", 10, complexNumber1.getReal(),0);
+        assertEquals("Imaginary part not expected", 2, complexNumber1.getImaginary(),0);
         complexNumber2 = new ComplexNumber(10);
         assertNotNull(complexNumber2);
-        assertEquals("wrong real part", new ComplexNumber(10,0), complexNumber2);
+        assertEquals("Real part not expected", 10, complexNumber2.getReal(),0);
+        assertEquals("Imaginary part not expected", 0, complexNumber2.getImaginary(),0);
     }
     
     
     @Test
-    public void testSumAllNegative() {
+    public void testAllNegative() {
         complexNumber1 = new ComplexNumber(-10,-10);
         complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("sum failed",new ComplexNumber(-30,-30),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",-30, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",-30, sum.getImaginary(),0);
     }
     
     @Test
-    public void testSumAllPositive() {
+    public void testAllPositive() {
         complexNumber1 = new ComplexNumber(10,10);
         complexNumber2 = new ComplexNumber(20,20);
-        assertEquals("sum failed",new ComplexNumber(30,30),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",30, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",30, sum.getImaginary(),0);
     }
     
     @Test
-    public void testSumOnePositiveOneNegative() {
+    public void testOnePositiveOneNegative() {
         complexNumber1 = new ComplexNumber(10,10);
         complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("sum failed",new ComplexNumber(-10,-10),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",-10, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",-10, sum.getImaginary(),0);
     }
 
     @Test
-    public void testSumOppositeSign() {
+    public void testOppositeSign() {
         complexNumber1 = new ComplexNumber(10,-10);
         complexNumber2 = new ComplexNumber(-20,20);
-        assertEquals("sum failed",new ComplexNumber(-10,10),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",-10, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",10, sum.getImaginary(),0);
     }
     
     @Test
-    public void testSumAllFloat() {
+    public void testAllFloat() {
         complexNumber1 = new ComplexNumber(10.1,10.1);
         complexNumber2 = new ComplexNumber(20.1,20.1);
-        assertEquals("sum failed",new ComplexNumber(30.2,30.2),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",30.2, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",30.2, sum.getImaginary(),0);
     }
     
     @Test
-    public void testSumFloatWithDifferentNumberOfDecimal() {
+    public void testFloatWithDifferentNumberOfDecimal() {
         complexNumber1 = new ComplexNumber(10.01,10.1);
         complexNumber2 = new ComplexNumber(20.1,20.001);
-        assertEquals("sum failed",new ComplexNumber(30.11,30.101),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",30.11, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",30.101, sum.getImaginary(),0);
     }
         
     @Test
-    public void testSumOneFloatOneInt() {
+    public void testOneFloatOneInt() {
         complexNumber1 = new ComplexNumber(10,10);
         complexNumber2 = new ComplexNumber(20.1,20.01);
-        assertEquals("sum failed",new ComplexNumber(30.1,30.01),ComplexNumber.sum(complexNumber1,complexNumber2));
+        ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected",30.1, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",30.01, sum.getImaginary(),0);
     }
 
 }
