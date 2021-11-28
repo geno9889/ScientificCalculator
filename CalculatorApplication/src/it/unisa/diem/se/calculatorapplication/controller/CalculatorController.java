@@ -102,7 +102,7 @@ public class CalculatorController {
                 }
                 realPart = input.substring(0, indexImaginaryPart);
                 imaginaryPart = input.substring(indexImaginaryPart, input.length()-1);
-                if(imaginaryPart.length() == 1){
+                if(imaginaryPart.length() == 1){  //complex number with real part and imaginary part with only j
                     return addDoubleToStack(realPart, imaginaryPart.concat("1"));
                 }
                 return addDoubleToStack(realPart, imaginaryPart);
