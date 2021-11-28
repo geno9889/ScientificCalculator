@@ -26,58 +26,77 @@ public class ComplexNumberSubstractionTest {
     public static void setUp() {        
         complexNumber1 = new ComplexNumber(10,2);
         assertNotNull (complexNumber1);
-        assertEquals("wrong complex number", new ComplexNumber(10,2), complexNumber1);
+        assertEquals("Real part not expected", 10, complexNumber1.getReal(), 0);
+        assertEquals("Imaginary part not expected", 2, complexNumber1.getImaginary(), 0);
         complexNumber2 = new ComplexNumber(10);
         assertNotNull(complexNumber2);
-        assertEquals("wrong real part", new ComplexNumber(10,0), complexNumber2);
+        assertEquals("Real part not expected", 10, complexNumber2.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, complexNumber2.getImaginary(), 0);
     }
     
     
     @Test
-    public void testSubstractionAllNegative() {
+    public void testAllNegative() {
         complexNumber1 = new ComplexNumber(-10,-10);
         complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("substraction failed",new ComplexNumber(10, 10),ComplexNumber.substraction(complexNumber1,complexNumber2));
+        ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
+        assertNotNull(substraction);
+        assertEquals("Real part not expected", 10, substraction.getReal(), 0);
+        assertEquals("Imaginary part not expected",10, substraction.getImaginary(), 0);
     }
     
     @Test
-    public void testSumbstractionAllPositive() {
+    public void testAllPositive() {
         complexNumber1 = new ComplexNumber(10,10);
         complexNumber2 = new ComplexNumber(20,20);
-        assertEquals("substraction failed",new ComplexNumber(-10 , -10),ComplexNumber.substraction(complexNumber1,complexNumber2));
+        ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
+        assertNotNull(substraction);
+        assertEquals("Real part not expected", -10, substraction.getReal(), 0);
+        assertEquals("Imaginary part not expected",-10, substraction.getImaginary(), 0);
     }
        
     @Test
-    public void testSubstractionOnePositiveOneNegative() {
+    public void testOnePositiveOneNegative() {
         complexNumber1 = new ComplexNumber(10,10);
         complexNumber2 = new ComplexNumber(-20,-20);
-        assertEquals("substraction failed",new ComplexNumber(30,30),ComplexNumber.substraction(complexNumber1,complexNumber2));
+        ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
+        assertNotNull(substraction);
+        assertEquals("Real part not expected", 30, substraction.getReal(), 0);
+        assertEquals("Imaginary part not expected",30, substraction.getImaginary(), 0);
     }
     
     
     @Test
-    public void testSubstractionOppositeSign() {
+    public void testOppositeSign() {
         complexNumber1 = new ComplexNumber(10,-10);
         complexNumber2 = new ComplexNumber(-20,+20);
-        assertEquals("substraction failed",new ComplexNumber(30,-30),ComplexNumber.substraction(complexNumber1,complexNumber2));
+        ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
+        assertNotNull(substraction);
+        assertEquals("Real part not expected", 30, substraction.getReal(), 0);
+        assertEquals("Imaginary part not expected",-30, substraction.getImaginary(), 0);
     }
     
     
     
     @Test
-    public void testSubstractionOneFloatOneInt() {
+    public void testOneFloatOneInt() {
         complexNumber1 = new ComplexNumber(10.3, 10.4);
         complexNumber2 = new ComplexNumber(20, 20);
-        assertEquals("substraction failed",new ComplexNumber(-9.7, -9.6),ComplexNumber.substraction(complexNumber1,complexNumber2));
+        assertEquals("substraction failed",new ComplexNumber(-9.7, -9.6),ComplexNumber.substraction(complexNumber1,complexNumber2));ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
+        assertNotNull(substraction);
+        assertEquals("Real part not expected", -9.7, substraction.getReal(), 0);
+        assertEquals("Imaginary part not expected",-9.6, substraction.getImaginary(), 0);
     }
       
        @Test
-    public void testSubstractionAllFloat(){
+    public void testAllFloat(){
         complexNumber1 = new ComplexNumber(10.9, 10.6);
         complexNumber2 = new ComplexNumber(20.1, 20.1);
-        assertEquals("substraction failed",new ComplexNumber(-9.2, -9.5),ComplexNumber.substraction(complexNumber1,complexNumber2));
+        ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
+        assertNotNull(substraction);
+        assertEquals("Real part not expected", -9.2, substraction.getReal(), 0);
+        assertEquals("Imaginary part not expected",-9.5, substraction.getImaginary(), 0);
     }
-  
         
         
         
