@@ -5,6 +5,7 @@
 package it.unisa.diem.se.calculatorapplication.entity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +56,7 @@ public class ComplexNumber {
         return new ComplexNumber(substractionReal.doubleValue(), substractionImaginary.doubleValue());
     }
     
-        public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2){
+    public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2){
         BigDecimal real1 = BigDecimal.valueOf(c1.real);
         BigDecimal real2 = BigDecimal.valueOf(c2.real);
         BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
@@ -64,4 +65,18 @@ public class ComplexNumber {
         BigDecimal multiplicationImaginary = (real1.multiply(imaginary2)).add(real2.multiply(imaginary1));
         return new ComplexNumber(multiplicationReal.doubleValue(),multiplicationImaginary.doubleValue());
     }
+        
+    public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2){
+        BigDecimal real1 = BigDecimal.valueOf(c1.real);
+        BigDecimal real2 = BigDecimal.valueOf(c2.real);
+        BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
+        BigDecimal imaginary2 = BigDecimal.valueOf(c2.imaginary);
+        BigDecimal realNumerator = (real1.multiply(real2)).add(imaginary1.multiply(imaginary2));
+        BigDecimal realDenominator = (real2.pow(2)).add(imaginary2.pow(2));
+        BigDecimal divisionReal = realNumerator.divide(realDenominator, 3, RoundingMode.HALF_UP);
+        BigDecimal imaginaryNumerator = (imaginary1.multiply(real2)).subtract(real1.multiply(imaginary2));
+        BigDecimal imaginaryDenominator = (real2.pow(2)).add(imaginary2.pow(2));
+        BigDecimal divisionImaginary = imaginaryNumerator.divide(imaginaryDenominator, 3, RoundingMode.HALF_UP);
+        return new ComplexNumber(divisionReal.doubleValue(),divisionImaginary.doubleValue());
+    }   
 }
