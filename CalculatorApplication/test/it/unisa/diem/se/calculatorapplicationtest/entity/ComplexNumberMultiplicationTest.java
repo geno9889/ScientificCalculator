@@ -22,123 +22,172 @@ public class ComplexNumberMultiplicationTest {
     public static void setUp() {        
         complexNumber1 = new ComplexNumber(1,2);
         assertNotNull (complexNumber1);
-        assertEquals("Wrong complex number", new ComplexNumber(1,2), complexNumber1);
+        assertEquals("Real part not expected", 1, complexNumber1.getReal(), 0);
+        assertEquals("Imaginary part not expected", 2, complexNumber1.getImaginary(), 0);
         complexNumber2 = new ComplexNumber(1);
         assertNotNull(complexNumber2);
-        assertEquals("Wrong real number", new ComplexNumber(1,0), complexNumber2);
+        assertEquals("Real part not expected", 1, complexNumber2.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, complexNumber2.getImaginary(), 0);
     }
     
     
      @Test
-    public void testMultiplicationAllNegativeValue() {
+    public void testAllNegativeValue() {
         complexNumber1 = new ComplexNumber(-1,-1);
         complexNumber2 = new ComplexNumber(-2,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(0,4),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 4, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationRealPartIsZero() {
+    public void testRealPartIsZero() {
         complexNumber1 = new ComplexNumber(0,-1);
         complexNumber2 = new ComplexNumber(-2,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(-2,2),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", -2, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 2, multiplication.getImaginary(), 0);
     }
        
     @Test
-    public void testMultiplicationRealPartIsPositive() {
+    public void testRealPartIsPositive() {
         complexNumber1 = new ComplexNumber(1,-1);
         complexNumber2 = new ComplexNumber(-2,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(-4,0),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", -4, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationImaginaryPartIsZero() {
+    public void testImaginaryPartIsZero() {
         complexNumber1 = new ComplexNumber(-1,0);
         complexNumber2 = new ComplexNumber(-2,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(2,2),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 2, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 2, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationImaginaryPartIsPositive() {
+    public void testImaginaryPartIsPositive() {
         complexNumber1 = new ComplexNumber(-1,1);
         complexNumber2 = new ComplexNumber(-2,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(4,0),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 4, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationRealPartIsZeroSecondComplexNumber() {
+    public void testRealPartIsZeroSecondComplexNumber() {
         complexNumber1 = new ComplexNumber(-1,-1);
         complexNumber2 = new ComplexNumber(0,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(-2,2),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", -2, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 2, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationRealPartIsPositiveSecondComplexNumber() {
+    public void testRealPartIsPositiveSecondComplexNumber() {
         complexNumber1 = new ComplexNumber(-1,-1);
         complexNumber2 = new ComplexNumber(1,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(-3,1),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", -3, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 1, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationImaginaryPartIsZeroSecondComplexNumber() {
+    public void testImaginaryPartIsZeroSecondComplexNumber() {
         complexNumber1 = new ComplexNumber(-1,-1);
         complexNumber2 = new ComplexNumber(-2,0);
-        assertEquals("Multiplication failed",new ComplexNumber(2,2),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 2, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 2, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationImaginaryPartIsPositiveSecondComplexNumber() {
+    public void testImaginaryPartIsPositiveSecondComplexNumber() {
         complexNumber1 = new ComplexNumber(-1,-1);
         complexNumber2 = new ComplexNumber(-2,2);
-        assertEquals("Multiplication failed",new ComplexNumber(4,0),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 4, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, multiplication.getImaginary(), 0);
     }
       
     @Test
-    public void testMultiplicationAllPositive() {
+    public void testAllPositive() {
         complexNumber1 = new ComplexNumber(1,1);
         complexNumber2 = new ComplexNumber(2,2);
-        assertEquals("Multiplication failed",new ComplexNumber(0,4),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 4, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationFirstComplexNumberIsAllPositive() {
+    public void testFirstComplexNumberIsAllPositive() {
         complexNumber1 = new ComplexNumber(1,1);
         complexNumber2 = new ComplexNumber(-2,-2);
-        assertEquals("Multiplication failed",new ComplexNumber(0,-4),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", -4, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationSecondComplexNumberIsAllPositive() {
+    public void testSecondComplexNumberIsAllPositive() {
         complexNumber1 = new ComplexNumber(-1,-1);
         complexNumber2 = new ComplexNumber(2,2);
-        assertEquals("Multiplication failed",new ComplexNumber(0,-4),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", -4, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationFirstComplexZero() {
+    public void testFirstComplexZero() {
         complexNumber1 = new ComplexNumber(0,0);
         complexNumber2 = new ComplexNumber(2,2);
-        assertEquals("Multiplication failed",new ComplexNumber(0,0),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationSecondComplexZero() {
+    public void testSecondComplexZero() {
         complexNumber1 = new ComplexNumber(2,2);
         complexNumber2 = new ComplexNumber(0,0);
-        assertEquals("Multiplication failed",new ComplexNumber(0,0),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationAllComplexZero() {
+    public void testAllComplexZero() {
         complexNumber1 = new ComplexNumber(0,0);
         complexNumber2 = new ComplexNumber(0,0);
-        assertEquals("Multiplication failed",new ComplexNumber(0,0),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 0, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 0, multiplication.getImaginary(), 0);
     }
     
     @Test
-    public void testMultiplicationAllDouble() {
+    public void testAllDouble() {
         complexNumber1 = new ComplexNumber(1.2,2.2);
         complexNumber2 = new ComplexNumber(2.5,0.8);
-        assertEquals("Multiplication failed",new ComplexNumber(1.24,6.46),ComplexNumber.multiplication(complexNumber1,complexNumber2));
+        ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
+        assertNotNull (multiplication);
+        assertEquals("Real part not expected", 1.24, multiplication.getReal(), 0);
+        assertEquals("Imaginary part not expected", 6.46, multiplication.getImaginary(), 0);
     }
     
 }
