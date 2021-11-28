@@ -39,33 +39,47 @@ public class MathematicalOperations implements SingleOperationsInterface{
     @Override
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
         Method m1;
-        
         if (operations.containsKey(operation)){
             try {
                 m1 = MathematicalOperations.class.getDeclaredMethod(operations.get(operation), Stack.class);
                 m1.invoke(this, stackNumbers);
-            } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                throw new StackBadSizeException("Stack can't do operation " + operations.get(operation) + "with only one argument\n");
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                if(ex.getCause() instanceof StackBadSizeException)
+                    throw (StackBadSizeException)ex.getCause();
+                
             }
+            
             return true;
         }
         return false;
     }
     
-    private void sum(Stack stackNumbers){       
+    private void sum(Stack stackNumbers) throws StackBadSizeException{       
         ComplexNumber temp;
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation sum with only one argument");
         temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
+        
     }
     
-    private void substraction(Stack stackNumbers){
+    private void substraction(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation substraction with only one argument");
         temp = ComplexNumber.substraction((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
     
-    private void multiplication(Stack stackNumbers){
+    private void multiplication(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation multiplication with only one argument");
         temp = ComplexNumber.multiplication((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
