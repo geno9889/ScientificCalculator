@@ -54,7 +54,6 @@ public class CalculatorController {
                 throw new InvalidInputException("Invalid input");
             }
         }
-        System.out.println(stackNumbers.size());
     }
     
     private boolean insertComplexNumber(String input){
