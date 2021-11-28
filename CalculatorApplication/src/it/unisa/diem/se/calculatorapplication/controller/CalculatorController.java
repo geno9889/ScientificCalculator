@@ -42,7 +42,7 @@ public class CalculatorController {
             throw new InvalidInputException("Input cannot be empty");
         }
         input = input.replaceAll("\\s", "");
-        boolean existsOperation = false;
+        boolean existsOperation = false;     
         if(!insertComplexNumber(input)){
             for(SingleOperationsInterface op : singleOperations){
                 if(op.executeifExists(input, stackNumbers)){
@@ -57,45 +57,65 @@ public class CalculatorController {
     }
     
     private boolean insertComplexNumber(String input){
-        Pattern pattern = Pattern.compile("[+|-]?\\d+([.]\\d+)?(([+|-]\\d+)([.]\\d*)?[j])?$");
+        Pattern pattern = Pattern.compile("[+|-]?\\d*([.]\\d+)?[j]?(([+|-]\\d+)([.]\\d*)?[j])?$");  //pattern to match complex number
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()){
-            char signReal = input.charAt(0);
-            String inputWithoutSignReal;
+            char firstSign = input.charAt(0);
+            String inputWithoutFirstSign;
             int indexImaginaryPart;
             String realPart;
             String imaginaryPart;
-            if(input.charAt(input.length()-1) == 'j'){
-                if(signReal == '+' || signReal == '-'){
-                    inputWithoutSignReal = input.substring(1, input.length());
-                    if(inputWithoutSignReal.contains("+")){
-                        indexImaginaryPart = inputWithoutSignReal.indexOf("+") + 1;
+            if(input.charAt(input.length()-1) == 'j'){   //checking if is complete complex number or only real part
+                if(input.length() == 1){   //only j
+                    return addDoubleToStack("0", "1");
+                }
+                if(input.length() == 2 && (firstSign == '+' || firstSign == '-')){  //only j with sign
+                    if(firstSign == '+'){
+                        return addDoubleToStack("0", "1");
                     }
                     else{
-                        indexImaginaryPart = inputWithoutSignReal.indexOf("-") + 1;
+                        return addDoubleToStack("0", "-1");
                     }
                 }
-                else{
+                if(firstSign == '+' || firstSign == '-'){    //complex number with imaginary part and/or real part(both signed)
+                    inputWithoutFirstSign = input.substring(1, input.length());
+                    if(inputWithoutFirstSign.contains("+")){
+                        indexImaginaryPart = inputWithoutFirstSign.indexOf("+") + 1;
+                    }
+                    else if(inputWithoutFirstSign.contains("-")){
+                        indexImaginaryPart = inputWithoutFirstSign.indexOf("-") + 1;
+                    }
+                    else{  //only imaginary part signed
+                        return addDoubleToStack("0", input.substring(0, input.length()-1));
+                    }
+                }
+                else{  //complex number with imaginary part(signed) and/or real part(unsigned)
                     if(input.contains("+")){
                         indexImaginaryPart = input.indexOf("+");
                     }
-                    else{
+                    else if(input.contains("-")){
                         indexImaginaryPart = input.indexOf("-");
+                    }
+                    else{ //only imaginary part unsigned
+                        return addDoubleToStack("0", input.substring(0, input.length()-1));
                     }
                 }
                 realPart = input.substring(0, indexImaginaryPart);
                 imaginaryPart = input.substring(indexImaginaryPart, input.length()-1);
-                stackNumbers.add(new ComplexNumber(new Double(realPart), new Double(imaginaryPart)));
-                return true;
+                return addDoubleToStack(realPart, imaginaryPart);
             }
             else{
-                stackNumbers.add(new ComplexNumber(new Double(input), new Double(0)));
-                return true;
+                return addDoubleToStack(input, "0");
             }
         }
         return false;
     }
     
+    private boolean addDoubleToStack(String real, String imaginary){
+        stackNumbers.add(new ComplexNumber(new Double(real), new Double(imaginary)));
+        return true;
+    }
     
+
 }
 

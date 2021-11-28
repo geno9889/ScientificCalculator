@@ -168,6 +168,54 @@ public class CalculatorControllerInsertOrExecuteTest {
         assertEquals("Imaginary part not expected", 0.0, number.getImaginary(), 0);
     }
     
+    @Test
+    public void testOnlyJ() throws InvalidInputException, StackBadSizeException{
+        controller.insertOrExecute("j");
+        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
+        assertNotNull("stack is null", stackNumbers);
+        assertFalse("stack is empty", stackNumbers.isEmpty());
+        ComplexNumber number = stackNumbers.get(0);
+        assertNotNull("number is null", number);
+        assertEquals("Real part not expected", 0, number.getReal(), 0);
+        assertEquals("Imaginary part not expected", 1, number.getImaginary(), 0);
+    }
+    
+    @Test
+    public void testSignPositiveOnlyJ() throws InvalidInputException, StackBadSizeException{
+        controller.insertOrExecute("+j");
+        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
+        assertNotNull("stack is null", stackNumbers);
+        assertFalse("stack is empty", stackNumbers.isEmpty());
+        ComplexNumber number = stackNumbers.get(0);
+        assertNotNull("number is null", number);
+        assertEquals("Real part not expected", 0, number.getReal(), 0);
+        assertEquals("Imaginary part not expected", 1, number.getImaginary(), 0);
+    }
+    
+    @Test
+    public void testSignNegativeOnlyJ() throws InvalidInputException, StackBadSizeException{
+        controller.insertOrExecute("-j");
+        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
+        assertNotNull("stack is null", stackNumbers);
+        assertFalse("stack is empty", stackNumbers.isEmpty());
+        ComplexNumber number = stackNumbers.get(0);
+        assertNotNull("number is null", number);
+        assertEquals("Real part not expected", 0, number.getReal(), 0);
+        assertEquals("Imaginary part not expected", -1, number.getImaginary(), 0);
+    }
+    
+    @Test
+    public void testOnlyJWithNumber() throws InvalidInputException, StackBadSizeException{
+        controller.insertOrExecute("1239j");
+        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
+        assertNotNull("stack is null", stackNumbers);
+        assertFalse("stack is empty", stackNumbers.isEmpty());
+        ComplexNumber number = stackNumbers.get(0);
+        assertNotNull("number is null", number);
+        assertEquals("Real part not expected", 0, number.getReal(), 0);
+        assertEquals("Imaginary part not expected", 1239, number.getImaginary(), 0);
+    }
+    
     @Test(expected = InvalidInputException.class)
     public void testInvalidInput() throws InvalidInputException, StackBadSizeException{
         controller.insertOrExecute("-aoww+ewomsj");
@@ -184,27 +232,5 @@ public class CalculatorControllerInsertOrExecuteTest {
         assertEquals("stack is not empty", 0, stackNumbers.size());
     }
     
-    @Test(expected = InvalidInputException.class)
-    public void testNullRealSignNegativeImaginary() throws InvalidInputException, StackBadSizeException{
-        controller.insertOrExecute("-120j");
-        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
-        assertNotNull("stack is null", stackNumbers);
-        assertEquals("stack is not empty", 0, stackNumbers.size());
-    }
     
-    @Test(expected = InvalidInputException.class)
-    public void testNullRealSignPositiveImaginary() throws InvalidInputException, StackBadSizeException{
-        controller.insertOrExecute("+120j");
-        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
-        assertNotNull("stack is null", stackNumbers);
-        assertEquals("stack is not empty", 0, stackNumbers.size());
-    }
-    
-    @Test(expected = InvalidInputException.class)
-    public void testNullRealPositiveImaginary() throws InvalidInputException, StackBadSizeException{
-        controller.insertOrExecute("120j");
-        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
-        assertNotNull("stack is null", stackNumbers);
-        assertEquals("stack is not empty", 0, stackNumbers.size());
-    }
 }
