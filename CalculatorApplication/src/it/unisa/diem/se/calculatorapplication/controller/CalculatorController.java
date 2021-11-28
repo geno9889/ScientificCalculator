@@ -57,7 +57,7 @@ public class CalculatorController {
     }
     
     private boolean insertComplexNumber(String input){
-        Pattern pattern = Pattern.compile("[+|-]?\\d*([.]\\d+)?[j]?(([+|-]\\d+)([.]\\d*)?[j])?$");  //pattern to match complex number
+        Pattern pattern = Pattern.compile("([+|-]\\d+)?\\d*([.]\\d+)?[j]?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match complex number
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()){
             char firstSign = input.charAt(0);
@@ -102,6 +102,9 @@ public class CalculatorController {
                 }
                 realPart = input.substring(0, indexImaginaryPart);
                 imaginaryPart = input.substring(indexImaginaryPart, input.length()-1);
+                if(imaginaryPart.length() == 1){
+                    return addDoubleToStack(realPart, imaginaryPart.concat("1"));
+                }
                 return addDoubleToStack(realPart, imaginaryPart);
             }
             else{

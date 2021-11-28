@@ -97,6 +97,18 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
+    public void testIntPositiveRealOnlyJImaginary() throws InvalidInputException, StackBadSizeException{
+        controller.insertOrExecute("43-j");
+        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
+        assertNotNull("stack is null", stackNumbers);
+        assertFalse("stack is empty", stackNumbers.isEmpty());
+        ComplexNumber number = stackNumbers.get(0);
+        assertNotNull("number is null", number);
+        assertEquals("Real part not expected", 43, number.getReal(), 0);
+        assertEquals("Imaginary part not expected", -1, number.getImaginary(), 0);
+    }
+    
+    @Test
     public void testWhiteSpacesValidInput() throws InvalidInputException, StackBadSizeException{
         controller.insertOrExecute("  43  + 120  j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
