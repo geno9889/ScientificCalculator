@@ -121,4 +121,20 @@ public class MathematicalOperationsTest {
         Boolean r = a.executeifExists("*",stack);
     }    
     
+    @Test
+    public void testExecuteifExistsDivision() throws StackBadSizeException {
+        stack.push(new ComplexNumber(1,1));
+        stack.push(new ComplexNumber(2,2));
+        Boolean r = a.executeifExists("/",stack);
+        assertTrue(r);
+        assertEquals("Division execution error",new ComplexNumber(2,0),stack.peek());
+        assertEquals("Stack resize error",1,stack.size());
+    }
+    
+    @Test (expected = StackBadSizeException.class)
+    public void testExecuteifExistsExceptionDivision() throws StackBadSizeException {
+        stack.push(new ComplexNumber(2));
+        Boolean r = a.executeifExists("/",stack);
+    }    
+    
 }
