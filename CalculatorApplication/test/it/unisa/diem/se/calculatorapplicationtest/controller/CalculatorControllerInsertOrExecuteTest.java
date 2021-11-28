@@ -231,17 +231,11 @@ public class CalculatorControllerInsertOrExecuteTest {
     @Test(expected = InvalidInputException.class)
     public void testInvalidInput() throws InvalidInputException, StackBadSizeException{
         controller.insertOrExecute("-aoww+ewomsj");
-        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
-        assertNotNull("stack is null", stackNumbers);
-        assertEquals("stack is not empty", 0, stackNumbers.size());
     }
     
     @Test(expected = InvalidInputException.class)
     public void testInputWithoutJ() throws InvalidInputException, StackBadSizeException{
         controller.insertOrExecute("43+120");
-        Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
-        assertNotNull("stack is null", stackNumbers);
-        assertEquals("stack is not empty", 0, stackNumbers.size());
     }
     
     
