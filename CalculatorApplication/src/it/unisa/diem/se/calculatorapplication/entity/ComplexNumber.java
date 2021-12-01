@@ -52,12 +52,11 @@ public class ComplexNumber {
     public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws MathematicalException{
         if(c2.real == 0 && c2.imaginary == 0) throw new MathematicalException("Math error, a number can't be divided by zero");
         double realNumerator = (c1.real * c2.real) + (c1.imaginary * c2.imaginary);
-        double realDenominator = (c2.real * c2.real) + (c2.imaginary * c2.imaginary);
         double imaginaryNumerator = (c1.imaginary * c2.real) - (c1.real * c2.imaginary);
-        double imaginaryDenominator = (c2.real * c2.real) + (c2.imaginary * c2.imaginary);
+        double denominator = (c2.real * c2.real) + (c2.imaginary * c2.imaginary);
         DecimalFormat df = new DecimalFormat("#.########");  //first 8 decimal digits
-        String formatReal = df.format((realNumerator)/(realDenominator));
-        String formatImaginary = df.format((imaginaryNumerator)/(imaginaryDenominator));
+        String formatReal = df.format((realNumerator)/(denominator));
+        String formatImaginary = df.format(imaginaryNumerator/denominator);
         double resultReal = Double.valueOf(formatReal.replace(",", "."));
         double resultImaginary = new Double(formatImaginary.replace(",", "."));
         return new ComplexNumber(resultReal, resultImaginary);
