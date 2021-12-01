@@ -37,23 +37,23 @@ public class ComplexNumber {
     }
      
 
-  public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2){
-        return new ComplexNumber(c1.real+c2.real, c1.imaginary+c2.imaginary);
+  public static ComplexNumber sum(ComplexNumber number1, ComplexNumber number2){
+        return new ComplexNumber(number1.real+number2.real, number1.imaginary+number2.imaginary);
     }
     
-    public static ComplexNumber substraction(ComplexNumber c1, ComplexNumber c2){
-        return new ComplexNumber(c1.real-c2.real, c1.imaginary-c2.imaginary);
+    public static ComplexNumber substraction(ComplexNumber number1, ComplexNumber number2){
+        return new ComplexNumber(number1.real-number2.real, number1.imaginary-number2.imaginary);
     }
     
-    public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2){
-        return new ComplexNumber(((c1.real * c2.real) - (c1.imaginary * c2.imaginary)), (c1.real * c2.imaginary) + (c2.real * c1.imaginary));
+    public static ComplexNumber multiplication(ComplexNumber number1, ComplexNumber number2){
+        return new ComplexNumber(((number1.real * number2.real) - (number1.imaginary * number2.imaginary)), (number1.real * number2.imaginary) + (number2.real * number1.imaginary));
     }
         
-    public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws MathematicalException{
-        if(c2.real == 0 && c2.imaginary == 0) throw new MathematicalException("Math error, a number can't be divided by zero");
-        double realNumerator = (c1.real * c2.real) + (c1.imaginary * c2.imaginary);
-        double imaginaryNumerator = (c1.imaginary * c2.real) - (c1.real * c2.imaginary);
-        double denominator = (c2.real * c2.real) + (c2.imaginary * c2.imaginary);
+    public static ComplexNumber division(ComplexNumber number1, ComplexNumber number2) throws MathematicalException{
+        if(number2.real == 0 && number2.imaginary == 0) throw new MathematicalException("Math error, a number can't be divided by zero");
+        double realNumerator = (number1.real * number2.real) + (number1.imaginary * number2.imaginary);
+        double imaginaryNumerator = (number1.imaginary * number2.real) - (number1.real * number2.imaginary);
+        double denominator = (number2.real * number2.real) + (number2.imaginary * number2.imaginary);
         DecimalFormat df = new DecimalFormat("#.########");  //first 8 decimal digits
         String formatReal = df.format((realNumerator)/(denominator));
         String formatImaginary = df.format(imaginaryNumerator/denominator);
