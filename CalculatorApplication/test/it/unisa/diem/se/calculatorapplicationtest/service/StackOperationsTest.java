@@ -47,8 +47,8 @@ public class StackOperationsTest {
     @Test
     public void testExecuteIfExistsClearEmptyStack(){
         Boolean r = operations.executeifExists("clear", stack);
-        assertTrue(r);
-        assertTrue(stack.empty());
+        assertTrue("The operation dup doesn't exists" ,r);
+        assertTrue("The stack is not empty", stack.empty());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class StackOperationsTest {
         stack.push(new ComplexNumber(4,4));
         stack.push(new ComplexNumber(5,5));
         Boolean r = operations.executeifExists("clear", stack);
-        assertTrue(r);
-        assertTrue(stack.empty());
+        assertTrue("The operation dup doesn't exists", r);
+        assertTrue("The stack is not empty", stack.empty());
     }
 }
