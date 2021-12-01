@@ -6,6 +6,7 @@
 package it.unisa.diem.se.calculatorapplication.service;
 
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
+import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -84,10 +85,12 @@ public class MathematicalOperations implements SingleOperationsInterface{
         stackNumbers.push(temp);
     }
     
-    private void division(Stack stackNumbers)throws StackBadSizeException{
+    private void division(Stack stackNumbers)throws StackBadSizeException, MathematicalException{
         ComplexNumber temp;
         if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation division with only one argument");
-        temp = ComplexNumber.division((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
+        ComplexNumber operand1 = (ComplexNumber) stackNumbers.pop();
+        ComplexNumber operand2 = (ComplexNumber) stackNumbers.pop();
+        temp = ComplexNumber.division(operand2, operand1);
         stackNumbers.push(temp);
     }
 }

@@ -42,7 +42,7 @@ public class CalculatorController {
             throw new InvalidInputException("Input cannot be empty");
         }
         input = input.replaceAll("\\s", "");
-        boolean existsOperation = false;     
+        boolean existsOperation = false;  
         if(!insertComplexNumber(input)){
             for(SingleOperationsInterface op : singleOperations){
                 if(op.executeifExists(input, stackNumbers)){
@@ -55,59 +55,38 @@ public class CalculatorController {
             }
         }
     }
-    
+
     private boolean insertComplexNumber(String input){
-        Pattern pattern = Pattern.compile("([+|-]\\d+)?\\d*([.]\\d+)?[j]?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match complex number
+        Pattern pattern = Pattern.compile("([+|-]\\d+)?\\d*([.]\\d+)?[j]?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match number(complex and not)
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()){
             char firstSign = input.charAt(0);
-            String inputWithoutFirstSign;
             int indexImaginaryPart;
-            String realPart;
-            String imaginaryPart;
-            if(input.charAt(input.length()-1) == 'j'){   //checking if is complete complex number or only real part
-                if(input.length() == 1){   //only j
+            if(input.charAt(input.length()-1) == 'j'){   //with imaginary part
+                if(input.length() == 1 || (input.length() == 2 && firstSign == '+')){   //insert if is j or +j
                     return addDoubleToStack("0", "1");
                 }
-                if(input.length() == 2 && (firstSign == '+' || firstSign == '-')){  //only j with sign
-                    if(firstSign == '+'){
-                        return addDoubleToStack("0", "1");
-                    }
-                    else{
-                        return addDoubleToStack("0", "-1");
-                    }
+                if(input.length() == 2 &&  firstSign == '-'){  //insert if is -j
+                    return addDoubleToStack("0", "-1");
                 }
-                if(firstSign == '+' || firstSign == '-'){    //complex number with imaginary part and/or real part(both signed)
-                    inputWithoutFirstSign = input.substring(1, input.length());
-                    if(inputWithoutFirstSign.contains("+")){
-                        indexImaginaryPart = inputWithoutFirstSign.indexOf("+") + 1;
-                    }
-                    else if(inputWithoutFirstSign.contains("-")){
-                        indexImaginaryPart = inputWithoutFirstSign.indexOf("-") + 1;
-                    }
-                    else{  //only imaginary part signed
-                        return addDoubleToStack("0", input.substring(0, input.length()-1));
-                    }
+                if(firstSign == '+' || firstSign == '-'){    //search imaginary part in cases (±)a(±)bj or(±)bj
+                    String inputWithoutFirstSign = input.substring(1, input.length());
+                    indexImaginaryPart = searchIndexImaginaryPart(inputWithoutFirstSign) + 1;
                 }
-                else{  //complex number with imaginary part(signed) and/or real part(unsigned)
-                    if(input.contains("+")){
-                        indexImaginaryPart = input.indexOf("+");
-                    }
-                    else if(input.contains("-")){
-                        indexImaginaryPart = input.indexOf("-");
-                    }
-                    else{ //only imaginary part unsigned
-                        return addDoubleToStack("0", input.substring(0, input.length()-1));
-                    }
+                else{  //search imaginary part in cases a(±)bj or bj
+                    indexImaginaryPart = searchIndexImaginaryPart(input);
                 }
-                realPart = input.substring(0, indexImaginaryPart);
-                imaginaryPart = input.substring(indexImaginaryPart, input.length()-1);
-                if(imaginaryPart.length() == 1){  //complex number with real part and imaginary part with only j
+                if(indexImaginaryPart <= 0){  //insert if is bj or (±)bj
+                    return addDoubleToStack("0", input.substring(0, input.length()-1));
+                }
+                String realPart = input.substring(0, indexImaginaryPart);
+                String imaginaryPart = input.substring(indexImaginaryPart, input.length()-1);
+                if(imaginaryPart.length() == 1){  //insert if is (±)a(±)j or a(±)j
                     return addDoubleToStack(realPart, imaginaryPart.concat("1"));
                 }
-                return addDoubleToStack(realPart, imaginaryPart);
+                return addDoubleToStack(realPart, imaginaryPart);  //insert if is (±)a(±)bj or a(±)bj
             }
-            else{
+            else{  //with only real part
                 return addDoubleToStack(input, "0");
             }
         }
@@ -119,6 +98,21 @@ public class CalculatorController {
         return true;
     }
     
-
+    private int searchIndexImaginaryPart(String inputWithoutRealSign){
+        int indexImaginaryPart = -1;
+        if(inputWithoutRealSign.contains("+")){
+            indexImaginaryPart = inputWithoutRealSign.indexOf("+");
+        }
+        else if(inputWithoutRealSign.contains("-")){
+            indexImaginaryPart = inputWithoutRealSign.indexOf("-");
+        }
+        return indexImaginaryPart;
+    }
+    
+        
+    public void execute(String input) throws StackBadSizeException{
+        for(SingleOperationsInterface op : singleOperations){
+            op.executeifExists(input, stackNumbers);
+        }    
+    }
 }
-
