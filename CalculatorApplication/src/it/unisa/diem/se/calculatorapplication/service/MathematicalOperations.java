@@ -30,11 +30,13 @@ public class MathematicalOperations implements SingleOperationsInterface{
     private HashMap<String,String> operations;
 
     public MathematicalOperations() {
-        this.operations = new HashMap();
-        this.operations.put("+", "sum");
-        this.operations.put("-", "substraction");
-        this.operations.put("*", "multiplication");
-        this.operations.put("/", "division");
+        operations = new HashMap();
+        operations.put("+", "sum");
+        operations.put("-", "substraction");
+        operations.put("*", "multiplication");
+        operations.put("/", "division");
+        operations.put("sqrt", "squareRoot");
+        operations.put("+/-", "invertSign");
     }
 
     @Override
@@ -75,7 +77,9 @@ public class MathematicalOperations implements SingleOperationsInterface{
     private void substraction(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
         if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do substraction operation with only one argument");
-        temp = ComplexNumber.substraction((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
+        ComplexNumber operator2 = (ComplexNumber) stackNumbers.pop();
+        ComplexNumber operator1 = (ComplexNumber) stackNumbers.pop();
+        temp = ComplexNumber.substraction(operator1,operator2);
         stackNumbers.push(temp);
     }
     
@@ -92,6 +96,20 @@ public class MathematicalOperations implements SingleOperationsInterface{
         temp = ComplexNumber.division((ComplexNumber) stackNumbers.elementAt(0), (ComplexNumber) stackNumbers.elementAt(1));
         stackNumbers.pop();
         stackNumbers.pop();
+        stackNumbers.push(temp);
+    }
+    /*
+    private void squareRoot(Stack stackNumbers)throws StackBadSizeException{
+        ComplexNumber temp;
+        if(stackNumbers.size()<1) throw new StackBadSizeException("Can't do division operation with no argument");
+        temp = ComplexNumber.squareRoot((ComplexNumber) stackNumbers.pop());
+        stackNumbers.push(temp);
+    }
+    */
+        private void invertSign(Stack stackNumbers)throws StackBadSizeException{
+        ComplexNumber temp;
+        if(stackNumbers.size()<1) throw new StackBadSizeException("Can't do division operation with no argument");
+        temp = ComplexNumber.invertSign((ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
 }
