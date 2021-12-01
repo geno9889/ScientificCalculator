@@ -125,13 +125,15 @@ public class MathematicalOperationsTest {
     
     @Test
     public void testExecuteifExistsDivision() throws StackBadSizeException, MathematicalException {
+        stack.push(new ComplexNumber(3,2));
+        stack.push(new ComplexNumber(4,1));
         stack.push(new ComplexNumber(2,2));
         stack.push(new ComplexNumber(1,1));
         Boolean r = a.executeifExists("/",stack);
         assertTrue(r);
         assertEquals("Division real part execution error",2,stack.peek().getReal(),0);
         assertEquals("Division imaginary part execution error",0,stack.peek().getImaginary(),0);
-        assertEquals("Stack resize error",1,stack.size());
+        assertEquals("Stack resize error",3,stack.size(),0);
     }
     
     @Test (expected = StackBadSizeException.class)

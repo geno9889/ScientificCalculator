@@ -87,7 +87,7 @@ public class MathematicalOperations implements SingleOperationsInterface{
     private void division(Stack stackNumbers)throws StackBadSizeException, MathematicalException{
         ComplexNumber temp;
         if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do division operation with only one argument");
-        temp = ComplexNumber.division((ComplexNumber) stackNumbers.elementAt(0), (ComplexNumber) stackNumbers.elementAt(1));
+        temp = ComplexNumber.division((ComplexNumber) stackNumbers.elementAt(stackNumbers.size()-2), (ComplexNumber) stackNumbers.elementAt(stackNumbers.size()-1));
         stackNumbers.pop();
         stackNumbers.pop();
         stackNumbers.push(temp);
