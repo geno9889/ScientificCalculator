@@ -4,6 +4,7 @@
  */
 package it.unisa.diem.se.calculatorapplication.service;
 
+import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import java.util.Stack;
 
 /**
@@ -12,6 +13,6 @@ import java.util.Stack;
  */
 public interface SingleOperationsInterface {
     
-    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException;
+    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, MathematicalException;
            
 }

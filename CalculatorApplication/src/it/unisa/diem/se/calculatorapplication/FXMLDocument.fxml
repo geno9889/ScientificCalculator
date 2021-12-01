@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.se.calculatorapplication.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.se.calculatorapplication.FXMLDocumentController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutY="1.0" prefHeight="600.0" prefWidth="901.0">
         <items>
@@ -26,7 +31,7 @@
                               <Insets bottom="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <ListView fx:id="list" prefHeight="567.0" prefWidth="115.0" />
+                        <ListView fx:id="list" fixedCellSize="80.0" prefHeight="567.0" prefWidth="115.0" />
                      </children>
                   </VBox>
                </children>
@@ -50,6 +55,8 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
+                        <Button fx:id="addition" mnemonicParsing="false" onAction="#additionMethod" text="Button" />
+                        <Button mnemonicParsing="false" text="Button" />
                      </children>
                   </VBox>
                </children>

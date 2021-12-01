@@ -5,6 +5,7 @@
 package it.unisa.diem.se.calculatorapplication.controller;
 
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
+import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
@@ -37,7 +38,7 @@ public class CalculatorController {
         singleOperations.add(new MathematicalOperations());
     }
     
-    public void insertOrExecute(String input) throws InvalidInputException, StackBadSizeException{
+    public void insertOrExecute(String input) throws InvalidInputException, StackBadSizeException, MathematicalException{
         if(input == null || input.isEmpty()){
             throw new InvalidInputException("Input cannot be empty");
         }
@@ -110,7 +111,7 @@ public class CalculatorController {
     }
     
         
-    public void execute(String input) throws StackBadSizeException{
+    public void execute(String input) throws StackBadSizeException, MathematicalException{
         for(SingleOperationsInterface op : singleOperations){
             op.executeifExists(input, stackNumbers);
         }    
