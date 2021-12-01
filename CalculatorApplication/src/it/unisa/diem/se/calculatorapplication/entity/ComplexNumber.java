@@ -37,34 +37,16 @@ public class ComplexNumber {
     }
      
 
-    public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2){
-        BigDecimal real1 = BigDecimal.valueOf(c1.real);
-        BigDecimal real2 = BigDecimal.valueOf(c2.real);
-        BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
-        BigDecimal imaginary2 = BigDecimal.valueOf(c2.imaginary);
-        BigDecimal substractionReal = real1.add(real2);
-        BigDecimal substractionImaginary = imaginary1.add(imaginary2);
-        return new ComplexNumber(substractionReal.doubleValue(), substractionImaginary.doubleValue());
+  public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2){
+        return new ComplexNumber(c1.real+c2.real, c1.imaginary+c2.imaginary);
     }
     
     public static ComplexNumber substraction(ComplexNumber c1, ComplexNumber c2){
-        BigDecimal real1 = BigDecimal.valueOf(c1.real);
-        BigDecimal real2 = BigDecimal.valueOf(c2.real);
-        BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
-        BigDecimal imaginary2 = BigDecimal.valueOf(c2.imaginary);
-        BigDecimal substractionReal = real1.subtract(real2);
-        BigDecimal substractionImaginary = imaginary1.subtract(imaginary2);
-        return new ComplexNumber(substractionReal.doubleValue(), substractionImaginary.doubleValue());
+        return new ComplexNumber(c1.real-c2.real, c1.imaginary-c2.imaginary);
     }
     
     public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2){
-        BigDecimal real1 = BigDecimal.valueOf(c1.real);
-        BigDecimal real2 = BigDecimal.valueOf(c2.real);
-        BigDecimal imaginary1 = BigDecimal.valueOf(c1.imaginary);
-        BigDecimal imaginary2 = BigDecimal.valueOf(c2.imaginary);
-        BigDecimal multiplicationReal = (real1.multiply(real2)).subtract(imaginary1.multiply(imaginary2));
-        BigDecimal multiplicationImaginary = (real1.multiply(imaginary2)).add(real2.multiply(imaginary1));
-        return new ComplexNumber(multiplicationReal.doubleValue(),multiplicationImaginary.doubleValue());
+        return new ComplexNumber(((c1.real * c2.real) - (c1.imaginary * c2.imaginary)), (c1.real * c2.imaginary) + (c2.real * c1.imaginary));
     }
         
     public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws MathematicalException{

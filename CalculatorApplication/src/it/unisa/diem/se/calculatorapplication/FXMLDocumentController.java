@@ -8,6 +8,7 @@ package it.unisa.diem.se.calculatorapplication;
 import it.unisa.diem.se.calculatorapplication.controller.CalculatorController;
 import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
+import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,6 +46,8 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> list;
     
     private CalculatorController c;
+    @FXML
+    private Button addition;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,7 +55,6 @@ public class FXMLDocumentController implements Initializable {
          list.setItems(stackNumbers);
          insertbtn.disableProperty().bind(Bindings.isEmpty(txtfield.textProperty()));
          c = new CalculatorController();
-        
     }    
 
    @FXML
@@ -70,7 +72,7 @@ public class FXMLDocumentController implements Initializable {
                 stackNumbers.add(s);
             }
         }
-        } catch (InvalidInputException | StackBadSizeException ex) {
+        } catch (InvalidInputException | StackBadSizeException | MathematicalException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
             al.setHeaderText("Input error");
@@ -80,6 +82,22 @@ public class FXMLDocumentController implements Initializable {
         
    
         }
+
+    @FXML
+    private void additionMethod(ActionEvent event) throws InvalidInputException, StackBadSizeException, MathematicalException {
+               c.execute("+");
+            if(!c.getStackNumbers().empty()){
+            stackNumbers.clear();
+            for(int i=c.getStackNumbers().size()-1; i>=0; i--){
+                String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
+                if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
+                    s += "+";
+                }
+                s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
+                stackNumbers.add(s);
+            }
+        }
+    }
     }
     
     

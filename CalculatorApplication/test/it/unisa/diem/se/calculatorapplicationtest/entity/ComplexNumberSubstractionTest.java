@@ -94,8 +94,8 @@ public class ComplexNumberSubstractionTest {
         complexNumber2 = new ComplexNumber(20.1, 20.1);
         ComplexNumber substraction = ComplexNumber.substraction(complexNumber1,complexNumber2);
         assertNotNull(substraction);
-        assertEquals("Real part not expected", -9.2, substraction.getReal(), 0);
-        assertEquals("Imaginary part not expected",-9.5, substraction.getImaginary(), 0);
+        assertEquals("Real part not expected", -9.2, substraction.getReal(), 0.00000001);
+        assertEquals("Imaginary part not expected",-9.5, substraction.getImaginary(), 0.00000001);
     }
         
         

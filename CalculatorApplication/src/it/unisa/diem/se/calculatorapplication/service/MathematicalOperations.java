@@ -65,7 +65,7 @@ public class MathematicalOperations implements SingleOperationsInterface{
     
     private void sum(Stack stackNumbers) throws StackBadSizeException{       
         ComplexNumber temp;
-        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation sum with only one argument");
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do sum operation with only one argument");
         temp = ComplexNumber.sum((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
         
@@ -73,21 +73,21 @@ public class MathematicalOperations implements SingleOperationsInterface{
     
     private void substraction(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
-        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation substraction with only one argument");
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do substraction operation with only one argument");
         temp = ComplexNumber.substraction((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
     
     private void multiplication(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
-        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation multiplication with only one argument");
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do multiplication operation with only one argument");
         temp = ComplexNumber.multiplication((ComplexNumber) stackNumbers.pop(), (ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
     
     private void division(Stack stackNumbers)throws StackBadSizeException, MathematicalException{
         ComplexNumber temp;
-        if(stackNumbers.size()<2) throw new StackBadSizeException("Stack can't do operation division with only one argument");
+        if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do division operation with only one argument");
         ComplexNumber operand1 = (ComplexNumber) stackNumbers.pop();
         ComplexNumber operand2 = (ComplexNumber) stackNumbers.pop();
         temp = ComplexNumber.division(operand2, operand1);

@@ -186,8 +186,8 @@ public class ComplexNumberMultiplicationTest {
         complexNumber2 = new ComplexNumber(2.5,0.8);
         ComplexNumber multiplication = ComplexNumber.multiplication(complexNumber1,complexNumber2);
         assertNotNull (multiplication);
-        assertEquals("Real part not expected", 1.24, multiplication.getReal(), 0);
-        assertEquals("Imaginary part not expected", 6.46, multiplication.getImaginary(), 0);
+        assertEquals("Real part not expected", 1.24, multiplication.getReal(), 0.00000001);
+        assertEquals("Imaginary part not expected", 6.46, multiplication.getImaginary(), 0.00000001);
     }
     
 }
