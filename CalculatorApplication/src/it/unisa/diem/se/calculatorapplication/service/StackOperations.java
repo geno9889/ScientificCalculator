@@ -24,9 +24,10 @@ public class StackOperations {
     public StackOperations(){
         operations = new HashMap<>();
         operations.put("clear", "clear");
+        operations.put("dup", "dup");
     }
     
-    public boolean executeifExists(String operation, Stack stackNumbers){
+    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
         Method m1;
         if (operations.containsKey(operation)){
             try {
@@ -35,7 +36,7 @@ public class StackOperations {
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException ex1) {
                 Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex1);
             } catch(InvocationTargetException ex2){
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex2);
+                    if(ex2.getCause() instanceof StackBadSizeException) throw (StackBadSizeException)ex2.getCause();
             }
             return true;
         }
@@ -44,6 +45,12 @@ public class StackOperations {
     
     private void clear(Stack stackNumbers){
         stackNumbers.clear();
+    }
+    
+    private void dup(Stack stackNumbers) throws StackBadSizeException{       
+        if(stackNumbers.size()<1) throw new StackBadSizeException("Stack is empty!");
+        stackNumbers.push(stackNumbers.peek());
+        System.out.println(stackNumbers.size());
     }
 
 }

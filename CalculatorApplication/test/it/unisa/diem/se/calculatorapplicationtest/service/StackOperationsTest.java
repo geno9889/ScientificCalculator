@@ -45,14 +45,14 @@ public class StackOperationsTest {
     }
     
     @Test
-    public void testExecuteIfExistsClearEmptyStack(){
+    public void testExecuteIfExistsClearEmptyStack() throws StackBadSizeException{
         Boolean r = operations.executeifExists("clear", stack);
         assertTrue("The operation dup doesn't exists" ,r);
         assertTrue("The stack is not empty", stack.empty());
     }
 
     @Test
-    public void testExecuteIfExistsClearNotEmptyStack(){
+    public void testExecuteIfExistsClearNotEmptyStack() throws StackBadSizeException{
         stack.push(new ComplexNumber(0,0));
         stack.push(new ComplexNumber(1,1));
         stack.push(new ComplexNumber(2,2));
@@ -62,5 +62,26 @@ public class StackOperationsTest {
         Boolean r = operations.executeifExists("clear", stack);
         assertTrue("The operation dup doesn't exists", r);
         assertTrue("The stack is not empty", stack.empty());
+    }
+    
+    @Test (expected = StackBadSizeException.class)
+    public void testExecuteIfExistsDupEmptyStack() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("dup", stack);
+    }
+    
+    @Test 
+    public void testExecuteIfExistsDupNotEmptyStack() throws StackBadSizeException{
+        stack.push(new ComplexNumber(0,0));
+        stack.push(new ComplexNumber(1,1));
+        stack.push(new ComplexNumber(2,2));
+        stack.push(new ComplexNumber(3,3));
+        stack.push(new ComplexNumber(4,4));
+        stack.push(new ComplexNumber(5,5));
+        Boolean r = operations.executeifExists("dup", stack);
+        assertTrue("The operation dup not exists",r);
+        ComplexNumber number = stack.peek();
+        assertEquals("Duplication part real of top element error",5,number.getReal(),0);
+        assertEquals("Duplication part imaginary of top element error",5,number.getImaginary(),0);
+        assertEquals("Stack resize error",7,stack.size(),0);
     }
 }
