@@ -60,5 +60,9 @@ public class ComplexNumber {
         double resultReal = Double.valueOf(formatReal.replace(",", "."));
         double resultImaginary = new Double(formatImaginary.replace(",", "."));
         return new ComplexNumber(resultReal, resultImaginary);
-    }   
+    }
+    
+    public static ComplexNumber invertSign(ComplexNumber number){
+        return new ComplexNumber(-(number.real), -(number.imaginary));
+    }
 }
