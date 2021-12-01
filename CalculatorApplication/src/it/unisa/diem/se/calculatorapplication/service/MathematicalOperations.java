@@ -46,19 +46,13 @@ public class MathematicalOperations implements SingleOperationsInterface{
             try {
                 m1 = MathematicalOperations.class.getDeclaredMethod(operations.get(operation), Stack.class);
                 m1.invoke(this, stackNumbers);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                if(ex.getCause() instanceof StackBadSizeException)
-                    throw (StackBadSizeException)ex.getCause();
-                if(ex.getCause() instanceof MathematicalException)
-                    throw (MathematicalException)ex.getCause();
+            } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException ex1) {
+                Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (InvocationTargetException ex2) {
+                if(ex2.getCause() instanceof StackBadSizeException)
+                    throw (StackBadSizeException)ex2.getCause();
+                if(ex2.getCause() instanceof MathematicalException)
+                    throw (MathematicalException)ex2.getCause();
             }
             
             return true;

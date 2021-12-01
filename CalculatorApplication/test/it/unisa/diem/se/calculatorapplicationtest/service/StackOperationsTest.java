@@ -44,5 +44,23 @@ public class StackOperationsTest {
         assertEquals("Stack clear error",stack.size(),0);
     }
     
+    @Test
+    public void testExecuteIfExistsClearEmptyStack(){
+        Boolean r = operations.executeifExists("clear", stack);
+        assertTrue(r);
+        assertTrue(stack.empty());
+    }
 
+    @Test
+    public void testExecuteIfExistsClearNotEmptyStack(){
+        stack.push(new ComplexNumber(0,0));
+        stack.push(new ComplexNumber(1,1));
+        stack.push(new ComplexNumber(2,2));
+        stack.push(new ComplexNumber(3,3));
+        stack.push(new ComplexNumber(4,4));
+        stack.push(new ComplexNumber(5,5));
+        Boolean r = operations.executeifExists("clear", stack);
+        assertTrue(r);
+        assertTrue(stack.empty());
+    }
 }
