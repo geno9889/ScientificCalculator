@@ -38,7 +38,7 @@ public class MathematicalOperations implements SingleOperationsInterface{
     }
 
     @Override
-    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
+    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, MathematicalException{
         Method m1;
         if (operations.containsKey(operation)){
             try {
@@ -55,7 +55,8 @@ public class MathematicalOperations implements SingleOperationsInterface{
             } catch (InvocationTargetException ex) {
                 if(ex.getCause() instanceof StackBadSizeException)
                     throw (StackBadSizeException)ex.getCause();
-                
+                if(ex.getCause() instanceof MathematicalException)
+                    throw (MathematicalException)ex.getCause();
             }
             
             return true;
@@ -88,9 +89,9 @@ public class MathematicalOperations implements SingleOperationsInterface{
     private void division(Stack stackNumbers)throws StackBadSizeException, MathematicalException{
         ComplexNumber temp;
         if(stackNumbers.size()<2) throw new StackBadSizeException("Can't do division operation with only one argument");
-        ComplexNumber operand1 = (ComplexNumber) stackNumbers.pop();
-        ComplexNumber operand2 = (ComplexNumber) stackNumbers.pop();
-        temp = ComplexNumber.division(operand2, operand1);
+        temp = ComplexNumber.division((ComplexNumber) stackNumbers.elementAt(0), (ComplexNumber) stackNumbers.elementAt(1));
+        stackNumbers.pop();
+        stackNumbers.pop();
         stackNumbers.push(temp);
     }
 }

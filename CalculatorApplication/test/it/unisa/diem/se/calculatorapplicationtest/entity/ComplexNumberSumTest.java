@@ -74,8 +74,8 @@ public class ComplexNumberSumTest {
         complexNumber1 = new ComplexNumber(10.1,10.1);
         complexNumber2 = new ComplexNumber(20.1,20.1);
         ComplexNumber sum = ComplexNumber.sum(complexNumber1,complexNumber2);
-        assertEquals("Real part not expected",30.2, sum.getReal(),0.00000001);
-        assertEquals("Imaginary part not expected",30.2, sum.getImaginary(),0.00000001);
+        assertEquals("Real part not expected",30.2, sum.getReal(),0);
+        assertEquals("Imaginary part not expected",30.2, sum.getImaginary(),0);
     }
     
     @Test

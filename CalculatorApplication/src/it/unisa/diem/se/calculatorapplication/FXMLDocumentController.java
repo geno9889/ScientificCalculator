@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 
 /**
@@ -46,18 +47,21 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> list;
     
     private CalculatorController c;
+    
     @FXML
-    private Button addition;
+    private Label resultLabel;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          stackNumbers = FXCollections.observableArrayList();
+         stackNumbers.add("");
          list.setItems(stackNumbers);
          insertbtn.disableProperty().bind(Bindings.isEmpty(txtfield.textProperty()));
          c = new CalculatorController();
+         
     }    
 
-   @FXML
+    @FXML
     private void insertValue(ActionEvent event) {
         try {
             c.insertOrExecute(txtfield.getText());
@@ -79,27 +83,64 @@ public class FXMLDocumentController implements Initializable {
             al.setContentText(ex.getMessage());
             al.show();
         }
-        
-   
-        }
+        this.clearAll(event);
+        resultLabel.setText(stackNumbers.get(0));
+    }
+
 
     @FXML
-    private void additionMethod(ActionEvent event) throws InvalidInputException, StackBadSizeException, MathematicalException {
-               c.execute("+");
-            if(!c.getStackNumbers().empty()){
-            stackNumbers.clear();
-            for(int i=c.getStackNumbers().size()-1; i>=0; i--){
-                String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
-                if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
-                    s += "+";
+    private void insertValue2(ActionEvent event) throws MathematicalException {
+        this.insertValue(event);
+    }
+
+
+    @FXML
+    private void clearAll(ActionEvent event) {
+        txtfield.clear();
+        resultLabel.setText(null);
+    }
+
+
+    @FXML
+    private void write(ActionEvent event) {
+        Button sourceButton = (Button) event.getSource();
+        txtfield.setText(txtfield.getText().concat(sourceButton.getText()));
+    }
+
+    @FXML
+    private void eventOp(ActionEvent event){
+        if(txtfield.getText().compareTo("") != 0){
+            this.write(event);
+        }
+        else{
+            try {
+                Button sourceButton = (Button) event.getSource();
+                c.execute(sourceButton.getText());
+                    if(!c.getStackNumbers().empty()){
+                    stackNumbers.clear();
+                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){
+                        String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
+                        if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
+                            s += "+";
+                        }
+                        s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
+                        stackNumbers.add(s);
+                    }
                 }
-                s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
-                stackNumbers.add(s);
+            } catch (StackBadSizeException | MathematicalException ex) {
+                Alert al= new Alert(Alert.AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Input error");
+                al.setContentText(ex.getMessage());
+                al.show();
             }
+            this.clearAll(event);
+            resultLabel.setText(stackNumbers.get(0));
         }
     }
-    }
     
+    
+    }
     
     
 
