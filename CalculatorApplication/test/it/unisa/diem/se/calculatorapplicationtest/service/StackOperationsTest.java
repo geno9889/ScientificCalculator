@@ -7,6 +7,7 @@ package it.unisa.diem.se.calculatorapplicationtest.service;
 
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
+import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
 import java.util.Stack;
 import org.junit.After;
@@ -42,6 +43,6 @@ public class StackOperationsTest {
         stack.clear();
         assertEquals("Stack clear error",stack.size(),0);
     }
-
     
+
 }

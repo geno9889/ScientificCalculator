@@ -63,6 +63,11 @@ public class ComplexNumber {
     }
     
     public static ComplexNumber invertSign(ComplexNumber number){
-        return new ComplexNumber(-(number.real), -(number.imaginary));
+        if(number.real==0)
+            return new ComplexNumber(0, -1*(number.imaginary));
+        if(number.imaginary==0)
+            return new ComplexNumber(-1*(number.real), 0);
+        else
+        return new ComplexNumber(-1*(number.real), -1*(number.imaginary));
     }
 }

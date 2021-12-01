@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.se.calculatorapplication.service;
 
+import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -24,4 +25,5 @@ public class StackOperations {
     public boolean executeifExists(String operation, Stack stackNumbers){
         return true;
     }
+
 }
