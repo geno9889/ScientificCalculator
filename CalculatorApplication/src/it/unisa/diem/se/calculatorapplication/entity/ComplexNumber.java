@@ -37,25 +37,16 @@ public class ComplexNumber {
     }
      
 
-  public static ComplexNumber sum(ComplexNumber c2, ComplexNumber c1){
-        DecimalFormat df = new DecimalFormat("#.########");  //first 8 decimal digits
-        double resultReal = Double.valueOf(df.format(c1.real+c2.real).replace(",", "."));
-        double resultImaginary = Double.valueOf(df.format(c1.imaginary+c2.imaginary).replace(",", "."));
-        return new ComplexNumber(resultReal, resultImaginary);
+  public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2){
+        return new ComplexNumber(c1.real+c2.real, c1.imaginary+c2.imaginary);
     }
     
-    public static ComplexNumber substraction(ComplexNumber c2, ComplexNumber c1){
-        DecimalFormat df = new DecimalFormat("#.########");  //first 8 decimal digits
-        double resultReal = Double.valueOf(df.format(c1.real-c2.real).replace(",", "."));
-        double resultImaginary = Double.valueOf(df.format(c1.imaginary-c2.imaginary).replace(",", "."));
-        return new ComplexNumber(resultReal, resultImaginary);
+    public static ComplexNumber substraction(ComplexNumber c1, ComplexNumber c2){
+        return new ComplexNumber(c1.real-c2.real, c1.imaginary-c2.imaginary);
     }
     
-    public static ComplexNumber multiplication(ComplexNumber c2, ComplexNumber c1){
-        DecimalFormat df = new DecimalFormat("#.########");  //first 8 decimal digits
-        double resultReal = Double.valueOf(df.format(((c1.real * c2.real) - (c1.imaginary * c2.imaginary))).replace(",", "."));
-        double resultImaginary = Double.valueOf(df.format(((c1.real * c2.imaginary) + (c2.real * c1.imaginary))).replace(",", "."));
-        return new ComplexNumber(resultReal, resultImaginary);
+    public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2){
+        return new ComplexNumber(((c1.real * c2.real) - (c1.imaginary * c2.imaginary)), (c1.real * c2.imaginary) + (c2.real * c1.imaginary));
     }
         
     public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws MathematicalException{
