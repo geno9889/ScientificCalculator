@@ -52,12 +52,6 @@ public class MathematicalOperationsTest {
         
     }
     
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-    
     @Test
     public void testExecuteifExistsEmpty() throws StackBadSizeException, MathematicalException {
         Boolean r = a.executeifExists("nogood",stack);
@@ -148,7 +142,7 @@ public class MathematicalOperationsTest {
         stack.push(new ComplexNumber(0,0));
         Boolean r = a.executeifExists("/",stack);
     } 
- /*   
+ 
     @Test
     public void testExecuteifExistsSquareRoot() throws StackBadSizeException, MathematicalException {
         stack.push(new ComplexNumber(4,4));
@@ -163,7 +157,7 @@ public class MathematicalOperationsTest {
     public void testExecuteifExistsExceptionSquareRoot() throws StackBadSizeException, MathematicalException {
         Boolean r = a.executeifExists("sqrt",stack);
     }    
- */   
+  
     @Test
     public void testExecuteifExistsInvertSign() throws StackBadSizeException, MathematicalException {
         stack.push(new ComplexNumber(2,2));

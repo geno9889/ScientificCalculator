@@ -29,6 +29,7 @@ public class StackOperations implements SingleOperationsInterface{
         operations.put("drop", "drop");
     }
     
+    @Override
     //check if name of the operation is an existing key and execute corresponding method(value in hashmap)
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
         Method m1;

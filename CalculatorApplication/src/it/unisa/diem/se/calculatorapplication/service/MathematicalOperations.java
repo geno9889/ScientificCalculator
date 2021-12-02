@@ -40,6 +40,7 @@ public class MathematicalOperations implements SingleOperationsInterface{
     }
 
     @Override
+    //check if name of the operation is an existing key and execute corresponding method(value in hashmap)
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, MathematicalException{
         Method m1;
         if (operations.containsKey(operation)){
@@ -92,14 +93,14 @@ public class MathematicalOperations implements SingleOperationsInterface{
         stackNumbers.pop();
         stackNumbers.push(temp);
     }
-    /*
+    
     private void squareRoot(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
         if(stackNumbers.size()<1) throw new StackBadSizeException("Can't do division operation with no argument");
         temp = ComplexNumber.squareRoot((ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
     }
-    */
+    
         private void invertSign(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
         if(stackNumbers.size()<1) throw new StackBadSizeException("Can't do division operation with no argument");

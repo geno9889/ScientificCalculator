@@ -47,9 +47,9 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> list;
     
     private CalculatorController c;
-    
     @FXML
     private Label resultLabel;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,7 +67,7 @@ public class FXMLDocumentController implements Initializable {
             c.insertOrExecute(txtfield.getText());
             if(!c.getStackNumbers().empty()){
             stackNumbers.clear();
-            for(int i=c.getStackNumbers().size()-1; i>=0; i--){
+            for(int i=c.getStackNumbers().size()-1; i>=0; i--){     // recreating stack with new elements
                 String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
                 if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
                     s += "+";
@@ -95,30 +95,34 @@ public class FXMLDocumentController implements Initializable {
 
 
     @FXML
-    private void clearAll(ActionEvent event) {
+    private void clearAll(ActionEvent event) {      // button canc function
         txtfield.clear();
         resultLabel.setText(null);
     }
 
 
     @FXML
-    private void write(ActionEvent event) {
-        Button sourceButton = (Button) event.getSource();
-        txtfield.setText(txtfield.getText().concat(sourceButton.getText()));
+    private void write(ActionEvent event) {    // number, "j", "." buttons fiunction
+        Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
+        txtfield.setText(txtfield.getText().concat(sourceButton.getText()));    //concat textField string with the value insert by the button
     }
 
     @FXML
-    private void eventOp(ActionEvent event){
+    private void eventOp(ActionEvent event){    // operations buttons function
         if(txtfield.getText().compareTo("") != 0){
             this.write(event);
         }
         else{
             try {
-                Button sourceButton = (Button) event.getSource();
-                c.execute(sourceButton.getText());
+                    Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
+                    c.execute(sourceButton.getText());
+                    if (sourceButton.getText().contentEquals("clear")){     //case of operation "clear" of StackOperations
+                        stackNumbers.clear();
+                        stackNumbers.add("");
+                    }
                     if(!c.getStackNumbers().empty()){
                     stackNumbers.clear();
-                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){
+                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
                         String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
                         if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
                             s += "+";

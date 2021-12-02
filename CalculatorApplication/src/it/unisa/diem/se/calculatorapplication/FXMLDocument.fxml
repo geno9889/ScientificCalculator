@@ -39,7 +39,7 @@
                      <children>
                         <Label fx:id="resultLabel" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
-                              <Font size="40.0" />
+                              <Font size="36.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
@@ -115,6 +115,11 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
+                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="sqrt">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
                                  </children>
                               </HBox>
                               <HBox layoutX="40.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -135,6 +140,11 @@
                                        </font>
                                     </Button>
                                     <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="*">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="+/-">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -161,6 +171,38 @@
                                     <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: #aeaeae;" text="CANC">
                                        <font>
                                           <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" text="Stack operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </Label>
+                              <HBox layoutX="40.0" layoutY="217.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                 <children>
+                                    <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="clear">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="dup">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="drop">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="swap">
+                                       <font>
+                                          <Font size="18.0" />
                                        </font>
                                     </Button>
                                  </children>
