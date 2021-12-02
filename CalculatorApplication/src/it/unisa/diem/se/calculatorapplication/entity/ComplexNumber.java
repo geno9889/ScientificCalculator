@@ -63,12 +63,14 @@ public class ComplexNumber {
     }
     
     public static ComplexNumber invertSign(ComplexNumber number){
-        if(number.real==0)
-            return new ComplexNumber(0, -1*(number.imaginary));
+        if(number.real == 0 && number.imaginary==0)
+            return new ComplexNumber(number.real, number.imaginary);
         if(number.imaginary==0)
-            return new ComplexNumber(-1*(number.real), 0);
+            return new ComplexNumber(-1*(number.real), 0.0);
+        if(number.real == 0)
+            return new ComplexNumber(0, -1*(number.imaginary));
         else
-        return new ComplexNumber(-1*(number.real), -1*(number.imaginary));
+            return new ComplexNumber(-1*(number.real), -1*(number.imaginary));
     }
     
      public static ComplexNumber squareRoot(ComplexNumber number) {
@@ -88,6 +90,8 @@ public class ComplexNumber {
         String formatImaginary = df.format(Math.sqrt(abs)*Math.sin(fase));
         double realPart = Double.valueOf(formatReal.replace(",", "."));
         double imaginaryPart = new Double(formatImaginary.replace(",", "."));
-        return new ComplexNumber(realPart, imaginaryPart);
-    }
+        if(imaginaryPart == new Double(-0.0)){
+        return new ComplexNumber(realPart, new Double(0.0));}
+        return new ComplexNumber(realPart, imaginaryPart);}
+    
 }

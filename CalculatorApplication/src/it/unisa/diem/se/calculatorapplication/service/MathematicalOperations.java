@@ -36,7 +36,7 @@ public class MathematicalOperations implements SingleOperationsInterface{
         operations.put("*", "multiplication");
         operations.put("/", "division");
         operations.put("sqrt", "squareRoot");
-        operations.put("+/-", "invertSign");
+        operations.put("+-", "invertSign");
     }
 
     @Override

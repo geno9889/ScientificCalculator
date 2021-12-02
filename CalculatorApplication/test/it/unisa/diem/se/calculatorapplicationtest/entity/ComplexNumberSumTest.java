@@ -19,20 +19,7 @@ import static org.junit.Assert.*;
 public class ComplexNumberSumTest {
     
     private static ComplexNumber complexNumber1, complexNumber2;
-         
-    @BeforeClass
-    public static void setUp() {        
-        complexNumber1 = new ComplexNumber(10,2);
-        assertNotNull (complexNumber1);
-        assertEquals("Real part not expected", 10, complexNumber1.getReal(),0);
-        assertEquals("Imaginary part not expected", 2, complexNumber1.getImaginary(),0);
-        complexNumber2 = new ComplexNumber(10);
-        assertNotNull(complexNumber2);
-        assertEquals("Real part not expected", 10, complexNumber2.getReal(),0);
-        assertEquals("Imaginary part not expected", 0, complexNumber2.getImaginary(),0);
-    }
-    
-    
+
     @Test
     public void testAllNegative() {
         complexNumber1 = new ComplexNumber(-10,-10);
