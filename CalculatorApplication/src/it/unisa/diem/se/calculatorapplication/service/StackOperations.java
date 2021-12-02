@@ -26,6 +26,7 @@ public class StackOperations implements SingleOperationsInterface{
         operations.put("clear", "clear");
         operations.put("dup", "dup");
         operations.put("swap", "swap");
+        operations.put("drop", "drop");
     }
     
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
@@ -59,5 +60,10 @@ public class StackOperations implements SingleOperationsInterface{
         ComplexNumber newTopElement = (ComplexNumber) stackNumbers.pop();
         stackNumbers.push(oldTopElement);
         stackNumbers.push(newTopElement);
+    }
+    
+    private void drop(Stack stackNumbers) throws StackBadSizeException{
+        if(stackNumbers.size()<1) throw new StackBadSizeException("Stack is empty!");
+        stackNumbers.pop();
     }
 }

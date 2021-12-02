@@ -112,4 +112,24 @@ public class StackOperationsTest {
         assertEquals("Swap not executed", new ComplexNumber(5,5),number);
         assertEquals("Stack resize error",6,stack.size(),0);
     }
+    
+    @Test (expected = StackBadSizeException.class)
+    public void testExecuteIfExistsDropEmptyStack() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("drop", stack);
+        }
+
+    @Test
+    public void testExecuteIfExistsDropNotEmptyStack() throws StackBadSizeException{
+        stack.push(new ComplexNumber(0,0));
+        stack.push(new ComplexNumber(1,1));
+        stack.push(new ComplexNumber(2,2));
+        stack.push(new ComplexNumber(3,3));
+        stack.push(new ComplexNumber(4,4));
+        stack.push(new ComplexNumber(5,5));
+        Boolean r = operations.executeifExists("drop", stack);
+        assertTrue("The operation drop not exists",r);
+        ComplexNumber number = stack.peek();
+        assertEquals("Drop not executed", new ComplexNumber(4, 4), number);
+        assertEquals("Stack resize error",5,stack.size(),0);
+    }
 }

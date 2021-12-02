@@ -70,4 +70,24 @@ public class ComplexNumber {
         else
         return new ComplexNumber(-1*(number.real), -1*(number.imaginary));
     }
+    
+     public static ComplexNumber squareRoot(ComplexNumber number) {
+        
+        double abs = 0;
+        double arg = 0;
+        double resultReal = number.real; 
+        double resultImaginary = number.imaginary;  
+           
+        if (resultReal!=0 || resultImaginary!=0) {
+            abs = Math.sqrt((resultReal*resultReal) + (resultImaginary*resultImaginary));
+        }
+        arg = Math.atan2(resultImaginary, resultReal);
+        double fase = arg/2;
+        DecimalFormat df = new DecimalFormat("#.########");  //first 8 decimal digits
+        String formatReal = df.format(Math.sqrt(abs)*Math.cos(fase));
+        String formatImaginary = df.format(Math.sqrt(abs)*Math.sin(fase));
+        double realPart = Double.valueOf(formatReal.replace(",", "."));
+        double imaginaryPart = new Double(formatImaginary.replace(",", "."));
+        return new ComplexNumber(realPart, imaginaryPart);
+    }
 }
