@@ -161,7 +161,7 @@ public class MathematicalOperationsTest {
     @Test
     public void testExecuteifExistsInvertSign() throws StackBadSizeException, MathematicalException {
         stack.push(new ComplexNumber(2,2));
-        Boolean r = a.executeifExists("+/-",stack);
+        Boolean r = a.executeifExists("+-",stack);
         assertTrue(r);
         assertEquals("Invert Sign real part execution error",-2,stack.peek().getReal(),0);
         assertEquals("Invert Sign imaginary part execution error",-2,stack.peek().getImaginary(),0);
@@ -170,7 +170,7 @@ public class MathematicalOperationsTest {
     
     @Test (expected = StackBadSizeException.class)
     public void testExecuteifExistsExceptionInvertSign() throws StackBadSizeException, MathematicalException {
-        Boolean r = a.executeifExists("+/-",stack);
+        Boolean r = a.executeifExists("+-",stack);
     }    
     
 }
