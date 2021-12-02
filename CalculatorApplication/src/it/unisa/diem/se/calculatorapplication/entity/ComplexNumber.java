@@ -88,6 +88,8 @@ public class ComplexNumber {
         String formatImaginary = df.format(Math.sqrt(abs)*Math.sin(fase));
         double realPart = Double.valueOf(formatReal.replace(",", "."));
         double imaginaryPart = new Double(formatImaginary.replace(",", "."));
-        return new ComplexNumber(realPart, imaginaryPart);
-    }
+        if(imaginaryPart == new Double(-0.0)){
+        return new ComplexNumber(realPart, new Double(0));}
+        return new ComplexNumber(realPart, imaginaryPart);}
+    
 }
