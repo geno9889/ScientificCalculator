@@ -114,38 +114,41 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void eventOp(ActionEvent event){    // operations buttons function
+        Alert al= new Alert(Alert.AlertType.ERROR);
         if(txtfield.getText().compareTo("") != 0){
-            this.write(event);
+            al.setTitle("Error");
+            al.setHeaderText("Input error");
+            al.setContentText("Can't use mathematical operations in input");
+            al.show();
+            return;
         }
-        else{
-            try {
-                    Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
-                    c.execute(sourceButton.getText());
-                    if (sourceButton.getText().contentEquals("clear")){     //case of operation "clear" of StackOperations
-                        stackNumbers.clear();
-                        stackNumbers.add("");
-                    }
-                    if(!c.getStackNumbers().empty()){
+        try {
+                Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
+                c.execute(sourceButton.getText());
+                if (sourceButton.getText().contentEquals("clear") || ( sourceButton.getText().contentEquals("drop") && c.getStackNumbers().size() == 1)){     //case of operation "clear" and particulare case of drop  of StackOperations
                     stackNumbers.clear();
-                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
-                        String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
-                        if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
-                            s += "+";
-                        }
-                        s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
-                        stackNumbers.add(s);
-                    }
+                    stackNumbers.add("");
                 }
-            } catch (StackBadSizeException | MathematicalException ex) {
-                Alert al= new Alert(Alert.AlertType.ERROR);
-                al.setTitle("Error");
-                al.setHeaderText("Input error");
-                al.setContentText(ex.getMessage());
-                al.show();
+                if(!c.getStackNumbers().empty()){
+                stackNumbers.clear();
+                for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
+                    String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
+                    if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
+                        s += "+";
+                    }
+                    s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
+                    stackNumbers.add(s);
+                }
             }
-            this.clearAll(event);
-            resultLabel.setText(stackNumbers.get(0));
+        } catch (StackBadSizeException | MathematicalException ex) {
+            al.setTitle("Error");
+            al.setHeaderText("Input error");
+            al.setContentText(ex.getMessage());
+            al.show();
         }
+        this.clearAll(event);
+        resultLabel.setText(stackNumbers.get(0));
+
     }
 }
     
