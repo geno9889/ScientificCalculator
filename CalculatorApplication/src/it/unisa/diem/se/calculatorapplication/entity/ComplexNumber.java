@@ -89,7 +89,7 @@ public class ComplexNumber {
         double realPart = Double.valueOf(formatReal.replace(",", "."));
         double imaginaryPart = new Double(formatImaginary.replace(",", "."));
         if(imaginaryPart == new Double(-0.0)){
-        return new ComplexNumber(realPart, new Double(0));}
+        return new ComplexNumber(realPart, new Double(0.0));}
         return new ComplexNumber(realPart, imaginaryPart);}
     
 }
