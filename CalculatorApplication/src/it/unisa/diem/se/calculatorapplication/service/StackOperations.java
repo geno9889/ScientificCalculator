@@ -29,12 +29,13 @@ public class StackOperations implements SingleOperationsInterface{
         operations.put("drop", "drop");
     }
     
+    //check if name of the operation is an existing key and execute corresponding method(value in hashmap)
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
         Method m1;
         if (operations.containsKey(operation)){
             try {
                 m1 = StackOperations.class.getDeclaredMethod(operations.get(operation), Stack.class);
-                m1.invoke(this, stackNumbers);
+                m1.invoke(this, stackNumbers); 
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException ex1) {
                 Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex1);
             } catch(InvocationTargetException ex2){

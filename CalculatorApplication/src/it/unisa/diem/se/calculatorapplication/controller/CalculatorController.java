@@ -112,7 +112,7 @@ public class CalculatorController {
         return indexImaginaryPart;
     }
     
-        
+    //when press the button execute directly this method, without check the input string    
     public void execute(String input) throws StackBadSizeException, MathematicalException{
         for(SingleOperationsInterface op : singleOperations){
             op.executeifExists(input, stackNumbers);
