@@ -25,6 +25,7 @@ public class StackOperations {
         operations = new HashMap<>();
         operations.put("clear", "clear");
         operations.put("dup", "dup");
+        operations.put("swap", "swap");
     }
     
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
@@ -50,7 +51,13 @@ public class StackOperations {
     private void dup(Stack stackNumbers) throws StackBadSizeException{       
         if(stackNumbers.size()<1) throw new StackBadSizeException("Stack is empty!");
         stackNumbers.push(stackNumbers.peek());
-        System.out.println(stackNumbers.size());
     }
-
+    
+    private void swap(Stack stackNumbers) throws StackBadSizeException{
+        if(stackNumbers.size()<2) throw new StackBadSizeException("There are less than two elements into stack");
+        ComplexNumber oldTopElement = (ComplexNumber) stackNumbers.pop();
+        ComplexNumber newTopElement = (ComplexNumber) stackNumbers.pop();
+        stackNumbers.push(oldTopElement);
+        stackNumbers.push(newTopElement);
+    }
 }

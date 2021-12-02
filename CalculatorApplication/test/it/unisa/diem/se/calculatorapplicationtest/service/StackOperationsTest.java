@@ -84,4 +84,32 @@ public class StackOperationsTest {
         assertEquals("Duplication part imaginary of top element error",5,number.getImaginary(),0);
         assertEquals("Stack resize error",7,stack.size(),0);
     }
+    
+    @Test(expected = StackBadSizeException.class)
+    public void testExecuteIfExistsSwapEmptyStack() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("swap", stack);
+    }
+    
+    @Test(expected = StackBadSizeException.class)
+    public void testExecuteIfExistsSwapOneElementInStack() throws StackBadSizeException{
+        stack.push(new ComplexNumber(0,0));
+        Boolean r = operations.executeifExists("swap", stack);
+    }
+    
+    @Test
+    public void testExecuteIfExistsSwapValidStack() throws StackBadSizeException{
+        stack.push(new ComplexNumber(0,0));
+        stack.push(new ComplexNumber(1,1));
+        stack.push(new ComplexNumber(2,2));
+        stack.push(new ComplexNumber(3,3));
+        stack.push(new ComplexNumber(4,4));
+        stack.push(new ComplexNumber(5,5));
+        Boolean r = operations.executeifExists("swap", stack);
+        assertTrue("The operation swap not exists",r);
+        ComplexNumber number = stack.peek();
+        assertEquals("Swap not executed", new ComplexNumber(4,4),number);
+        number = stack.elementAt(stack.size() - 2);
+        assertEquals("Swap not executed", new ComplexNumber(5,5),number);
+        assertEquals("Stack resize error",6,stack.size(),0);
+    }
 }
