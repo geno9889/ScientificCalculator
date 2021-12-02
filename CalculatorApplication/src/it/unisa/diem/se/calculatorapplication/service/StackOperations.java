@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Giuseppe
  */
-public class StackOperations {
+public class StackOperations implements SingleOperationsInterface{
     
     private HashMap<String,String> operations;
     
