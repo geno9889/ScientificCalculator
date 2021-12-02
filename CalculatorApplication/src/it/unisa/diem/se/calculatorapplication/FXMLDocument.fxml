@@ -168,9 +168,14 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
+                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteLastCharacter" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: #aeaeae;" text="«-">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
                                     <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: #aeaeae;" text="CANC">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="18.0" />
                                        </font>
                                     </Button>
                                  </children>

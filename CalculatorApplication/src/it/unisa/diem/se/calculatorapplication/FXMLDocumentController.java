@@ -93,7 +93,12 @@ public class FXMLDocumentController implements Initializable {
         this.insertValue(event);
     }
 
-
+    @FXML
+    private void deleteLastCharacter(ActionEvent event) {      // button backspace function
+        if (txtfield.getLength() != 0)          //avoid lenght exception
+            txtfield.setText(txtfield.getText(0, txtfield.getLength()-1));
+    }
+    
     @FXML
     private void clearAll(ActionEvent event) {      // button canc function
         txtfield.clear();
@@ -142,9 +147,7 @@ public class FXMLDocumentController implements Initializable {
             resultLabel.setText(stackNumbers.get(0));
         }
     }
-    
-    
-    }
+}
     
     
 
