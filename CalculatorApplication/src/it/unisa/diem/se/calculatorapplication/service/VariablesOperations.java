@@ -50,7 +50,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         char variable = operation.charAt(1);
         if (operations.containsKey(op) && variables.containsKey(variable)){
             try {
-                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(op), Stack.class, String.class);
+                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(op), Stack.class, Character.class);
                 m1.invoke(this, stackNumbers, variable);
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException ex1) {
                 Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
@@ -58,7 +58,6 @@ public class VariablesOperations implements SingleOperationsInterface{
                 if(ex2.getCause() instanceof StackBadSizeException)
                     throw (StackBadSizeException)ex2.getCause();
             }
-            
             return true;
         }
         return false;
