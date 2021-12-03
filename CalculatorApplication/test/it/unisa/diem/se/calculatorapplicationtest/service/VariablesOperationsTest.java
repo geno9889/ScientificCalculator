@@ -46,6 +46,7 @@ public class VariablesOperationsTest {
         assertNotNull(op);
         assertTrue(op.containsKey(">"));
         assertTrue(op.containsKey("+"));
+        assertTrue(op.containsKey("-"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -111,13 +112,16 @@ public class VariablesOperationsTest {
         assertEquals("MajorX not executed", 0, stackNumbers.size());
     }
     
+
     @Test
     public void testExecuteifExistsPlusX() throws StackBadSizeException{
+        stackNumbers.push(new ComplexNumber(4));
         stackNumbers.push(new ComplexNumber(2));
         operations.getVariables().put('x', new ComplexNumber(3));
         Boolean r = operations.executeifExists("+x", stackNumbers);
-        assertEquals("PlusX variable real part execution error", 5, operations.getVariables().get('x').getReal(), 0);
-        assertEquals("PlusX variable imaginary part execution error", 0, operations.getVariables().get('x').getImaginary(),0);
+        assertTrue("The operation not exists",r);
+        assertEquals("PlusX not executed", operations.getVariables().get('x'), new ComplexNumber(5, 0));
+        assertEquals("PlusX not executed", 1, stackNumbers.size());
         
     }
     
@@ -126,4 +130,22 @@ public class VariablesOperationsTest {
         Boolean r = operations.executeifExists("+k", stackNumbers);
     }
     
+
+    @Test(expected = StackBadSizeException.class)
+    public void testExecuteifExistsEmptyStackMinusrX() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("-x", stackNumbers);
+    }
+    
+    @Test()
+    public void testExecuteIfExistsMinusX() throws StackBadSizeException{
+        stackNumbers.push(new ComplexNumber(0,0));
+        stackNumbers.push(new ComplexNumber(1,1));
+        operations.getVariables().put('x', new ComplexNumber(3,3));
+        Boolean r = operations.executeifExists("-x", stackNumbers);
+        assertTrue("The operation not exists",r);
+        assertEquals("MinusX not executed", 1, stackNumbers.size());assertEquals("MajorX not executed", 1, stackNumbers.size());
+        assertEquals("MinusX not executed", operations.getVariables().get('x'), new ComplexNumber(2, 2));
+
+    }
+
 }
