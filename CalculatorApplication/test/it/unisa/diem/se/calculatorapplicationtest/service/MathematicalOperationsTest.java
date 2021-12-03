@@ -9,6 +9,7 @@ import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.*;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Stack;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -32,6 +33,13 @@ public class MathematicalOperationsTest {
     public static void setUp() {
         a = new MathematicalOperations();
         assertNotNull("MathematicalOperation initialization error",a);
+        HashMap<String, String> operations = a.getOperations();
+        assertTrue(operations.containsKey("+"));
+        assertTrue(operations.containsKey("-"));
+        assertTrue(operations.containsKey("*"));
+        assertTrue(operations.containsKey("/"));
+        assertTrue(operations.containsKey("sqrt"));
+        assertTrue(operations.containsKey("+-"));
         stack = new Stack(); 
         assertNotNull("Stack initialization error",stack);
     }
@@ -53,18 +61,11 @@ public class MathematicalOperationsTest {
     }
     
     @Test
-    public void testExecuteifExistsEmpty() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsInvalidOperation() throws StackBadSizeException, MathematicalException {
         Boolean r = a.executeifExists("nogood",stack);
-        assertFalse("Empty stack check failed",r);
+        assertFalse("Operation not existing",r);
     }
     
-    @Test
-    public void testExecuteifExistsFalse() throws StackBadSizeException, MathematicalException {
-        stack.push(new ComplexNumber(1));
-        stack.push(new ComplexNumber(2));
-        Boolean r = a.executeifExists("nogood",stack);
-        assertFalse("Wrong operation check failed",r);
-    }
     
     @Test
     public void testExecuteifExistsSum() throws StackBadSizeException, MathematicalException {

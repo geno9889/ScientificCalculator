@@ -9,6 +9,7 @@ import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
+import java.util.HashMap;
 import java.util.Stack;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,6 +35,11 @@ public class StackOperationsTest {
     public static void setUpClass() {
         operations = new StackOperations();
         assertNotNull("StackOperations initialization error", operations);
+        HashMap<String, String> op = operations.getOperations();
+        assertTrue(op.containsKey("clear"));
+        assertTrue(op.containsKey("drop"));
+        assertTrue(op.containsKey("dup"));
+        assertTrue(op.containsKey("swap"));
         stack = new Stack(); 
         assertNotNull("Stack initialization error",stack);
     }

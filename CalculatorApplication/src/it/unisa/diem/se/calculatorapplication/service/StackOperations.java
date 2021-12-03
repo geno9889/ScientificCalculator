@@ -12,11 +12,17 @@ import java.util.HashMap;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  *
  * @author Giuseppe
  */
+@Getter
+@EqualsAndHashCode
+@ToString
 public class StackOperations implements SingleOperationsInterface{
     
     private HashMap<String,String> operations;
