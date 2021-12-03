@@ -49,7 +49,7 @@
                         </Label>
                         <HBox prefHeight="44.0" prefWidth="559.0" spacing="20.0">
                            <children>
-                              <TextField fx:id="txtfield" alignment="CENTER" maxWidth="500.0" onAction="#insertValue2" prefHeight="30.0" prefWidth="412.0" promptText="Insert input here...">
+                              <TextField fx:id="txtfield" alignment="CENTER" maxWidth="500.0" onAction="#insertValue" prefHeight="30.0" prefWidth="412.0" promptText="Insert input here...">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -246,14 +246,38 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="41.0" layoutY="374.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" text="Variable operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="527.0" text="Variables operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
+                                    </Label>
+                                    <HBox prefHeight="20.0" prefWidth="303.0" spacing="1.0">
+                                       <children>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="21.0" prefWidth="108.0" text="Setted variable:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                          </Label>
+                                          <Label fx:id="settedVariable" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="38.0" text="None" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
                               <HBox layoutX="40.0" layoutY="414.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
                                     <MenuButton fx:id="variableSetter" mnemonicParsing="false" prefHeight="35.0" prefWidth="132.0" text="Variable setter">

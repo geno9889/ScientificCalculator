@@ -54,6 +54,8 @@ public class FXMLDocumentController implements Initializable {
     private Label resultLabel;
     @FXML
     private MenuButton variableSetter;
+    @FXML
+    private Label settedVariable;
     
     
     @Override
@@ -66,21 +68,29 @@ public class FXMLDocumentController implements Initializable {
          
     }    
 
+    private void recreateStack(){
+        stackNumbers.clear();
+        for(int i=c.getStackNumbers().size()-1; i>=0; i--){     // recreating stack with new elements
+            String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
+            if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
+                s += "+";
+            }
+            s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
+            stackNumbers.add(s);
+        }
+    }
+    
     @FXML
     private void insertValue(ActionEvent event) {
         try {
             c.insertOrExecute(txtfield.getText());
-            if(!c.getStackNumbers().empty()){
-            stackNumbers.clear();
-            for(int i=c.getStackNumbers().size()-1; i>=0; i--){     // recreating stack with new elements
-                String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
-                if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
-                    s += "+";
+            if(c.getStackNumbers().empty()){
+                    stackNumbers.clear();
+                    stackNumbers.add("");
                 }
-                s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
-                stackNumbers.add(s);
+            else{
+                recreateStack();
             }
-        }
         } catch (InvalidInputException | StackBadSizeException | MathematicalException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
@@ -92,12 +102,6 @@ public class FXMLDocumentController implements Initializable {
         resultLabel.setText(stackNumbers.get(0));
     }
 
-
-    @FXML
-    private void insertValue2(ActionEvent event) throws MathematicalException {
-        this.insertValue(event);
-    }
-
     @FXML
     private void deleteLastCharacter(ActionEvent event) {      // button backspace function
         if (txtfield.getLength() != 0)          //avoid lenght exception
@@ -107,9 +111,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void clearAll(ActionEvent event) {      // button canc function
         txtfield.clear();
-        resultLabel.setText(null);
     }
-
 
     @FXML
     private void write(ActionEvent event) {    // number, "j", "." buttons fiunction
@@ -134,17 +136,8 @@ public class FXMLDocumentController implements Initializable {
                     stackNumbers.clear();
                     stackNumbers.add("");
                 }
-                if(!c.getStackNumbers().empty()){
-                    stackNumbers.clear();
-                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
-                        String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
-                        if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
-                            s += "+";
-                        }
-                        s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
-                        stackNumbers.add(s);
-                    }
-            }
+                if(!c.getStackNumbers().empty())
+                    recreateStack();
         } catch (StackBadSizeException | MathematicalException ex) {
             al.setTitle("Error");
             al.setHeaderText("Input error");
@@ -153,19 +146,24 @@ public class FXMLDocumentController implements Initializable {
         }
         this.clearAll(event);
         resultLabel.setText(stackNumbers.get(0));
-
     }
     
     @FXML
     private void selectedOption(Event event) {
         int i=0;
         CheckMenuItem checked = (CheckMenuItem) event.getSource();
-        while(i < variableSetter.getItems().size()){
-            CheckMenuItem controlled = (CheckMenuItem) variableSetter.getItems().get(i);
-            if(controlled.isSelected() && controlled.getText().compareTo(checked.getText()) !=0 ){
-                controlled.setSelected(false);
+        if(checked.getText() == settedVariable.getText()){
+            settedVariable.setText("None");
+        }
+        else{
+            settedVariable.setText(checked.getText());
+            while(i < variableSetter.getItems().size()){
+                CheckMenuItem controlled = (CheckMenuItem) variableSetter.getItems().get(i);
+                if(controlled.isSelected() && controlled.getText().compareTo(checked.getText()) !=0 ){
+                    controlled.setSelected(false);
+                }
+                i++;
             }
-            i++;
         }
     }
 
@@ -196,17 +194,8 @@ public class FXMLDocumentController implements Initializable {
                     stackNumbers.clear();
                     stackNumbers.add("");
                 }
-                else{
-                    stackNumbers.clear();
-                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
-                        String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
-                        if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
-                            s += "+";
-                        }
-                        s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
-                        stackNumbers.add(s);
-                    }
-            }
+                else
+                    recreateStack();
         } catch (StackBadSizeException | MathematicalException ex) {
             al.setTitle("Error");
             al.setHeaderText("Input error");
@@ -215,7 +204,6 @@ public class FXMLDocumentController implements Initializable {
         }
         this.clearAll(event);
         resultLabel.setText(stackNumbers.get(0));
-
     }
 
 }
