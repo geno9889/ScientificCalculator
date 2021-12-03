@@ -33,6 +33,7 @@ public class StackOperations implements SingleOperationsInterface{
         operations.put("dup", "dup");
         operations.put("swap", "swap");
         operations.put("drop", "drop");
+        operations.put("over", "over");
     }
     
     @Override
@@ -73,5 +74,10 @@ public class StackOperations implements SingleOperationsInterface{
     private void drop(Stack stackNumbers) throws StackBadSizeException{
         if(stackNumbers.size()<1) throw new StackBadSizeException("Stack is empty!");
         stackNumbers.pop();
+    }
+    
+        private void over(Stack stackNumbers) throws StackBadSizeException{
+        if(stackNumbers.size()<2) throw new StackBadSizeException("There are less than two elements into stack");
+        stackNumbers.push(stackNumbers.elementAt(stackNumbers.size()-2));
     }
 }
