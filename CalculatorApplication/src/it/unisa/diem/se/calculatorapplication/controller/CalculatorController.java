@@ -10,6 +10,7 @@ import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
+import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -38,6 +39,7 @@ public class CalculatorController {
         singleOperations = new LinkedList<>();
         singleOperations.add(new MathematicalOperations());
         singleOperations.add(new StackOperations());
+        singleOperations.add(new VariablesOperations());
     }
     
     public void insertOrExecute(String input) throws InvalidInputException, StackBadSizeException, MathematicalException{
