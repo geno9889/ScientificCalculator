@@ -85,6 +85,11 @@ public class VariablesOperations implements SingleOperationsInterface{
         if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
         ComplexNumber topElement = (ComplexNumber) stackNumbers.pop();
         variables.put(variable, ComplexNumber.substraction(variables.get(variable), topElement));
-    }    
+    } 
+    
+    private void minorX (Stack stackNumbers, char variable){
+        ComplexNumber x = (ComplexNumber) variables.get(variable);
+        stackNumbers.push(x);
+    }
 
 }
