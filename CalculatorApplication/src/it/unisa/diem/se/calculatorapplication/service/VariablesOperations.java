@@ -68,21 +68,21 @@ public class VariablesOperations implements SingleOperationsInterface{
     
     
     private void majorX(Stack stackNumbers, Character variable) throws StackBadSizeException{
-        if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
+        if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
         ComplexNumber number = (ComplexNumber) stackNumbers.pop();
         variables.put(variable, number);
     }
     
 
     private void plusX(Stack stackNumbers, Character variable) throws StackBadSizeException{
-        if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
+        if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
         ComplexNumber varValue = variables.get(variable);
         ComplexNumber finalVarValue = ComplexNumber.sum(varValue, (ComplexNumber) stackNumbers.pop());
         variables.put(variable, finalVarValue);
     }
 
     private void minusX(Stack stackNumbers, Character variable) throws StackBadSizeException{
-        if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
+        if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
         ComplexNumber topElement = (ComplexNumber) stackNumbers.pop();
         variables.put(variable, ComplexNumber.substraction(variables.get(variable), topElement));
     }    

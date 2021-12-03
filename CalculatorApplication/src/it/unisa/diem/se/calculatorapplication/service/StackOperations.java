@@ -59,7 +59,7 @@ public class StackOperations implements SingleOperationsInterface{
     }
     
     private void dup(Stack stackNumbers) throws StackBadSizeException{       
-        if(stackNumbers.size()<1) throw new StackBadSizeException("Stack is empty!");
+        if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
         stackNumbers.push(stackNumbers.peek());
     }
     
@@ -72,7 +72,7 @@ public class StackOperations implements SingleOperationsInterface{
     }
     
     private void drop(Stack stackNumbers) throws StackBadSizeException{
-        if(stackNumbers.size()<1) throw new StackBadSizeException("Stack is empty!");
+        if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
         stackNumbers.pop();
     }
     
