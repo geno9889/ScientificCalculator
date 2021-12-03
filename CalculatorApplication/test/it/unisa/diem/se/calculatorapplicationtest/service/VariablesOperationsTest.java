@@ -101,6 +101,12 @@ public class VariablesOperationsTest {
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
         Boolean r = operations.executeifExists(">c", stackNumbers);
-        assertTrue("It returns false",r);
+        assertTrue("The operation not exists",r);
+        assertEquals("MajorX not executed", operations.getVariables().get('c'), new ComplexNumber(1, 1));
+        assertEquals("MajorX not executed", 1, stackNumbers.size());
+        Boolean r2 = operations.executeifExists(">d", stackNumbers);
+        assertTrue("The operation not exists",r2);
+        assertEquals("MajorX not executed", operations.getVariables().get('d'), new ComplexNumber(0, 0));
+        assertEquals("MajorX not executed", 0, stackNumbers.size());
     }
 }

@@ -63,4 +63,10 @@ public class VariablesOperations implements SingleOperationsInterface{
         return false;
     }
     
+    
+    private void majorX(Stack stackNumbers, Character variable) throws StackBadSizeException{
+        if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
+        ComplexNumber number = (ComplexNumber) stackNumbers.pop();
+        variables.put(variable, number);
+    }
 }
