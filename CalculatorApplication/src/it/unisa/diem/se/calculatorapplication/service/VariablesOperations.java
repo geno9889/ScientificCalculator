@@ -59,4 +59,8 @@ public class VariablesOperations implements SingleOperationsInterface{
         return false;
     }
     
+    private void topIntoVariable(Stack stackNumbers) throws StackBadSizeException{
+    
+    }
+    
 }

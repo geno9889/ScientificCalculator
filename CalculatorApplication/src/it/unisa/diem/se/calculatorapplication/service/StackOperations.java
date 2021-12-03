@@ -76,7 +76,7 @@ public class StackOperations implements SingleOperationsInterface{
         stackNumbers.pop();
     }
     
-        private void over(Stack stackNumbers) throws StackBadSizeException{
+    private void over(Stack stackNumbers) throws StackBadSizeException{
         if(stackNumbers.size()<2) throw new StackBadSizeException("There are less than two elements into stack");
         stackNumbers.push(stackNumbers.elementAt(stackNumbers.size()-2));
     }
