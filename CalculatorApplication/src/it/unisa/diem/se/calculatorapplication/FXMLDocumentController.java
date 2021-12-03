@@ -19,12 +19,15 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -49,6 +52,8 @@ public class FXMLDocumentController implements Initializable {
     private CalculatorController c;
     @FXML
     private Label resultLabel;
+    @FXML
+    private MenuButton variableSetter;
     
     
     @Override
@@ -130,15 +135,15 @@ public class FXMLDocumentController implements Initializable {
                     stackNumbers.add("");
                 }
                 if(!c.getStackNumbers().empty()){
-                stackNumbers.clear();
-                for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
-                    String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
-                    if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
-                        s += "+";
+                    stackNumbers.clear();
+                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
+                        String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
+                        if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
+                            s += "+";
+                        }
+                        s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
+                        stackNumbers.add(s);
                     }
-                    s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
-                    stackNumbers.add(s);
-                }
             }
         } catch (StackBadSizeException | MathematicalException ex) {
             al.setTitle("Error");
@@ -150,6 +155,69 @@ public class FXMLDocumentController implements Initializable {
         resultLabel.setText(stackNumbers.get(0));
 
     }
+    
+    @FXML
+    private void selectedOption(Event event) {
+        int i=0;
+        CheckMenuItem checked = (CheckMenuItem) event.getSource();
+        while(i < variableSetter.getItems().size()){
+            CheckMenuItem controlled = (CheckMenuItem) variableSetter.getItems().get(i);
+            if(controlled.isSelected() && controlled.getText().compareTo(checked.getText()) !=0 ){
+                controlled.setSelected(false);
+            }
+            i++;
+        }
+    }
+
+    @FXML
+    private void variableOp(ActionEvent event) {
+        Alert al= new Alert(Alert.AlertType.ERROR);
+        String varName = "";
+        int j=0;
+        while(j<variableSetter.getItems().size()){
+            CheckMenuItem controlled = (CheckMenuItem) variableSetter.getItems().get(j);
+            if(controlled.isSelected()){
+                varName = controlled.getText();
+            }
+            j++;
+        }
+        if(varName.compareTo("")==0){
+            al.setTitle("Error");
+            al.setHeaderText("Variable error");
+            al.setContentText("Can't use variable operations without setted variable");
+            al.show();
+            return;
+        }
+        try {
+                Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
+                String op = sourceButton.getText().replace("x", varName);
+                c.execute(op);
+                if(c.getStackNumbers().empty()){
+                    stackNumbers.clear();
+                    stackNumbers.add("");
+                }
+                else{
+                    stackNumbers.clear();
+                    for(int i=c.getStackNumbers().size()-1; i>=0; i--){         // recreating stack with new elements
+                        String s = String.valueOf(c.getStackNumbers().elementAt(i).getReal());
+                        if(c.getStackNumbers().elementAt(i).getImaginary()>=0){
+                            s += "+";
+                        }
+                        s += String.valueOf(c.getStackNumbers().elementAt(i).getImaginary()) + "j";
+                        stackNumbers.add(s);
+                    }
+            }
+        } catch (StackBadSizeException | MathematicalException ex) {
+            al.setTitle("Error");
+            al.setHeaderText("Input error");
+            al.setContentText(ex.getMessage());
+            al.show();
+        }
+        this.clearAll(event);
+        resultLabel.setText(stackNumbers.get(0));
+
+    }
+
 }
     
     

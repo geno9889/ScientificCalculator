@@ -37,6 +37,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         }
         
         operations.put(">", "majorX");
+        operations.put("+", "plusX");
         
     }
     
@@ -68,5 +69,12 @@ public class VariablesOperations implements SingleOperationsInterface{
         if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
         ComplexNumber number = (ComplexNumber) stackNumbers.pop();
         variables.put(variable, number);
+    }
+    
+    private void plusX(Stack stackNumbers, Character variable) throws StackBadSizeException{
+        if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
+        ComplexNumber varValue = variables.get(variable);
+        ComplexNumber finalVarValue = ComplexNumber.sum(varValue, (ComplexNumber) stackNumbers.pop());
+        variables.put(variable, finalVarValue);
     }
 }

@@ -45,6 +45,7 @@ public class VariablesOperationsTest {
         HashMap<String, String> op = operations.getOperations();
         assertNotNull(op);
         assertTrue(op.containsKey(">"));
+        assertTrue(op.containsKey("+"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -109,4 +110,20 @@ public class VariablesOperationsTest {
         assertEquals("MajorX not executed", operations.getVariables().get('d'), new ComplexNumber(0, 0));
         assertEquals("MajorX not executed", 0, stackNumbers.size());
     }
+    
+    @Test
+    public void testExecuteifExistsPlusX() throws StackBadSizeException{
+        stackNumbers.push(new ComplexNumber(2));
+        operations.getVariables().put('x', new ComplexNumber(3));
+        Boolean r = operations.executeifExists("+x", stackNumbers);
+        assertEquals("PlusX variable real part execution error", 5, operations.getVariables().get('x').getReal(), 0);
+        assertEquals("PlusX variable imaginary part execution error", 0, operations.getVariables().get('x').getImaginary(),0);
+        
+    }
+    
+    @Test (expected = StackBadSizeException.class)
+    public void testExecuteifExistsEmptyStackPlusX() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("+k", stackNumbers);
+    }
+    
 }
