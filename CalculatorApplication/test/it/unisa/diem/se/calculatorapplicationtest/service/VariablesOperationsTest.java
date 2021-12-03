@@ -91,4 +91,9 @@ public class VariablesOperationsTest {
         assertFalse("Operation not existing",r);
     }
     
+    @Test
+    public void testExecuteifExistsEmptyStackMajorX() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("nogood", stackNumbers);
+        assertFalse("Operation not existing",r);
+    }
 }

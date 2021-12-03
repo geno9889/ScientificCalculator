@@ -36,17 +36,22 @@ public class VariablesOperations implements SingleOperationsInterface{
             variables.put((char) i, null);
         }
         
-        operations.put(">", "topIntoVariable");
+        operations.put(">", "majorX");
         
     }
     
     @Override
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException {
         Method m1;
-        if (operations.containsKey(operation)){
+        if(operation.length() != 2){
+            return false;
+        }
+        String op = operation.substring(0, 1);
+        char variable = operation.charAt(1);
+        if (operations.containsKey(op) && variables.containsKey(variable)){
             try {
-                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operation), Stack.class);
-                m1.invoke(this, stackNumbers);
+                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(op), Stack.class, String.class);
+                m1.invoke(this, stackNumbers, variable);
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException ex1) {
                 Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
             } catch (InvocationTargetException ex2) {
