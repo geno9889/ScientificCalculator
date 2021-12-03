@@ -45,6 +45,7 @@ public class VariablesOperationsTest {
         HashMap<String, String> op = operations.getOperations();
         assertNotNull(op);
         assertTrue(op.containsKey(">"));
+        assertTrue(op.containsKey("-"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -108,5 +109,22 @@ public class VariablesOperationsTest {
         assertTrue("The operation not exists",r2);
         assertEquals("MajorX not executed", operations.getVariables().get('d'), new ComplexNumber(0, 0));
         assertEquals("MajorX not executed", 0, stackNumbers.size());
+    }
+    
+    @Test(expected = StackBadSizeException.class)
+    public void testExecuteifExistsEmptyStackMinusrX() throws StackBadSizeException{
+        Boolean r = operations.executeifExists("-x", stackNumbers);
+    }
+    
+    @Test()
+    public void testExecuteIfExistsMinusX() throws StackBadSizeException{
+        stackNumbers.push(new ComplexNumber(0,0));
+        stackNumbers.push(new ComplexNumber(1,1));
+        operations.getVariables().put('x', new ComplexNumber(3,3));
+        Boolean r = operations.executeifExists("-x", stackNumbers);
+        assertTrue("The operation not exists",r);
+        assertEquals("MinusX not executed", 1, stackNumbers.size());assertEquals("MajorX not executed", 1, stackNumbers.size());
+        assertEquals("MinusX not executed", operations.getVariables().get('x'), new ComplexNumber(2, 2));
+
     }
 }

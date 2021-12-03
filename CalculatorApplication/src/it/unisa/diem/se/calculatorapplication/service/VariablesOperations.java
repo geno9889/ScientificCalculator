@@ -37,6 +37,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         }
         
         operations.put(">", "majorX");
+        operations.put("-", "minusX");
         
     }
     
@@ -69,4 +70,11 @@ public class VariablesOperations implements SingleOperationsInterface{
         ComplexNumber number = (ComplexNumber) stackNumbers.pop();
         variables.put(variable, number);
     }
+    
+    private void minusX(Stack stackNumbers, Character variable) throws StackBadSizeException{
+        System.out.println(stackNumbers.size());
+        if(stackNumbers.size()<1) throw new StackBadSizeException("There is less than one element into stack");
+        ComplexNumber topElement = (ComplexNumber) stackNumbers.pop();
+        variables.put(variable, ComplexNumber.substraction(variables.get(variable), topElement));
+    }    
 }
