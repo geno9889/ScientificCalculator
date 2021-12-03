@@ -248,7 +248,7 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="527.0" text="Variables operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="477.0" text="Variables operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -258,7 +258,7 @@
                                     </Label>
                                     <HBox prefHeight="20.0" prefWidth="304.0" spacing="1.0">
                                        <children>
-                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="112.0" text="Setted variable:  " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="123.0" text="Setted variable:  " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
