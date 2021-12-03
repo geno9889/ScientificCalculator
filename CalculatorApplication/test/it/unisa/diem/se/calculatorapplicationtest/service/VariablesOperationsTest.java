@@ -47,6 +47,7 @@ public class VariablesOperationsTest {
         assertTrue(op.containsKey(">"));
         assertTrue(op.containsKey("+"));
         assertTrue(op.containsKey("-"));
+        assertTrue(op.containsKey("<"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
