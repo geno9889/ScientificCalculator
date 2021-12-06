@@ -12,6 +12,7 @@ import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
 import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -48,6 +49,7 @@ public class CustomOperationTest {
     public void tearDown() {
         stack.clear();
         assertEquals("Stack clear error",stack.size(),0);
+        customOperations.getCustomOperations().clear();
     }
     
     @Test
@@ -56,7 +58,8 @@ public class CustomOperationTest {
         assertTrue("Addition of the operation not successful", result);
         HashMap<String,String[]> mapOperations = customOperations.getCustomOperations();
         assertTrue("Name of the operation doesn't exists", mapOperations.containsKey("ValidTest"));
-        assertEquals("Sequence of operations doesn't correspond to name", "+ clear dup sqrt >e", mapOperations.get("ValidTest"));
+        String[] singleOp = "+ clear dup sqrt >e".split("\\s+");
+        assertTrue("Sequence of operations doesn't correspond to name", Arrays.equals(singleOp,mapOperations.get("ValidTest")));
     }
     
     @Test

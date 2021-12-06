@@ -117,7 +117,9 @@ public class CalculatorController {
     //when press the button execute directly this method, without check the input string    
     public void executeSingleOperation(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
         for(SingleOperationsInterface op : singleOperations){
-            op.executeifExists(input, stackNumbers);
+            if(op.executeifExists(input, stackNumbers)){
+                break;
+            }
         }    
     }
     

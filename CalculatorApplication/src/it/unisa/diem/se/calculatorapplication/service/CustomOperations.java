@@ -40,14 +40,22 @@ public class CustomOperations implements MultipleOperationsInterface{
                 }
             }
             String[] singleOpSplit = operation.split("\\s+");
+            boolean flag = false;
             for(String singleOp : singleOpSplit){
                 for(SingleOperationsInterface op : singleOperations){
-                    if(!op.containsOperation(singleOp)){
-                        return false;
+                    if(op.containsOperation(singleOp)){
+                        flag = true;
+                        break;
                     }
+                }
+                if(flag == false){
+                    return false;
+                }else{
+                    flag = false;
                 }
             }
             customOperations.put(name, singleOpSplit);
+            return true;
         }
         return false;
     }
