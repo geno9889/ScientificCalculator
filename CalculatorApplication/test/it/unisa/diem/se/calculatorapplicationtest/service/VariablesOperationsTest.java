@@ -177,7 +177,7 @@ public class VariablesOperationsTest {
     
     @Test 
     public void testContainsOperationValidOperation() throws Exception{
-        Boolean r = operations.containsOperation("<");
+        Boolean r = operations.containsOperation("<a");
         assertTrue("Operation doesn't exists",r);
     }
 
