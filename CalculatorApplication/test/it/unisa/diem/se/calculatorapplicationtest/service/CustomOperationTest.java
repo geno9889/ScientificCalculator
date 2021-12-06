@@ -75,7 +75,7 @@ public class CustomOperationTest {
         Boolean result = customOperations.addOperation("ValidTest", "+ clear dop sqrt >e");
         assertFalse("Sequence of the operation is valid", result);
     }
-    /*
+    
     @Test
     public void testModifyOperationValidInput(){
         customOperations.getCustomOperations().put("ValidTest", new String[]{"+ clear dup sqrt >e"});
@@ -105,5 +105,5 @@ public class CustomOperationTest {
         customOperations.getCustomOperations().put("ValidTest2", new String[]{"+ clear drop sqrt >e"});
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest2", "+ clear swap sqrt >e");
         assertFalse("The sequence of the operation is valid",result);
-    }*/
+    }
 }
