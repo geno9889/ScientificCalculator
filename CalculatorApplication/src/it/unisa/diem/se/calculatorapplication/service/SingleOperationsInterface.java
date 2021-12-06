@@ -13,6 +13,6 @@ import java.util.Stack;
  */
 public interface SingleOperationsInterface {
     
-    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, MathematicalException;
+    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, MathematicalException, NullVariableException;
            
 }
