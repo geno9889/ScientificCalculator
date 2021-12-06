@@ -37,8 +37,8 @@ public class VariablesOperations implements SingleOperationsInterface{
         }
         
         operations.put(">", "majorX");
-        operations.put("+", "plusX");
         operations.put("<", "minorX");
+        operations.put("+", "plusX");
         operations.put("-", "minusX");
         
 
