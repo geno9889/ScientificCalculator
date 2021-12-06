@@ -97,4 +97,9 @@ public class VariablesOperations implements SingleOperationsInterface{
         stackNumbers.push(x);
     }
 
+    @Override
+    public boolean containsOperation(String operation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

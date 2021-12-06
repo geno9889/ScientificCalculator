@@ -61,14 +61,14 @@ public class MathematicalOperationsTest {
     }
     
     @Test
-    public void testExecuteifExistsInvalidOperation() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsInvalidOperation() throws Exception {
         Boolean r = a.executeifExists("nogood",stack);
         assertFalse("Operation not existing",r);
     }
     
     
     @Test
-    public void testExecuteifExistsSum() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsSum() throws Exception {
         stack.push(new ComplexNumber(1));
         stack.push(new ComplexNumber(2));
         Boolean r = a.executeifExists("+",stack);
@@ -79,13 +79,13 @@ public class MathematicalOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsExceptionSum() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsExceptionSum() throws Exception {
         stack.push(new ComplexNumber(2));
         a.executeifExists("+",stack);
     }    
     
     @Test
-    public void testExecuteifExistsSubstraction() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsSubstraction() throws Exception {
         stack.push(new ComplexNumber(2));
         stack.push(new ComplexNumber(1));
         Boolean r = a.executeifExists("-",stack);
@@ -96,13 +96,13 @@ public class MathematicalOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsExceptionSubstraction() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsExceptionSubstraction() throws Exception {
         stack.push(new ComplexNumber(2));
         a.executeifExists("-",stack);
     }    
     
     @Test
-    public void testExecuteifExistsMultiplication() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsMultiplication() throws Exception {
         stack.push(new ComplexNumber(1,2));
         stack.push(new ComplexNumber(2));
         Boolean r = a.executeifExists("*",stack);
@@ -113,13 +113,13 @@ public class MathematicalOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsExceptionMultiplication() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsExceptionMultiplication() throws Exception {
         stack.push(new ComplexNumber(2));
         a.executeifExists("*",stack);
     }    
     
     @Test
-    public void testExecuteifExistsDivision() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsDivision() throws Exception {
         stack.push(new ComplexNumber(3,2));
         stack.push(new ComplexNumber(4,1));
         stack.push(new ComplexNumber(2,2));
@@ -132,20 +132,20 @@ public class MathematicalOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsExceptionDivision() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsExceptionDivision() throws Exception {
         stack.push(new ComplexNumber(2));
         a.executeifExists("/",stack);
     }   
     
     @Test (expected = MathematicalException.class)
-    public void testExecuteifExistsMathematicalExceptionDivision() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsMathematicalExceptionDivision() throws Exception {
         stack.push(new ComplexNumber(0,0));
         stack.push(new ComplexNumber(0,0));
         a.executeifExists("/",stack);
     } 
  
     @Test
-    public void testExecuteifExistsSquareRoot() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsSquareRoot() throws Exception {
         stack.push(new ComplexNumber(4,4));
         Boolean r = a.executeifExists("sqrt",stack);
         assertTrue(r);
@@ -155,12 +155,12 @@ public class MathematicalOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsExceptionSquareRoot() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsExceptionSquareRoot() throws Exception {
         a.executeifExists("sqrt",stack);
     }    
   
     @Test
-    public void testExecuteifExistsInvertSign() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsInvertSign() throws Exception {
         stack.push(new ComplexNumber(2,2));
         Boolean r = a.executeifExists("+-",stack);
         assertTrue(r);
@@ -170,7 +170,7 @@ public class MathematicalOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsExceptionInvertSign() throws StackBadSizeException, MathematicalException {
+    public void testExecuteifExistsExceptionInvertSign() throws Exception {
         a.executeifExists("+-",stack);
     }    
     

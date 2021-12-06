@@ -80,4 +80,9 @@ public class StackOperations implements SingleOperationsInterface{
         if(stackNumbers.size()<2) throw new StackBadSizeException("There are less than two elements into stack");
         stackNumbers.push(stackNumbers.elementAt(stackNumbers.size()-2));
     }
+
+    @Override
+    public boolean containsOperation(String operation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

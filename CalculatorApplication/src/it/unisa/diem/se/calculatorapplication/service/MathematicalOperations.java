@@ -101,11 +101,16 @@ public class MathematicalOperations implements SingleOperationsInterface{
         stackNumbers.push(temp);
     }
     
-        private void invertSign(Stack stackNumbers)throws StackBadSizeException{
+    private void invertSign(Stack stackNumbers)throws StackBadSizeException{
         ComplexNumber temp;
         if(stackNumbers.size()<1) throw new StackBadSizeException("Can't do division operation with no argument");
         temp = ComplexNumber.invertSign((ComplexNumber) stackNumbers.pop());
         stackNumbers.push(temp);
+    }
+
+    @Override
+    public boolean containsOperation(String operation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

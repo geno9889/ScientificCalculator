@@ -96,18 +96,18 @@ public class VariablesOperationsTest {
     }
     
     @Test
-    public void testExecuteifExistsInvalidOperation() throws StackBadSizeException, NullVariableException{
+    public void testExecuteifExistsInvalidOperation() throws Exception{
         Boolean r = operations.executeifExists("nogood", stackNumbers);
         assertFalse("Operation not existing",r);
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testExecuteifExistsEmptyStackMajorX() throws StackBadSizeException, NullVariableException{
+    public void testExecuteifExistsEmptyStackMajorX() throws Exception{
         operations.executeifExists(">a", stackNumbers);
     }
     
     @Test()
-    public void testExecuteIfExistsMajorX() throws StackBadSizeException, NullVariableException{
+    public void testExecuteIfExistsMajorX() throws Exception{
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
         Boolean r = operations.executeifExists(">c", stackNumbers);
@@ -122,7 +122,7 @@ public class VariablesOperationsTest {
     
 
     @Test
-    public void testExecuteifExistsPlusX() throws StackBadSizeException, NullVariableException{
+    public void testExecuteifExistsPlusX() throws Exception{
         stackNumbers.push(new ComplexNumber(4));
         stackNumbers.push(new ComplexNumber(2));
         operations.getVariables().put('x', new ComplexNumber(3));
@@ -134,18 +134,18 @@ public class VariablesOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsEmptyStackPlusX() throws StackBadSizeException, NullVariableException{
+    public void testExecuteifExistsEmptyStackPlusX() throws Exception{
         operations.executeifExists("+k", stackNumbers);
     }
     
 
     @Test(expected = StackBadSizeException.class)
-    public void testExecuteifExistsEmptyStackMinusrX() throws StackBadSizeException, NullVariableException{
+    public void testExecuteifExistsEmptyStackMinusrX() throws Exception{
         operations.executeifExists("-x", stackNumbers);
     }
     
     @Test
-    public void testExecuteIfExistsMinusX() throws StackBadSizeException, NullVariableException{
+    public void testExecuteIfExistsMinusX() throws Exception{
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
         operations.getVariables().put('x', new ComplexNumber(3,3));
@@ -157,12 +157,12 @@ public class VariablesOperationsTest {
     }
     
     @Test (expected = NullVariableException.class)
-    public void testExecuteifExistsMinorXNullVariable() throws NullVariableException, StackBadSizeException{
+    public void testExecuteifExistsMinorXNullVariable() throws Exception{
         operations.executeifExists("<x", stackNumbers);
     }
     
     @Test
-    public void testExecuteifExistsMinorX() throws NullVariableException, StackBadSizeException{
+    public void testExecuteifExistsMinorX() throws Exception{
         operations.getVariables().put('x', new ComplexNumber(1,2));
         Boolean r = operations.executeifExists("<x", stackNumbers);
         assertTrue("The operation not exists",r);
