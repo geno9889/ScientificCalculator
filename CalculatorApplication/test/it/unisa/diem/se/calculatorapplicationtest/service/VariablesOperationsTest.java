@@ -47,6 +47,7 @@ public class VariablesOperationsTest {
         assertTrue(op.containsKey(">"));
         assertTrue(op.containsKey("+"));
         assertTrue(op.containsKey("-"));
+        assertTrue(op.containsKey("<"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -146,6 +147,15 @@ public class VariablesOperationsTest {
         assertEquals("MinusX not executed", 1, stackNumbers.size());assertEquals("MajorX not executed", 1, stackNumbers.size());
         assertEquals("MinusX not executed", operations.getVariables().get('x'), new ComplexNumber(2, 2));
 
+    }
+    
+    @Test
+    public void testExecuteifExistsMinorX() throws StackBadSizeException{
+        operations.getVariables().put('x', new ComplexNumber(1,2));
+        stackNumbers.push(operations.getVariables().get('x'));
+        Boolean r = operations.executeifExists("<x", stackNumbers);
+        assertTrue("The operation not exists",r);
+        assertEquals("MinorX not executed",stackNumbers.peek(), new ComplexNumber(1,2));
     }
 
 }
