@@ -169,7 +169,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void variableOp(ActionEvent event) throws NullVariableException {
+    private void variableOp(ActionEvent event) {
         Alert al= new Alert(Alert.AlertType.ERROR);
         String varName = "";
         int j=0;
@@ -197,7 +197,7 @@ public class FXMLDocumentController implements Initializable {
                 }
                 else
                     recreateStack();
-        } catch (StackBadSizeException | MathematicalException ex) {
+        } catch (NullVariableException | StackBadSizeException | MathematicalException ex) {
             al.setTitle("Error");
             al.setHeaderText("Input error");
             al.setContentText(ex.getMessage());
