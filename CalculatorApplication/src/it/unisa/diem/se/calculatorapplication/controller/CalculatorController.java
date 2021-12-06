@@ -62,26 +62,20 @@ public class CalculatorController {
     }
 
     private boolean insertComplexNumber(String input){
-        Pattern pattern = Pattern.compile("([+|-]\\d+)?\\d*([.]\\d+)?[j]?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match number(complex and not)
+        Pattern pattern = Pattern.compile("[+|-]?\\d+([.]\\d+)?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match number(complex and not)
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()){
             char firstSign = input.charAt(0);
             int indexImaginaryPart;
             if(input.charAt(input.length()-1) == 'j'){   //with imaginary part
-                if(input.length() == 1 || (input.length() == 2 && firstSign == '+')){   //insert if is j or +j
-                    return addDoubleToStack("0", "1");
-                }
-                if(input.length() == 2 &&  firstSign == '-'){  //insert if is -j
-                    return addDoubleToStack("0", "-1");
-                }
                 if(firstSign == '+' || firstSign == '-'){    //search imaginary part in cases (±)a(±)bj or(±)bj
                     String inputWithoutFirstSign = input.substring(1, input.length());
                     indexImaginaryPart = searchIndexImaginaryPart(inputWithoutFirstSign) + 1;
                 }
-                else{  //search imaginary part in cases a(±)bj or bj
+                else{  //search imaginary part in cases a(±)bj
                     indexImaginaryPart = searchIndexImaginaryPart(input);
                 }
-                if(indexImaginaryPart <= 0){  //insert if is bj or (±)bj
+                if(indexImaginaryPart <= 0){  //insert if is bj
                     return addDoubleToStack("0", input.substring(0, input.length()-1));
                 }
                 String realPart = input.substring(0, indexImaginaryPart);
