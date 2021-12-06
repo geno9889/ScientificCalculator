@@ -199,7 +199,7 @@ public class FXMLDocumentController implements Initializable {
                     recreateStack();
         } catch (NullVariableException | StackBadSizeException | MathematicalException ex) {
             al.setTitle("Error");
-            al.setHeaderText("Input error");
+            al.setHeaderText("Variable error");
             al.setContentText(ex.getMessage());
             al.show();
         }
