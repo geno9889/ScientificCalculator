@@ -9,6 +9,7 @@ import it.unisa.diem.se.calculatorapplication.controller.CalculatorController;
 import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
+import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -81,7 +82,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void insertValue(ActionEvent event) {
+    private void insertValue(ActionEvent event) throws NullVariableException {
         try {
             c.insertOrExecute(txtfield.getText());
             if(c.getStackNumbers().empty()){
@@ -120,7 +121,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void eventOp(ActionEvent event){    // operations buttons function
+    private void eventOp(ActionEvent event) throws NullVariableException{    // operations buttons function
         Alert al= new Alert(Alert.AlertType.ERROR);
         if(txtfield.getText().compareTo("") != 0){
             al.setTitle("Error");
@@ -168,7 +169,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void variableOp(ActionEvent event) {
+    private void variableOp(ActionEvent event) throws NullVariableException {
         Alert al= new Alert(Alert.AlertType.ERROR);
         String varName = "";
         int j=0;
