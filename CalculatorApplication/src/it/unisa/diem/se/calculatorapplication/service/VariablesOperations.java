@@ -44,12 +44,9 @@ public class VariablesOperations implements SingleOperationsInterface{
     @Override
     public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, NullVariableException {
         Method m1;
-        if(operation.length() != 2){
-            return false;
-        }
-        String op = operation.substring(0, 1);
-        char variable = operation.charAt(1);
-        if (operations.containsKey(op) && variables.containsKey(variable)){
+        if (containsOperation(operation) ){
+            String op = operation.substring(0, 1);
+            char variable = operation.charAt(1);
             try {
                 m1 = VariablesOperations.class.getDeclaredMethod(operations.get(op), Stack.class, Character.class);
                 m1.invoke(this, stackNumbers, variable);
@@ -95,7 +92,12 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     @Override
     public boolean containsOperation(String operation) {
-        return operations.containsKey(operation);
+        if(operation.length() != 2){
+            return false;
+        }   
+        String op = operation.substring(0, 1);
+        char variable = operation.charAt(1);      
+        return operations.containsKey(op) && variables.containsKey(variable);
     }
 
 }
