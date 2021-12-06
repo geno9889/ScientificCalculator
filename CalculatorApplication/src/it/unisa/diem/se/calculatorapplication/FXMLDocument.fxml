@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.se.calculatorapplication.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.se.calculatorapplication.FXMLDocumentController">
    <children>
-      <SplitPane dividerPositions="0.37374860956618466" layoutY="1.0" prefHeight="750.0" prefWidth="950.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.37374860956618466" layoutY="1.0" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="848.0" maxWidth="350.0" minHeight="0.0" minWidth="0.0" prefHeight="848.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
+          <AnchorPane maxWidth="350.0" minWidth="350.0" prefHeight="848.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
                <children>
                   <VBox prefHeight="748.0" prefWidth="350.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -30,16 +30,16 @@
                               <Insets bottom="10.0" top="10.0" />
                            </padding>
                         </Label>
-                        <ListView fx:id="list" fixedCellSize="50.0" prefHeight="810.0" prefWidth="350.0" style="-fx-font-size: 18px;" />
+                        <ListView fx:id="list" fixedCellSize="50.0" prefHeight="710.0" prefWidth="350.0" style="-fx-font-size: 18px;" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-          <AnchorPane maxHeight="850.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="850.0" prefWidth="600.0" SplitPane.resizableWithParent="false">
+          <AnchorPane maxWidth="650.0" minHeight="0.0" minWidth="600.0" prefHeight="748.0" prefWidth="650.0" SplitPane.resizableWithParent="false">
                <children>
                   <VBox alignment="CENTER" layoutX="7.0" prefHeight="748.0" prefWidth="590.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="resultLabel" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Label fx:id="resultLabel" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="550.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -47,7 +47,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Label>
-                        <HBox prefHeight="44.0" prefWidth="559.0" spacing="20.0">
+                        <HBox prefHeight="44.0" prefWidth="550.0" spacing="20.0">
                            <children>
                               <TextField fx:id="txtfield" alignment="CENTER" maxWidth="500.0" onAction="#insertValue" prefHeight="30.0" prefWidth="412.0" promptText="Insert input here ...">
                                  <font>
@@ -64,9 +64,9 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" />
                            </padding>
                         </HBox>
-                        <VBox alignment="CENTER" prefHeight="442.0" prefWidth="590.0" spacing="20.0">
+                        <VBox alignment="CENTER" prefHeight="442.0" prefWidth="578.0" spacing="20.0">
                            <children>
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" text="Input buttons:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="591.0" text="Input buttons:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -167,7 +167,7 @@
                                  </children>
                               </HBox>
                               <HBox layoutX="40.0" layoutY="157.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="41.0" layoutY="346.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" text="Mathematical operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="41.0" layoutY="346.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="586.0" text="Mathematical operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -209,7 +209,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="529.0" text="Stack operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="585.0" text="Stack operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
