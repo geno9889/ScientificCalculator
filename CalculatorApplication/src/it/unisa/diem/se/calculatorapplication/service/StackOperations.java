@@ -83,6 +83,6 @@ public class StackOperations implements SingleOperationsInterface{
 
     @Override
     public boolean containsOperation(String operation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return operations.containsKey(operation);    
     }
 }

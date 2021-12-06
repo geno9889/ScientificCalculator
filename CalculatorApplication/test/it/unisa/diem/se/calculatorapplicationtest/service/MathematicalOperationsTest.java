@@ -172,6 +172,19 @@ public class MathematicalOperationsTest {
     @Test (expected = StackBadSizeException.class)
     public void testExecuteifExistsExceptionInvertSign() throws Exception {
         a.executeifExists("+-",stack);
-    }    
+    }   
+    
+    @Test 
+    public void testContainsOperationInvalidOperation() throws Exception{
+        Boolean r = a.containsOperation("zum");
+        assertFalse("It returns true, but operations doesn't exists",r);
+    }
+    
+    @Test 
+    public void testContainsOperationValidOperation() throws Exception{
+        Boolean r = a.containsOperation("+");
+        assertTrue("Operation doesn't exists",r);
+        
+    }
     
 }

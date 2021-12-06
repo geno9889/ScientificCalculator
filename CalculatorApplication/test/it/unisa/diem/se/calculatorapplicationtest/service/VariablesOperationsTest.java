@@ -168,5 +168,17 @@ public class VariablesOperationsTest {
         assertTrue("The operation not exists",r);
         assertEquals("MinorX not executed",stackNumbers.peek(), new ComplexNumber(1,2));
     }
+    
+    @Test 
+    public void testContainsOperationInvalidOperation() throws Exception{
+        Boolean r = operations.containsOperation("plas");
+        assertFalse("It returns true, but operations doesn't exists",r); 
+    }
+    
+    @Test 
+    public void testContainsOperationValidOperation() throws Exception{
+        Boolean r = operations.containsOperation("<");
+        assertTrue("Operation doesn't exists",r);
+    }
 
 }

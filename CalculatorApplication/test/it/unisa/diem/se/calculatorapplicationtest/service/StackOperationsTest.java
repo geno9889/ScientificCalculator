@@ -159,4 +159,16 @@ public class StackOperationsTest {
         assertEquals("Over not executed", new ComplexNumber(4,4),number);
         assertEquals("Stack resize error",7,stack.size(),0);
     }
+    
+    @Test 
+    public void testContainsOperationInvalidOperation() throws Exception{
+        Boolean r = operations.containsOperation("dop");
+        assertFalse("It returns true, but operations doesn't exists",r); 
+    }
+    
+    @Test 
+    public void testContainsOperationValidOperation() throws Exception{
+        Boolean r = operations.containsOperation("dup");
+        assertTrue("Operation doesn't exists",r);
+    }
 }
