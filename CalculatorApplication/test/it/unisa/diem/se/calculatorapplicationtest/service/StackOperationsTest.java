@@ -72,7 +72,7 @@ public class StackOperationsTest {
     
     @Test (expected = StackBadSizeException.class)
     public void testExecuteIfExistsDupEmptyStack() throws StackBadSizeException{
-        Boolean r = operations.executeifExists("dup", stack);
+        operations.executeifExists("dup", stack);
     }
     
     @Test 
@@ -93,13 +93,13 @@ public class StackOperationsTest {
     
     @Test(expected = StackBadSizeException.class)
     public void testExecuteIfExistsSwapEmptyStack() throws StackBadSizeException{
-        Boolean r = operations.executeifExists("swap", stack);
+       operations.executeifExists("swap", stack);
     }
     
     @Test(expected = StackBadSizeException.class)
     public void testExecuteIfExistsSwapOneElementInStack() throws StackBadSizeException{
         stack.push(new ComplexNumber(0,0));
-        Boolean r = operations.executeifExists("swap", stack);
+        operations.executeifExists("swap", stack);
     }
     
     @Test
@@ -121,8 +121,8 @@ public class StackOperationsTest {
     
     @Test (expected = StackBadSizeException.class)
     public void testExecuteIfExistsDropEmptyStack() throws StackBadSizeException{
-        Boolean r = operations.executeifExists("drop", stack);
-        }
+        operations.executeifExists("drop", stack);
+    }
 
     @Test
     public void testExecuteIfExistsDropNotEmptyStack() throws StackBadSizeException{
@@ -142,7 +142,7 @@ public class StackOperationsTest {
         @Test(expected = StackBadSizeException.class)
     public void testExecuteIfExistsOverOneElementInStack() throws StackBadSizeException{
         stack.push(new ComplexNumber(0,0));
-        Boolean r = operations.executeifExists("over", stack);
+        operations.executeifExists("over", stack);
     }
     
     @Test

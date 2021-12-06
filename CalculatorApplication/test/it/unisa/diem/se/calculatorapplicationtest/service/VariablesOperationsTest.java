@@ -6,6 +6,7 @@
 package it.unisa.diem.se.calculatorapplicationtest.service;
 
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
+import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
 import java.util.HashMap;
@@ -86,21 +87,27 @@ public class VariablesOperationsTest {
     public void tearDown() {
         stackNumbers.clear();
         assertEquals("Stack clear error", stackNumbers.size(), 0);
+        HashMap<Character, ComplexNumber> variables = operations.getVariables();
+        Set<Character> keys = variables.keySet();
+        for(Character c: keys){
+            variables.put(c, null);
+        }
+        
     }
     
     @Test
-    public void testExecuteifExistsInvalidOperation() throws StackBadSizeException{
+    public void testExecuteifExistsInvalidOperation() throws StackBadSizeException, NullVariableException{
         Boolean r = operations.executeifExists("nogood", stackNumbers);
         assertFalse("Operation not existing",r);
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testExecuteifExistsEmptyStackMajorX() throws StackBadSizeException{
-        Boolean r = operations.executeifExists(">a", stackNumbers);
+    public void testExecuteifExistsEmptyStackMajorX() throws StackBadSizeException, NullVariableException{
+        operations.executeifExists(">a", stackNumbers);
     }
     
     @Test()
-    public void testExecuteIfExistsMajorX() throws StackBadSizeException{
+    public void testExecuteIfExistsMajorX() throws StackBadSizeException, NullVariableException{
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
         Boolean r = operations.executeifExists(">c", stackNumbers);
@@ -115,7 +122,7 @@ public class VariablesOperationsTest {
     
 
     @Test
-    public void testExecuteifExistsPlusX() throws StackBadSizeException{
+    public void testExecuteifExistsPlusX() throws StackBadSizeException, NullVariableException{
         stackNumbers.push(new ComplexNumber(4));
         stackNumbers.push(new ComplexNumber(2));
         operations.getVariables().put('x', new ComplexNumber(3));
@@ -127,18 +134,18 @@ public class VariablesOperationsTest {
     }
     
     @Test (expected = StackBadSizeException.class)
-    public void testExecuteifExistsEmptyStackPlusX() throws StackBadSizeException{
-        Boolean r = operations.executeifExists("+k", stackNumbers);
+    public void testExecuteifExistsEmptyStackPlusX() throws StackBadSizeException, NullVariableException{
+        operations.executeifExists("+k", stackNumbers);
     }
     
 
     @Test(expected = StackBadSizeException.class)
-    public void testExecuteifExistsEmptyStackMinusrX() throws StackBadSizeException{
-        Boolean r = operations.executeifExists("-x", stackNumbers);
+    public void testExecuteifExistsEmptyStackMinusrX() throws StackBadSizeException, NullVariableException{
+        operations.executeifExists("-x", stackNumbers);
     }
     
-    @Test()
-    public void testExecuteIfExistsMinusX() throws StackBadSizeException{
+    @Test
+    public void testExecuteIfExistsMinusX() throws StackBadSizeException, NullVariableException{
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
         operations.getVariables().put('x', new ComplexNumber(3,3));
@@ -149,10 +156,14 @@ public class VariablesOperationsTest {
 
     }
     
+    @Test (expected = NullVariableException.class)
+    public void testExecuteifExistsMinorXNullVariable() throws NullVariableException, StackBadSizeException{
+        operations.executeifExists("<x", stackNumbers);
+    }
+    
     @Test
-    public void testExecuteifExistsMinorX() throws StackBadSizeException{
+    public void testExecuteifExistsMinorX() throws NullVariableException, StackBadSizeException{
         operations.getVariables().put('x', new ComplexNumber(1,2));
-        stackNumbers.push(operations.getVariables().get('x'));
         Boolean r = operations.executeifExists("<x", stackNumbers);
         assertTrue("The operation not exists",r);
         assertEquals("MinorX not executed",stackNumbers.peek(), new ComplexNumber(1,2));

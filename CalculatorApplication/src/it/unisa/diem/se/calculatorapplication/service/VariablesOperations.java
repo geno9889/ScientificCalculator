@@ -38,14 +38,15 @@ public class VariablesOperations implements SingleOperationsInterface{
         
         operations.put(">", "majorX");
         operations.put("+", "plusX");
-        operations.put("-", "minusX");
         operations.put("<", "minorX");
+        operations.put("-", "minusX");
+        
 
         
     }
     
     @Override
-    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException {
+    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException, NullVariableException {
         Method m1;
         if(operation.length() != 2){
             return false;
@@ -61,6 +62,8 @@ public class VariablesOperations implements SingleOperationsInterface{
             } catch (InvocationTargetException ex2) {
                 if(ex2.getCause() instanceof StackBadSizeException)
                     throw (StackBadSizeException)ex2.getCause();
+                if(ex2.getCause() instanceof NullVariableException)
+                    throw (NullVariableException) ex2.getCause();
             }
             return true;
         }
@@ -88,8 +91,9 @@ public class VariablesOperations implements SingleOperationsInterface{
         variables.put(variable, ComplexNumber.substraction(variables.get(variable), topElement));
     } 
     
-    private void minorX (Stack stackNumbers, char variable){
+    private void minorX (Stack stackNumbers, Character variable) throws NullVariableException{
         ComplexNumber x = (ComplexNumber) variables.get(variable);
+        if(x == null) throw new NullVariableException("The variable is not initialized");
         stackNumbers.push(x);
     }
 
