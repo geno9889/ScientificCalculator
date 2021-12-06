@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public interface MultipleOperationsInterface {
     
-    public boolean addOperation(String inputOperation, String inputName);
+    public boolean addOperation(String inputName, String inputOperations);
     public boolean modifyOperation(String newOperation, String nameOperation);
     public boolean deleteOperation(String nameOperation);
     public boolean execute(String operation, Stack stackNumbers);
