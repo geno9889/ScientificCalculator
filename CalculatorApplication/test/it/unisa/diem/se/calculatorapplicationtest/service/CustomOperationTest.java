@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
-import org.apache.hadoop.mapreduce.lib.input.InvalidInputException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -72,5 +71,36 @@ public class CustomOperationTest {
     public void testAddOperationInvalidInputOperation(){
         Boolean result = customOperations.addOperation("+ clear dop sqrt >e", "ValidTest");
         assertFalse("Sequence of the operation is valid", result);
+    }
+    
+    @Test
+    public void testModifyOperationValidInput(){
+        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e");
+        Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ clear drop sqrt >e");
+        assertTrue("Modification of the operation not success",result);
+        HashMap<String,String> mapOperations = customOperations.getCustomOperations();
+        assertTrue("Name of the operation doesn't exists", mapOperations.containsKey("ValidTest"));
+        assertEquals("Sequence of operations doesn't correspond to name", "+ clear drop sqrt >e", mapOperations.get("ValidTest"));
+    }
+    
+    @Test
+    public void testModifyOperationInvalidOldName(){
+        Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ clear drop sqrt >e");
+        assertFalse("The name of the operation exists",result);
+    }
+    
+    @Test
+    public void testModifyOperationInvalidNewOperation(){
+        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e");
+        Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ cleardrop sqrt >e");
+        assertFalse("The sequence of the operation is valid",result);
+    }
+    
+    @Test
+    public void testModifyOperationInvalidNewName(){
+        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e");
+        customOperations.getCustomOperations().put("ValidTest2", "+ clear drop sqrt >e");
+        Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest2", "+ clear swap sqrt >e");
+        assertFalse("The sequence of the operation is valid",result);
     }
 }

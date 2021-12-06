@@ -132,7 +132,7 @@ public class FXMLDocumentController implements Initializable {
         }
         try {
                 Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
-                c.execute(sourceButton.getText());
+                c.executeSingleOperation(sourceButton.getText());
                 if (sourceButton.getText().contentEquals("clear") || ( sourceButton.getText().contentEquals("drop") && c.getStackNumbers().size() == 1)){     //case of operation "clear" and particulare case of drop  of StackOperations
                     stackNumbers.clear();
                     stackNumbers.add("");
@@ -190,7 +190,7 @@ public class FXMLDocumentController implements Initializable {
         try {
                 Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
                 String op = sourceButton.getText().replace("x", varName);
-                c.execute(op);
+                c.executeSingleOperation(op);
                 if(c.getStackNumbers().empty()){
                     stackNumbers.clear();
                     stackNumbers.add("");

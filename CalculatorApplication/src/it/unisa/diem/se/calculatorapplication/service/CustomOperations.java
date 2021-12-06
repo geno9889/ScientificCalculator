@@ -32,17 +32,17 @@ public class CustomOperations implements MultipleOperationsInterface{
     }
     
     @Override
-    public boolean addOperation(String inputName, String inputOperation) {
+    public boolean addOperation(String name, String operation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean modifyOperation(String newOperation, String nameOperation) {
+    public boolean modifyOperation(String newName, String oldName, String newOperation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean deleteOperation(String nameOperation) {
+    public boolean deleteOperation(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

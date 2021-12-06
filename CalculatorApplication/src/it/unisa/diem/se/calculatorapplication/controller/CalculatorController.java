@@ -115,9 +115,28 @@ public class CalculatorController {
     }
     
     //when press the button execute directly this method, without check the input string    
-    public void execute(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
+    public void executeSingleOperation(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
         for(SingleOperationsInterface op : singleOperations){
             op.executeifExists(input, stackNumbers);
         }    
     }
+    
+    public void addCustomOperations(String inputName, String inputOperation){    
+    }
+    
+    public void modifyOperation(String newNameOperation, String oldNameOperation, String newOperation){     
+    }
+    
+    public void deleteOperation(String nameOperation) {
+    }
+    
+    public void executeMultipleOperation(String operation){
+    }
+    
+    public void saveOperationToFile(){
+    }
+    
+    public void reloadOperationFromFile(String filename){
+    }
+    
 }
