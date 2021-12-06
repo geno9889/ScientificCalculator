@@ -10,6 +10,7 @@ import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
+import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
@@ -55,7 +56,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testIntPositiveRealPositiveImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testIntPositiveRealPositiveImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("43+120j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -67,7 +68,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testSignIntPositiveRealPositiveImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testSignIntPositiveRealPositiveImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("+43+120j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -79,7 +80,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testSignIntNegativeRealPositiveImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testSignIntNegativeRealPositiveImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("-43+120j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -91,7 +92,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testIntPositiveRealNegativeImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testIntPositiveRealNegativeImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("43-120j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -103,7 +104,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testIntPositiveRealOnlyJImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testIntPositiveRealOnlyJImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("43-j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -115,7 +116,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testWhiteSpacesValidInput() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testWhiteSpacesValidInput() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("  43  + 120  j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -127,7 +128,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testPositiveRealNullImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testPositiveRealNullImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("4396");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -139,7 +140,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testSignPositiveRealNullImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testSignPositiveRealNullImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("+4396");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -151,7 +152,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testNegativeRealNullImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testNegativeRealNullImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("-4396");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -163,7 +164,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testFloatRealImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testFloatRealImaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("72.5+120.189j");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -175,7 +176,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testFloatRealNullImmaginary() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testFloatRealNullImmaginary() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("72.5");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -187,22 +188,22 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test(expected = InvalidInputException.class)
-    public void testInvalidInput() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testInvalidInput() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("-aoww+ewomsj");
     }
     
     @Test(expected = InvalidInputException.class)
-    public void testInputWithoutJ() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testInputWithoutJ() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("43+120");
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("+");
     }
     
     @Test
-    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
@@ -211,12 +212,12 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("dup");
     }
     
     @Test
-    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));

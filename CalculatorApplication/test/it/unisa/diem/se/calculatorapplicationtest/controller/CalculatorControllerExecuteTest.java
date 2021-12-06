@@ -10,6 +10,7 @@ import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
+import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
@@ -52,12 +53,12 @@ public class CalculatorControllerExecuteTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("+");
     }
     
     @Test
-    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
@@ -66,12 +67,12 @@ public class CalculatorControllerExecuteTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         controller.insertOrExecute("dup");
     }
     
     @Test
-    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException{
+    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
