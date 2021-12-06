@@ -6,7 +6,9 @@ package it.unisa.diem.se.calculatorapplication.controller;
 
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
+import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
+import it.unisa.diem.se.calculatorapplication.service.MultipleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
@@ -32,15 +34,18 @@ import lombok.ToString;
 @ToString
 public class CalculatorController {
     
-    private Stack<ComplexNumber> stackNumbers;
-    private List<SingleOperationsInterface> singleOperations;
+    private final Stack<ComplexNumber> stackNumbers;
+    private final List<SingleOperationsInterface> singleOperations;
+    private final List<MultipleOperationsInterface> multipleOperations;
     
     public CalculatorController(){
         stackNumbers = new Stack<>();
         singleOperations = new LinkedList<>();
+        multipleOperations = new LinkedList<>();
         singleOperations.add(new MathematicalOperations());
         singleOperations.add(new StackOperations());
         singleOperations.add(new VariablesOperations());
+        multipleOperations.add(new CustomOperations(singleOperations));
     }
     
     public void insertOrExecute(String input) throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
