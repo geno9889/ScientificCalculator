@@ -35,14 +35,10 @@ public class VariablesOperations implements SingleOperationsInterface{
         for(int i = 97; i<=122; i++){   //initialize variables in Map through ASCII code
             variables.put((char) i, null);
         }
-        
         operations.put(">", "majorX");
         operations.put("<", "minorX");
         operations.put("+", "plusX");
         operations.put("-", "minusX");
-        
-
-        
     }
     
     @Override

@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString
 public class CustomOperations implements MultipleOperationsInterface{
     
-    private HashMap<String,String> customOperations;
+    private HashMap<String,String[]> customOperations;
     private List<SingleOperationsInterface> singleOperations;
     
     public CustomOperations(List<SingleOperationsInterface> singleOperations){
@@ -33,7 +33,23 @@ public class CustomOperations implements MultipleOperationsInterface{
     
     @Override
     public boolean addOperation(String name, String operation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(!customOperations.containsKey(name)){
+            for(SingleOperationsInterface op : singleOperations){  //check if name of custom operation is a name of an existing single operation
+                if(op.containsOperation(name)){
+                    return false;
+                }
+            }
+            String[] singleOpSplit = operation.split("\\s+");
+            for(String singleOp : singleOpSplit){
+                for(SingleOperationsInterface op : singleOperations){
+                    if(!op.containsOperation(singleOp)){
+                        return false;
+                    }
+                }
+            }
+            customOperations.put(name, singleOpSplit);
+        }
+        return false;
     }
 
     @Override
