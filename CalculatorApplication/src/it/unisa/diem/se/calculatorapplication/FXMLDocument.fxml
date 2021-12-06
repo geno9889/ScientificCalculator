@@ -18,7 +18,7 @@
    <children>
       <SplitPane dividerPositions="0.37374860956618466" layoutY="1.0" prefHeight="750.0" prefWidth="950.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="848.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
+          <AnchorPane maxHeight="848.0" maxWidth="350.0" minHeight="0.0" minWidth="0.0" prefHeight="848.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
                <children>
                   <VBox prefHeight="748.0" prefWidth="350.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -35,7 +35,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="850.0" prefWidth="600.0" SplitPane.resizableWithParent="false">
+          <AnchorPane maxHeight="850.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="850.0" prefWidth="600.0" SplitPane.resizableWithParent="false">
                <children>
                   <VBox alignment="CENTER" layoutX="7.0" prefHeight="748.0" prefWidth="590.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
                      <children>
