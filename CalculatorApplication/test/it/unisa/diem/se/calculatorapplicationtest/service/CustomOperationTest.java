@@ -50,19 +50,27 @@ public class CustomOperationTest {
         stack.clear();
         assertEquals("Stack clear error",stack.size(),0);
     }
-    /*
+    
     @Test
-    public void testAddOperationValidInput() throws Exception{
+    public void testAddOperationValidInput(){
         Boolean result = customOperations.addOperation("+ clear dup sqrt >e", "ValidTest");
-        assertTrue(result);
+        assertTrue("Addition of the operation not successful", result);
         HashMap<String,String> mapOperations = customOperations.getCustomOperations();
         assertTrue("Name of the operation doesn't exists", mapOperations.containsKey("ValidTest"));
         assertEquals("Sequence of operations doesn't correspond to name", "+ clear dup sqrt >e", mapOperations.get("ValidTest"));
     }
     
-    @Test(expected = InvalidInputException.class)
-    public void testAddOperationInvalidInputName() throws Exception{
-        customOperations.addOperation("+ clear dup sqrt >e", "ValidTest");
-        Boolean result = customOperations.addOperation("+ clear dup sqrt >e", "ValidTest");
-    }*/
+    @Test
+    public void testAddOperationInvalidInputName(){
+        Boolean result1 = customOperations.addOperation("+ clear dup sqrt >e", "ValidTest");
+        assertTrue("Addition of the operation not successful", result1);
+        Boolean result2 = customOperations.addOperation("+ clear dup sqrt >e", "ValidTest");
+        assertFalse("The name of the operation doesn't exists", result2);
+    }
+    
+    @Test
+    public void testAddOperationInvalidInputOperation(){
+        Boolean result = customOperations.addOperation("+ clear dop sqrt >e", "ValidTest");
+        assertFalse("Sequence of the operation is valid", result);
+    }
 }
