@@ -78,12 +78,12 @@ public class CustomOperationTest {
     
     @Test
     public void testModifyOperationValidInput(){
-        customOperations.getCustomOperations().put("ValidTest", new String[]{"+ clear dup sqrt >e"});
+        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ clear drop sqrt >e");
         assertTrue("Modification of the operation not success",result);
         HashMap<String,String[]> mapOperations = customOperations.getCustomOperations();
         assertTrue("Name of the operation doesn't exists", mapOperations.containsKey("ValidTest"));
-        assertEquals("Sequence of operations doesn't correspond to name", "+ clear drop sqrt >e", mapOperations.get("ValidTest"));
+        assertTrue("Sequence of operations doesn't correspond to name", Arrays.equals("+ clear drop sqrt >e".split("\\s+"), mapOperations.get("ValidTest")));
     }
     
     @Test
@@ -94,16 +94,16 @@ public class CustomOperationTest {
     
     @Test
     public void testModifyOperationInvalidNewOperation(){
-        customOperations.getCustomOperations().put("ValidTest", new String[]{"+ clear dup sqrt >e"});
+        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ cleardrop sqrt >e");
         assertFalse("The sequence of the operation is valid",result);
     }
     
     @Test
     public void testModifyOperationInvalidNewName(){
-        customOperations.getCustomOperations().put("ValidTest", new String[]{"+ clear dup sqrt >e"});
-        customOperations.getCustomOperations().put("ValidTest2", new String[]{"+ clear drop sqrt >e"});
+        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
+        customOperations.getCustomOperations().put("ValidTest2", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest2", "+ clear swap sqrt >e");
-        assertFalse("The sequence of the operation is valid",result);
+        assertFalse("The name doesn't exists",result);
     }
 }

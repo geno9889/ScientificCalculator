@@ -34,36 +34,56 @@ public class CustomOperations implements MultipleOperationsInterface{
     @Override
     public boolean addOperation(String name, String operation) {
         if(!customOperations.containsKey(name)){
-            for(SingleOperationsInterface op : singleOperations){  //check if name of custom operation is a name of an existing single operation
-                if(op.containsOperation(name)){
-                    return false;
-                }
-            }
             String[] singleOpSplit = operation.split("\\s+");
-            boolean flag = false;
-            for(String singleOp : singleOpSplit){
-                for(SingleOperationsInterface op : singleOperations){
-                    if(op.containsOperation(singleOp)){
-                        flag = true;
-                        break;
-                    }
-                }
-                if(flag == false){
-                    return false;
-                }else{
-                    flag = false;
-                }
+            if(checkOperation(name,singleOpSplit)){
+                customOperations.put(name, singleOpSplit);
+                return true;
             }
-            customOperations.put(name, singleOpSplit);
-            return true;
         }
         return false;
     }
 
     @Override
-    public boolean modifyOperation(String newName, String oldName, String newOperation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean modifyOperation(String newName, String oldName, String newOperation){
+        if(customOperations.containsKey(oldName) && (!customOperations.containsKey(newName) || oldName == newName)){
+            String[] singleOpSplit = newOperation.split("\\s+");
+            if(checkOperation(newName, singleOpSplit)){
+                if(oldName != newName){
+                    customOperations.remove(oldName);
+                    customOperations.put(newName, singleOpSplit);
+                }
+                else{
+                    customOperations.put(newName, singleOpSplit);
+                }
+                return true;
+            }
+        }
+        return false;
     }
+    
+    // check if name of the operation already exists.
+    private boolean checkOperation(String name, String[] singleOpSplit){
+        for(SingleOperationsInterface op : singleOperations){
+                if(op.containsOperation(name))
+                    return false;
+            }
+        boolean flag = false;
+        for(String singleOp : singleOpSplit){
+            for(SingleOperationsInterface op : singleOperations){
+                if(op.containsOperation(singleOp)){
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag == false){
+                return false;
+           }else{
+                flag = false;
+            }
+        }
+        return true;
+    }
+    
 
     @Override
     public boolean deleteOperation(String name) {
