@@ -55,12 +55,12 @@ public class CalculatorControllerExecuteSingleOperationTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
+    public void testMathematicalOperationsInValidSum() throws Exception{
         controller.insertOrExecute("+");
     }
     
     @Test
-    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
+    public void testMathematicalOperationsValidSum() throws Exception{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
@@ -69,12 +69,12 @@ public class CalculatorControllerExecuteSingleOperationTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
+    public void testStackOperationsInvalidDup() throws Exception{
         controller.insertOrExecute("dup");
     }
     
     @Test
-    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
+    public void testStackOperationsValidDup() throws Exception{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
