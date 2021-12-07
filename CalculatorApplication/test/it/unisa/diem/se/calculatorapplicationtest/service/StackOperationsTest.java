@@ -52,7 +52,7 @@ public class StackOperationsTest {
     
     @Test
     public void testExecuteIfExistsClearEmptyStack() throws Exception{
-        Boolean r = operations.executeifExists("clear", stack);
+        Boolean r = operations.executeIfExists("clear", stack);
         assertTrue("The operation dup doesn't exists" ,r);
         assertTrue("The stack is not empty", stack.empty());
     }
@@ -65,14 +65,14 @@ public class StackOperationsTest {
         stack.push(new ComplexNumber(3,3));
         stack.push(new ComplexNumber(4,4));
         stack.push(new ComplexNumber(5,5));
-        Boolean r = operations.executeifExists("clear", stack);
+        Boolean r = operations.executeIfExists("clear", stack);
         assertTrue("The operation dup doesn't exists", r);
         assertTrue("The stack is not empty", stack.empty());
     }
     
     @Test (expected = StackBadSizeException.class)
     public void testExecuteIfExistsDupEmptyStack() throws Exception{
-        operations.executeifExists("dup", stack);
+        operations.executeIfExists("dup", stack);
     }
     
     @Test 
@@ -83,7 +83,7 @@ public class StackOperationsTest {
         stack.push(new ComplexNumber(3,3));
         stack.push(new ComplexNumber(4,4));
         stack.push(new ComplexNumber(5,5));
-        Boolean r = operations.executeifExists("dup", stack);
+        Boolean r = operations.executeIfExists("dup", stack);
         assertTrue("The operation dup not exists",r);
         ComplexNumber number = stack.peek();
         assertEquals("Duplication part real of top element error",5,number.getReal(),0);
@@ -93,13 +93,13 @@ public class StackOperationsTest {
     
     @Test(expected = StackBadSizeException.class)
     public void testExecuteIfExistsSwapEmptyStack() throws Exception{
-       operations.executeifExists("swap", stack);
+       operations.executeIfExists("swap", stack);
     }
     
     @Test(expected = StackBadSizeException.class)
     public void testExecuteIfExistsSwapOneElementInStack() throws Exception{
         stack.push(new ComplexNumber(0,0));
-        operations.executeifExists("swap", stack);
+        operations.executeIfExists("swap", stack);
     }
     
     @Test
@@ -110,7 +110,7 @@ public class StackOperationsTest {
         stack.push(new ComplexNumber(3,3));
         stack.push(new ComplexNumber(4,4));
         stack.push(new ComplexNumber(5,5));
-        Boolean r = operations.executeifExists("swap", stack);
+        Boolean r = operations.executeIfExists("swap", stack);
         assertTrue("The operation swap not exists",r);
         ComplexNumber number = stack.peek();
         assertEquals("Swap not executed", new ComplexNumber(4,4),number);
@@ -121,7 +121,7 @@ public class StackOperationsTest {
     
     @Test (expected = StackBadSizeException.class)
     public void testExecuteIfExistsDropEmptyStack() throws StackBadSizeException{
-        operations.executeifExists("drop", stack);
+        operations.executeIfExists("drop", stack);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class StackOperationsTest {
         stack.push(new ComplexNumber(3,3));
         stack.push(new ComplexNumber(4,4));
         stack.push(new ComplexNumber(5,5));
-        Boolean r = operations.executeifExists("drop", stack);
+        Boolean r = operations.executeIfExists("drop", stack);
         assertTrue("The operation drop not exists",r);
         ComplexNumber number = stack.peek();
         assertEquals("Drop not executed", new ComplexNumber(4, 4), number);
@@ -142,7 +142,7 @@ public class StackOperationsTest {
         @Test(expected = StackBadSizeException.class)
     public void testExecuteIfExistsOverOneElementInStack() throws Exception{
         stack.push(new ComplexNumber(0,0));
-        operations.executeifExists("over", stack);
+        operations.executeIfExists("over", stack);
     }
     
     @Test
@@ -153,7 +153,7 @@ public class StackOperationsTest {
         stack.push(new ComplexNumber(3,3));
         stack.push(new ComplexNumber(4,4));
         stack.push(new ComplexNumber(5,5));
-        Boolean r = operations.executeifExists("over", stack);
+        Boolean r = operations.executeIfExists("over", stack);
         assertTrue("The operation over not exists",r);
         ComplexNumber number = stack.peek();
         assertEquals("Over not executed", new ComplexNumber(4,4),number);

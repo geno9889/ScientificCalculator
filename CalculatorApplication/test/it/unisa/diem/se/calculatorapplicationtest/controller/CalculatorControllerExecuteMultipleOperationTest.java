@@ -6,16 +6,14 @@
 package it.unisa.diem.se.calculatorapplicationtest.controller;
 
 import it.unisa.diem.se.calculatorapplication.controller.CalculatorController;
-import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
-import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
-import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
 import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 import org.junit.After;
@@ -29,7 +27,7 @@ import static org.junit.Assert.*;
  *
  * @author Giuseppe
  */
-public class CalculatorControllerExecuteTest {
+public class CalculatorControllerExecuteMultipleOperationTest {
     
     private static CalculatorController controller;
     
@@ -55,44 +53,25 @@ public class CalculatorControllerExecuteTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testMathematicalOperationsInValidSum() throws Exception{
-        controller.executeSingleOperation("+");
+    public void testCustomOperationsInvalidSum() throws Exception{
+        HashMap<String,String[]> multipleOperations = controller.getCustomOperations().getMultipleOperations();
+        multipleOperations.put("Op1", ">b +".split("\\s+"));
+        Stack stack = controller.getStackNumbers();
+        stack.add(new ComplexNumber(-12, 89));
+        controller.executeMultipleOperation("Op1");
     }
     
     @Test
-    public void testMathematicalOperationsValidSum() throws Exception{
-        Stack stackNumbers = controller.getStackNumbers();
-        stackNumbers.push(new ComplexNumber(0, 0));
-        stackNumbers.push(new ComplexNumber(0, 0));
-        controller.executeSingleOperation("+");
-        assertEquals("MathematicalOperation not executed", 1, stackNumbers.size());
-    }
-    
-    @Test(expected = StackBadSizeException.class)
-    public void testStackOperationsInvalidDup() throws Exception{
-        controller.executeSingleOperation("dup");
-    }
-    
-    @Test
-    public void testStackOperationsValidDup() throws Exception{
-        Stack stackNumbers = controller.getStackNumbers();
-        stackNumbers.push(new ComplexNumber(0, 0));
-        stackNumbers.push(new ComplexNumber(0, 0));
-        controller.executeSingleOperation("dup");
-        assertEquals("StackOperation not executed", 3, stackNumbers.size());
-    }
-    
-    @Test(expected = StackBadSizeException.class)
-    public void testVariableOperationsInvalidMajorX() throws Exception{
-        controller.executeSingleOperation(">x");
-    }
-    
-    @Test
-    public void testVariableOperationsValidMajorX() throws Exception{
-        Stack stackNumbers = controller.getStackNumbers();
-        stackNumbers.push(new ComplexNumber(0, 0));
-        stackNumbers.push(new ComplexNumber(0, 0));
-        controller.executeSingleOperation(">x");
-        assertEquals("VariableOperation not executed", 1, stackNumbers.size());
+    public void testCustomOperationValidSum() throws Exception{
+        Stack stack = controller.getStackNumbers();
+        stack.add(new ComplexNumber(-12, 89));
+        stack.add(new ComplexNumber(3.5, -2));
+        stack.add(new ComplexNumber(3.5, -2));
+        HashMap<String,String[]> multipleOperations = controller.getCustomOperations().getMultipleOperations();
+        multipleOperations.put("Op1", ">b +".split("\\s+"));
+        controller.executeMultipleOperation("Op1");
+        ComplexNumber number = controller.getStackNumbers().peek();
+        assertEquals("Real part not expected", -8.5, number.getReal(), 0);
+        assertEquals("ImaginaryPart part not expected", 87, number.getImaginary(), 0);
     }
 }

@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.se.calculatorapplication.service;
 
+import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -21,39 +22,39 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class CustomOperations implements MultipleOperationsInterface{
+public class CustomOperations{
     
-    private HashMap<String,String[]> customOperations;
+    private HashMap<String,String[]> multipleOperations;
     private List<SingleOperationsInterface> singleOperations;
     
     public CustomOperations(List<SingleOperationsInterface> singleOperations){
-        customOperations = new HashMap();
+        multipleOperations = new HashMap();
         this.singleOperations = singleOperations;
     }
     
-    @Override
+    
     public boolean addOperation(String name, String operation) {
-        if(!customOperations.containsKey(name)){
+        if(!name.contains(",") && !multipleOperations.containsKey(name)){
             String[] singleOpSplit = operation.split("\\s+");
             if(checkOperation(name,singleOpSplit)){
-                customOperations.put(name, singleOpSplit);
+                multipleOperations.put(name, singleOpSplit);
                 return true;
             }
         }
         return false;
     }
 
-    @Override
+    
     public boolean modifyOperation(String newName, String oldName, String newOperation){
-        if(customOperations.containsKey(oldName) && (!customOperations.containsKey(newName) || oldName == newName)){
+        if(multipleOperations.containsKey(oldName) && (!multipleOperations.containsKey(newName) || oldName == newName)){
             String[] singleOpSplit = newOperation.split("\\s+");
             if(checkOperation(newName, singleOpSplit)){
                 if(oldName != newName){
-                    customOperations.remove(oldName);
-                    customOperations.put(newName, singleOpSplit);
+                    multipleOperations.remove(oldName);
+                    multipleOperations.put(newName, singleOpSplit);
                 }
                 else{
-                    customOperations.put(newName, singleOpSplit);
+                    multipleOperations.put(newName, singleOpSplit);
                 }
                 return true;
             }
@@ -66,7 +67,7 @@ public class CustomOperations implements MultipleOperationsInterface{
         for(SingleOperationsInterface op : singleOperations){
                 if(op.containsOperation(name))
                     return false;
-            }
+        }
         boolean flag = false;
         for(String singleOp : singleOpSplit){
             for(SingleOperationsInterface op : singleOperations){
@@ -85,18 +86,29 @@ public class CustomOperations implements MultipleOperationsInterface{
     }
     
 
-    @Override
+    
     public boolean deleteOperation(String name) {
-        if(customOperations.containsKey(name)){
-            customOperations.remove(name);
+        if(multipleOperations.containsKey(name)){
+            multipleOperations.remove(name);
         return true;
         }
         else return false;
     }
 
-    @Override
-    public boolean execute(String operation, Stack stackNumbers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public boolean executeIfExists(String operationName, Stack stackNumbers) throws StackBadSizeException, MathematicalException, NullVariableException{
+        if(multipleOperations.containsKey(operationName)){
+            String[] singleOpSplit = multipleOperations.get(operationName);
+            for(String singleOperation : singleOpSplit){
+                for(SingleOperationsInterface op : singleOperations){
+                    if(op.executeIfExists(singleOperation, stackNumbers)){
+                        break;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
     
 }

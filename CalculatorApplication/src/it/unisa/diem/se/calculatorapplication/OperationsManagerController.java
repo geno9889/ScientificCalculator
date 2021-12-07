@@ -10,6 +10,7 @@ import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,7 +104,7 @@ public class OperationsManagerController {
     @FXML
     private void modify(ActionEvent event) {
         try {
-            controller.modifyOperation(operationNameField.getText(), String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()), sequenceField.getText());
+            controller.modifyCustomOperation(operationNameField.getText(), String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()), sequenceField.getText());
             recreateList();
         } catch (InvalidInputException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
@@ -119,7 +120,7 @@ public class OperationsManagerController {
     @FXML
     private void delete(ActionEvent event) {
         try {
-            controller.deleteOperation(String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()));
+            controller.deleteCustomOperation(String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()));
             recreateList();
         } catch (InvalidInputException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
@@ -137,8 +138,18 @@ public class OperationsManagerController {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as...");
         File file = fileChooser.showSaveDialog(rootPane.getScene().getWindow());
-        if(file!= null){
-            controller.saveOperationToFile(file);
+        if (file != null) {
+            try {
+                controller.saveCustomOperationToFile(file);
+            } catch (IOException ex) {
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Save error");
+                al.setContentText("Save on file not successful");
+                al.show();
+                operationNameField.clear();
+                sequenceField.clear();
+            }
         }
     }
 
@@ -147,14 +158,25 @@ public class OperationsManagerController {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open...");
         File file = fileChooser.showOpenDialog(rootPane.getScene().getWindow());
-        if(file!= null){
-            controller.reloadOperationFromFile(file);
+        if (file != null) {
+            try {
+                controller.reloadCustomOperationFromFile(file);
+                recreateList();
+            } catch (IOException ex) {
+                Alert al = new Alert(Alert.AlertType.ERROR);
+                al.setTitle("Error");
+                al.setHeaderText("Restore error");
+                al.setContentText("Restore by file not successful");
+                al.show();
+                operationNameField.clear();
+                sequenceField.clear();
+            }
         }
     }
 
     private void recreateList(){
         list1.clear();
-        for(Map.Entry<String, String[]> entry : ((CustomOperations)controller.getMultipleOperations().get(0)).getCustomOperations().entrySet()){
+        for(Map.Entry<String, String[]> entry : ((CustomOperations)controller.getCustomOperations()).getMultipleOperations().entrySet()){
             String s = "";
             for(int i = 0; i < entry.getValue().length; i++){
                     s+=entry.getValue()[i];
