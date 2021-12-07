@@ -80,7 +80,7 @@ public class CalculatorController {
     }
 
     private boolean insertComplexNumber(String input){
-        Pattern pattern = Pattern.compile("[+|-]?\\d+([.]\\d+)?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match number(complex and not)
+        Pattern pattern = Pattern.compile("[+|-]?\\d+([.]\\d+)?([+|-]\\d*([.]?\\d+)?[j])?$");  //pattern to match number(complex and not)
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()){
             char firstSign = input.charAt(0);
@@ -138,7 +138,7 @@ public class CalculatorController {
     public void addCustomOperations(String inputName, String inputOperation) throws InvalidInputException{
         if(!customOperations.addOperation(inputName, inputOperation)){
             throw new InvalidInputException("Possible causes:\n"
-                    + "- calculator doesn't support one or more operation written in sequence field\n "
+                    + "- calculator doesn't support one operation in sequence\n "
                     + "- name of custom operation is equal to name of an already existing operation\n"
                     + "- operation name contains the character \",\" (it's not allowed)");
         }
@@ -148,7 +148,7 @@ public class CalculatorController {
         if(!customOperations.modifyOperation(newNameOperation, oldNameOperation, newOperation)){
             throw new InvalidInputException("Possible causes:\n"
                     + "- new name of custom operation is equal to name of an already existing operation\n"
-                    + "- calculator doesn't support one or more operation written in sequence field\n "
+                    + "- calculator doesn't support one operation in sequence\n "
                     + "- operation name contains the character \",\" (it's not allowed)");
         }
     }
