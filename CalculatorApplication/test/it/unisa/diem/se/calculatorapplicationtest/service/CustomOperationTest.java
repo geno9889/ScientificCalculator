@@ -107,6 +107,19 @@ public class CustomOperationTest {
     }
     
     @Test
+    public void testDeleteOperationValid(){
+    customOperations.getCustomOperations().put("ValidTest", "+".split("\\s+"));
+    customOperations.deleteOperation("ValidTest");
+    assertEquals("Deletion not success",0,customOperations.getCustomOperations().size());
+    }
+    
+    @Test
+    public void testDeleteOperationInvalid(){
+    customOperations.getCustomOperations().put("ValidTest", "+".split("\\s+"));
+    Boolean result = customOperations.deleteOperation("ValidTest1");
+    assertFalse("Deletion success", result);
+    }
+    
     public void testExecuteExistingOperation() throws Exception{
         stack.add(new ComplexNumber(-12, 89));
         stack.add(new ComplexNumber(3.5, -2));

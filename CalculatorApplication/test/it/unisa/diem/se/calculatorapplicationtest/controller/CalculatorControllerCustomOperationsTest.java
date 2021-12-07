@@ -79,4 +79,20 @@ public class CalculatorControllerCustomOperationsTest {
         custom.getCustomOperations().put("Op1", "+ clear >x".split("\\s+"));
         controller.modifyOperation("Op1", "Op2", "* clear >x");
     }
+
+    @Test
+    public void testDeleteOperationValid() throws InvalidInputException{
+        CustomOperations custom = (CustomOperations)controller.getMultipleOperations().get(0);
+        custom.getCustomOperations().put("Op1", "+ clear >x".split("\\s+"));
+        controller.deleteOperation("Op1");
+        assertEquals("DeleteOperation not executed", 0, custom.getCustomOperations().size());
+    }
+    
+    @Test(expected = InvalidInputException.class)
+    public void testDeleteOperationInvalid() throws InvalidInputException{
+        CustomOperations custom = (CustomOperations)controller.getMultipleOperations().get(0);
+        custom.getCustomOperations().put("Op1", "+ clear >x".split("\\s+"));
+        controller.deleteOperation("Op2");
+    }    
+    
 }
