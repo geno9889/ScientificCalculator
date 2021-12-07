@@ -48,7 +48,6 @@ public class CustomOperationTest {
     @After
     public void tearDown() {
         stack.clear();
-        assertEquals("Stack clear error",stack.size(),0);
         customOperations.getCustomOperations().clear();
     }
     

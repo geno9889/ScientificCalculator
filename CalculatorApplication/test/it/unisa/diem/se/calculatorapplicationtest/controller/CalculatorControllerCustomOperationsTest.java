@@ -7,18 +7,14 @@ package it.unisa.diem.se.calculatorapplicationtest.controller;
 
 import it.unisa.diem.se.calculatorapplication.controller.CalculatorController;
 import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
-import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
-import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
 import it.unisa.diem.se.calculatorapplication.service.MultipleOperationsInterface;
-import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
-import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
 import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,7 +26,7 @@ import static org.junit.Assert.*;
  *
  * @author Giuseppe
  */
-public class CalculatorControllerExecuteTest {
+public class CalculatorControllerCustomOperationsTest {
     
     private static CalculatorController controller;
     
@@ -47,40 +43,40 @@ public class CalculatorControllerExecuteTest {
         assertEquals("first item of singleOperations is not a VariablesOperations", VariablesOperations.class, singleOperations.get(2).getClass());
         assertEquals("first item of singleOperations is not a VariablesOperations", CustomOperations.class, multipleOperations.get(0).getClass());
         assertNotNull("stackNumbers is null", controller.getStackNumbers());
-        
     }
     
     @After
     public void clearStack(){
         controller.getStackNumbers().clear();
-        assertEquals(0, controller.getStackNumbers().size());
+        CustomOperations customOperations = (CustomOperations)controller.getMultipleOperations().get(0);
+        customOperations.getCustomOperations().clear();
     }
     
-    @Test(expected = StackBadSizeException.class)
-    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
-        controller.insertOrExecute("+");
+    
+    @Test
+    public void testAddOperationValid() throws InvalidInputException{
+        controller.addCustomOperations("Op1", "+ clear >x");
+        CustomOperations custom = (CustomOperations)controller.getMultipleOperations().get(0);
+        assertEquals("CustomOperation not added", 1, custom.getCustomOperations().size());
+    }
+    
+    @Test(expected = InvalidInputException.class)
+    public void testAddOperationInvalid() throws InvalidInputException{
+        controller.addCustomOperations("Op1", "+ dop >x");
     }
     
     @Test
-    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
-        Stack stackNumbers = controller.getStackNumbers();
-        stackNumbers.push(new ComplexNumber(0, 0));
-        stackNumbers.push(new ComplexNumber(0, 0));
-        controller.insertOrExecute("+");
-        assertEquals("MathematicalOperation not executed", 1, stackNumbers.size());
+    public void testModifyOperationValid() throws InvalidInputException{
+        CustomOperations custom = (CustomOperations)controller.getMultipleOperations().get(0);
+        custom.getCustomOperations().put("Op1", "+ clear >x".split("\\s+"));
+        controller.modifyOperation("Op1", "Op1", "* clear >x");
+        assertTrue("ModifyOperation not executed", Arrays.equals("* clear >x".split("\\s+"), custom.getCustomOperations().get("Op1")));
     }
     
-    @Test(expected = StackBadSizeException.class)
-    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
-        controller.insertOrExecute("dup");
-    }
-    
-    @Test
-    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
-        Stack stackNumbers = controller.getStackNumbers();
-        stackNumbers.push(new ComplexNumber(0, 0));
-        stackNumbers.push(new ComplexNumber(0, 0));
-        controller.insertOrExecute("dup");
-        assertEquals("StackOperation not executed", 3, stackNumbers.size());
+    @Test(expected = InvalidInputException.class)
+    public void testModifyOperationInvalid() throws InvalidInputException{
+        CustomOperations custom = (CustomOperations)controller.getMultipleOperations().get(0);
+        custom.getCustomOperations().put("Op1", "+ clear >x".split("\\s+"));
+        controller.modifyOperation("Op1", "Op2", "* clear >x");
     }
 }

@@ -123,10 +123,28 @@ public class CalculatorController {
         }    
     }
     
-    public void addCustomOperations(String inputName, String inputOperation){    
+    public void addCustomOperations(String inputName, String inputOperation) throws InvalidInputException{  
+        CustomOperations custom = null;
+        for(MultipleOperationsInterface op : multipleOperations){
+            if(op instanceof CustomOperations){
+                if(!op.addOperation(inputName, inputOperation)){
+                    throw new InvalidInputException("Invalid sequence of operations or invalid operation name");
+                }
+                break;
+            }
+        }
     }
     
-    public void modifyOperation(String newNameOperation, String oldNameOperation, String newOperation){     
+    public void modifyOperation(String newNameOperation, String oldNameOperation, String newOperation) throws InvalidInputException{ 
+        CustomOperations custom = null;
+        for(MultipleOperationsInterface op : multipleOperations){
+            if(op instanceof CustomOperations){
+                if(!op.modifyOperation(newNameOperation, oldNameOperation, newOperation)){
+                    throw new InvalidInputException("Invalid sequence of operations or invalid operation name");
+                }
+                break;
+            }
+        }
     }
     
     public void deleteOperation(String nameOperation) {
