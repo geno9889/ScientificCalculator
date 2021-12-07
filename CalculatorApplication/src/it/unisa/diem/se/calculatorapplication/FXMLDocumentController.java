@@ -259,7 +259,7 @@ public class FXMLDocumentController implements Initializable {
         } catch (NullVariableException | StackBadSizeException | MathematicalException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
-            al.setHeaderText("Variable error");
+            al.setHeaderText("Save/restore error");
             al.setContentText(ex.getMessage());
             al.show();
         }
