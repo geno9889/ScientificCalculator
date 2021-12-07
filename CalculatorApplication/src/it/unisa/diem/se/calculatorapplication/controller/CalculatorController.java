@@ -138,7 +138,7 @@ public class CalculatorController {
     public void addCustomOperations(String inputName, String inputOperation) throws InvalidInputException{
         if(!customOperations.addOperation(inputName, inputOperation)){
             throw new InvalidInputException("Possible causes:\n"
-                    + "- calculator doesn't support one operation in sequence\n "
+                    + "- calculator doesn't support one or more operation written in sequence field\n "
                     + "- name of custom operation is equal to name of an already existing operation\n"
                     + "- operation name contains the character \",\" (it's not allowed)");
         }
@@ -148,7 +148,7 @@ public class CalculatorController {
         if(!customOperations.modifyOperation(newNameOperation, oldNameOperation, newOperation)){
             throw new InvalidInputException("Possible causes:\n"
                     + "- new name of custom operation is equal to name of an already existing operation\n"
-                    + "- calculator doesn't support one operation in sequence\n "
+                    + "- calculator doesn't support one or more operation written in sequence field\n "
                     + "- operation name contains the character \",\" (it's not allowed)");
         }
     }

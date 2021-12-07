@@ -282,12 +282,15 @@
                                                    </cursor>
                                                 </Label>
                                              </children>
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
                                           </HBox>
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                        <children>
-                                          <MenuButton fx:id="variableSetter" mnemonicParsing="false" prefHeight="35.0" prefWidth="131.0" text="Variable setter">
+                                          <MenuButton fx:id="variableSetter" alignment="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="146.0" text="Variable setter">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
