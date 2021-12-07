@@ -27,7 +27,7 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     private HashMap<String, String> operations;
     private HashMap<Character, ComplexNumber> variables;
-    
+        
     public VariablesOperations(){
         operations = new HashMap<>();
         variables = new HashMap<>();
