@@ -78,6 +78,7 @@ public class OperationsManagerController {
         mainTab.setItems(list1);
         addButton.disableProperty().bind(Bindings.isEmpty(operationNameField.textProperty()).and(Bindings.isEmpty(sequenceField.textProperty())));
         modifyButton.disableProperty().bind(Bindings.isEmpty(operationNameField.textProperty()).and(Bindings.isEmpty(sequenceField.textProperty())));
+        modifyButton.disableProperty().bind(Bindings.isNull(mainTab.getSelectionModel().selectedItemProperty()));
         deleteButton.disableProperty().bind(Bindings.isNull(mainTab.getSelectionModel().selectedItemProperty()));
         substitute();
         recreateList();

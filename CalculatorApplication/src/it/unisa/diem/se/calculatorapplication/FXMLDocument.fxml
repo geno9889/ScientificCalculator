@@ -246,7 +246,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                  <children>
                                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="477.0" text="Variables operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
@@ -256,103 +256,107 @@
                                           <Cursor fx:constant="DEFAULT" />
                                        </cursor>
                                     </Label>
-                                    <HBox prefHeight="20.0" prefWidth="304.0" spacing="1.0">
+                                    <HBox prefHeight="39.0" prefWidth="567.0" spacing="40.0">
                                        <children>
-                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="123.0" text="Setted variable:  " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                          <Button mnemonicParsing="false" onAction="#showVariablesData" prefHeight="39.0" prefWidth="353.0" style="-fx-background-color: yellow;" text="Show variables datas">
                                              <font>
-                                                <Font size="16.0" />
+                                                <Font size="18.0" />
                                              </font>
-                                             <cursor>
-                                                <Cursor fx:constant="DEFAULT" />
-                                             </cursor>
-                                          </Label>
-                                          <Label fx:id="settedVariable" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="41.0" text="None" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                          </Button>
+                                          <HBox alignment="CENTER" prefHeight="39.0" prefWidth="272.0" spacing="1.0" style="-fx-border-color: white;">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="123.0" text="Setted variable:  " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </Label>
+                                                <Label fx:id="settedVariable" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="41.0" text="None" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <MenuButton fx:id="variableSetter" mnemonicParsing="false" prefHeight="35.0" prefWidth="131.0" text="Variable setter">
                                              <font>
-                                                <Font name="System Bold" size="16.0" />
+                                                <Font size="14.0" />
                                              </font>
-                                             <cursor>
-                                                <Cursor fx:constant="DEFAULT" />
-                                             </cursor>
-                                          </Label>
+                                             <items>
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="a" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="b" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="c" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="d" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="e" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="f" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="g" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="h" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="i" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="j" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="k" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="l" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="m" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="n" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="o" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="p" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="q" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="r" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="s" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="t" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="u" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="v" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="w" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="x" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="y" />
+                                                <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="z" />
+                                             </items>
+                                          </MenuButton>
+                                          <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="&gt;x">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="&lt;x">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button layoutX="272.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="+x">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="-x">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
                                        </children>
                                     </HBox>
                                  </children>
-                              </HBox>
-                              <HBox layoutX="40.0" layoutY="414.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                                 <children>
-                                    <MenuButton fx:id="variableSetter" mnemonicParsing="false" prefHeight="35.0" prefWidth="131.0" text="Variable setter">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <items>
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="a" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="b" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="c" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="d" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="e" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="f" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="g" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="h" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="i" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="j" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="k" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="l" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="m" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="n" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="o" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="p" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="q" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="r" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="s" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="t" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="u" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="v" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="w" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="x" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="y" />
-                                          <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="z" />
-                                       </items>
-                                    </MenuButton>
-                                    <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="&gt;x">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Button>
-                                    <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="&lt;x">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Button>
-                                    <Button layoutX="272.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="+x">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Button>
-                                    <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="-x">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <Button mnemonicParsing="false" onAction="#showVariablesData" prefHeight="39.0" prefWidth="580.0" style="-fx-background-color: yellow;" text="Show variables datas">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="25.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" onAction="#showOperationsManager" prefHeight="39.0" prefWidth="580.0" style="-fx-background-color: yellow;" text="Custom operations manager">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Button>
+                              </VBox>
                            </children>
                            <padding>
                               <Insets left="30.0" right="30.0" />
                            </padding>
                         </VBox>
+                        <Button mnemonicParsing="false" onAction="#showOperationsManager" prefHeight="39.0" prefWidth="565.0" style="-fx-background-color: yellow;" text="Custom operations manager">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </children>

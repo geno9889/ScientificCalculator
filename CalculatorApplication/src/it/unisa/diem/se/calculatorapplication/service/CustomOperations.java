@@ -46,10 +46,10 @@ public class CustomOperations{
 
     
     public boolean modifyOperation(String newName, String oldName, String newOperation){
-        if(multipleOperations.containsKey(oldName) && (!multipleOperations.containsKey(newName) || oldName == newName)){
+        if(multipleOperations.containsKey(oldName) && (!multipleOperations.containsKey(newName) || oldName.equals(newName))){
             String[] singleOpSplit = newOperation.split("\\s+");
             if(checkOperation(newName, singleOpSplit)){
-                if(oldName != newName){
+                if(!oldName.equals(newName)){
                     multipleOperations.remove(oldName);
                     multipleOperations.put(newName, singleOpSplit);
                 }
