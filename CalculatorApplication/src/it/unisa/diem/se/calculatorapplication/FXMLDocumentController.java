@@ -243,6 +243,28 @@ public class FXMLDocumentController implements Initializable {
         addStage.show();
         
     }
+
+    @FXML
+    private void variableStackOp(ActionEvent event) {
+        try {
+                Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
+                String op = sourceButton.getText();
+                c.executeSingleOperation(op);
+                if(c.getStackNumbers().empty()){
+                    stackNumbers.clear();
+                    stackNumbers.add("");
+                }
+                else
+                    recreateStack();
+        } catch (NullVariableException | StackBadSizeException | MathematicalException ex) {
+            Alert al= new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Error");
+            al.setHeaderText("Variable error");
+            al.setContentText(ex.getMessage());
+            al.show();
+        }
+        this.clearAll(event);
+    }
 }
     
     

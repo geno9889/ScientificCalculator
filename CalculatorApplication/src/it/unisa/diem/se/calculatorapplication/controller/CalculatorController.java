@@ -76,7 +76,7 @@ public class CalculatorController {
                     }
                 }catch(StackBadSizeException | MathematicalException | NullVariableException ex){
                     stackNumbers = clone;
-                    throw ex;
+                    throw new InvalidInputException("Size of stack doesn't allow the execution of the custom operation");
                 }
             }
             if(existsOperation == false){

@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,6 +33,9 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 /**
@@ -59,9 +63,17 @@ public class OperationsManagerController {
     private TableColumn<CustomOperation, String> nameColumn;
     @FXML
     private TableColumn<CustomOperation, String> sequenceColumn;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label sequenceLabel;
+    @FXML
+    private VBox settingBox;
     
     private CalculatorController controller;
     private ObservableList<CustomOperation> list1;
+   
+    
     
     
     /**
@@ -76,11 +88,10 @@ public class OperationsManagerController {
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         sequenceColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         mainTab.setItems(list1);
-        addButton.disableProperty().bind(Bindings.isEmpty(operationNameField.textProperty()).and(Bindings.isEmpty(sequenceField.textProperty())));
-        modifyButton.disableProperty().bind(Bindings.isEmpty(operationNameField.textProperty()).and(Bindings.isEmpty(sequenceField.textProperty())));
-        modifyButton.disableProperty().bind(Bindings.isNull(mainTab.getSelectionModel().selectedItemProperty()));
+        addButton.disableProperty().bind(Bindings.isNotNull(mainTab.getSelectionModel().selectedItemProperty()));
+        modifyButton.disableProperty().bind(Bindings.isNull(mainTab.getSelectionModel().selectedItemProperty()));                                                         
         deleteButton.disableProperty().bind(Bindings.isNull(mainTab.getSelectionModel().selectedItemProperty()));
-        substitute();
+        substitute(); 
         recreateList();
         
     }    
@@ -91,6 +102,8 @@ public class OperationsManagerController {
         try {
             controller.addCustomOperations(operationNameField.getText(), sequenceField.getText());
             recreateList();
+            operationNameField.clear();
+            sequenceField.clear();
         } catch (InvalidInputException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
@@ -107,6 +120,11 @@ public class OperationsManagerController {
         try {
             controller.modifyCustomOperation(operationNameField.getText(), String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()), sequenceField.getText());
             recreateList();
+            settingBox.setStyle("-fx-border-color:BLACK;");
+            nameLabel.setStyle("-fx-text-fill:WHITE;");
+            sequenceLabel.setStyle("-fx-text-fill:WHITE;");
+            operationNameField.clear();
+            sequenceField.clear();
         } catch (InvalidInputException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
@@ -123,6 +141,11 @@ public class OperationsManagerController {
         try {
             controller.deleteCustomOperation(String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()));
             recreateList();
+            settingBox.setStyle("-fx-border-color:BLACK;");
+            nameLabel.setStyle("-fx-text-fill:WHITE;");
+            sequenceLabel.setStyle("-fx-text-fill:WHITE;");
+            operationNameField.clear();
+            sequenceField.clear();
         } catch (InvalidInputException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
@@ -194,6 +217,9 @@ public class OperationsManagerController {
             if(mainTab.getSelectionModel().getSelectedItem()!=null){
                 operationNameField.setText(String.valueOf(mainTab.getSelectionModel().getSelectedItem().getName()));
                 sequenceField.setText(String.valueOf(mainTab.getSelectionModel().getSelectedItem().getSequence()));
+                settingBox.setStyle("-fx-border-color:YELLOW;");
+                nameLabel.setStyle("-fx-text-fill:YELLOW;");
+                sequenceLabel.setStyle("-fx-text-fill:YELLOW;");
             }
            }
         });
@@ -217,7 +243,7 @@ public class OperationsManagerController {
 
         public CustomOperation(String name, String sequence) {
             this.name = name;
-            this.sequence = sequence;
+            this.sequence = sequence; 
         }
 
         public String getName() {
