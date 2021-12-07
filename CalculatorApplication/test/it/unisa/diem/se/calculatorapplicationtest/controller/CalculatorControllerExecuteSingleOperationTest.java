@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  *
  * @author Giuseppe
  */
-public class CalculatorControllerExecuteTest {
+public class CalculatorControllerExecuteSingleOperationTest {
     
     private static CalculatorController controller;
     

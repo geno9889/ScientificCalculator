@@ -38,11 +38,11 @@ public class StackOperations implements SingleOperationsInterface{
     
     @Override
     //check if name of the operation is an existing key and execute corresponding method(value in hashmap)
-    public boolean executeifExists(String operation, Stack stackNumbers) throws StackBadSizeException{
+    public boolean executeIfExists(String operationName, Stack stackNumbers) throws StackBadSizeException{
         Method m1;
-        if (operations.containsKey(operation)){
+        if (operations.containsKey(operationName)){
             try {
-                m1 = StackOperations.class.getDeclaredMethod(operations.get(operation), Stack.class);
+                m1 = StackOperations.class.getDeclaredMethod(operations.get(operationName), Stack.class);
                 m1.invoke(this, stackNumbers); 
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException ex1) {
                 Logger.getLogger(MathematicalOperations.class.getName()).log(Level.SEVERE, null, ex1);

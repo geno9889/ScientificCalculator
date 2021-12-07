@@ -56,13 +56,21 @@ public class CalculatorController {
         boolean existsOperation = false;  
         if(!insertComplexNumber(input)){
             for(SingleOperationsInterface op : singleOperations){
-                if(op.executeifExists(input, stackNumbers)){
+                if(op.executeIfExists(input, stackNumbers)){
                     existsOperation = true;
                     break;
                 }
             }
             if(existsOperation == false){
-                throw new InvalidInputException("Invalid input");
+                for(MultipleOperationsInterface op : multipleOperations){
+                    if(op.executeIfExists(input, stackNumbers)){
+                        existsOperation = true;
+                        break;
+                    }
+                }
+                if(existsOperation == false){
+                    throw new InvalidInputException("Invalid input");
+                }
             }
         }
     }
@@ -117,7 +125,7 @@ public class CalculatorController {
     //when press the button execute directly this method, without check the input string    
     public void executeSingleOperation(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
         for(SingleOperationsInterface op : singleOperations){
-            if(op.executeifExists(input, stackNumbers)){
+            if(op.executeIfExists(input, stackNumbers)){
                 break;
             }
         }    
@@ -150,7 +158,12 @@ public class CalculatorController {
     public void deleteOperation(String nameOperation) {
     }
     
-    public void executeMultipleOperation(String operation){
+    public void executeMultipleOperation(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
+        for(MultipleOperationsInterface op : multipleOperations){
+            if(op.executeIfExists(input, stackNumbers)){
+                break;
+            }
+        }
     }
     
     public void saveOperationToFile(){

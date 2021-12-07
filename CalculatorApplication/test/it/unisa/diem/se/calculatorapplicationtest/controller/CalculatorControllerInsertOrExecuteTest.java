@@ -227,4 +227,27 @@ public class CalculatorControllerInsertOrExecuteTest {
         controller.insertOrExecute("dup");
         assertEquals("StackOperation not executed", 3, stackNumbers.size());
     }
+    
+    @Test(expected = StackBadSizeException.class)
+    public void testCustomOperationsInvalidSum() throws Exception{
+        CustomOperations customOperations = (CustomOperations) controller.getMultipleOperations().get(0);
+        customOperations.getCustomOperations().put("Op1", ">b +".split("\\s+"));
+        Stack stack = controller.getStackNumbers();
+        stack.add(new ComplexNumber(-12, 89));
+        controller.insertOrExecute("Op1");
+    }
+    
+    @Test
+    public void testCustomOperationValidSum() throws Exception{
+        Stack stack = controller.getStackNumbers();
+        stack.add(new ComplexNumber(-12, 89));
+        stack.add(new ComplexNumber(3.5, -2));
+        stack.add(new ComplexNumber(3.5, -2));
+        CustomOperations customOperations = (CustomOperations) controller.getMultipleOperations().get(0);
+        customOperations.getCustomOperations().put("Op1", ">b +".split("\\s+"));
+        controller.insertOrExecute("Op1");
+        ComplexNumber number = controller.getStackNumbers().peek();
+        assertEquals("Real part not expected", -8.5, number.getReal(), 0);
+        assertEquals("ImaginaryPart part not expected", 87, number.getImaginary(), 0);
+    }
 }

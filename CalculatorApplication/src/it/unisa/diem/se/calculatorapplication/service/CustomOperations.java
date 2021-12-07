@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.se.calculatorapplication.service;
 
+import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -91,8 +92,19 @@ public class CustomOperations implements MultipleOperationsInterface{
     }
 
     @Override
-    public boolean execute(String operation, Stack stackNumbers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean executeIfExists(String operationName, Stack stackNumbers) throws StackBadSizeException, MathematicalException, NullVariableException{
+        if(customOperations.containsKey(operationName)){
+            String[] singleOpSplit = customOperations.get(operationName);
+            for(String singleOperation : singleOpSplit){
+                for(SingleOperationsInterface op : singleOperations){
+                    if(op.executeIfExists(singleOperation, stackNumbers)){
+                        break;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
     
 }
