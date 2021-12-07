@@ -119,4 +119,29 @@ public class CustomOperationTest {
     Boolean result = customOperations.deleteOperation("ValidTest1");
     assertFalse("Deletion success", result);
     }
+    
+    public void testExecuteExistingOperation() throws Exception{
+        stack.add(new ComplexNumber(-12, 89));
+        stack.add(new ComplexNumber(3.5, -2));
+        stack.add(new ComplexNumber(1,0));
+        stack.add(new ComplexNumber(33, 21));
+        customOperations.getCustomOperations().put("Op1", "+ >b dup * <b swap over".split("\\s+"));
+        Boolean result = customOperations.executeIfExists("Op1", stack);
+        assertTrue("Operation not executed", result);
+        ComplexNumber number = stack.peek();
+        assertEquals("Real part not expected", 34, number.getReal(), 0);
+        assertEquals("ImaginaryPart part not expected", 21, number.getImaginary(), 0);
+    }
+    
+    @Test
+    public void testExecuteNotExistingOperation() throws Exception{
+        stack.add(new ComplexNumber(-12, 89));
+        stack.add(new ComplexNumber(3.5, -2));
+        stack.add(new ComplexNumber(1,0));
+        stack.add(new ComplexNumber(33, 21));
+        customOperations.getCustomOperations().put("Op1", "+ >b dup * <b swap over".split("\\s+"));
+        Boolean result = customOperations.executeIfExists("Op2", stack);
+        assertFalse("Operation executed but not existing", result);
+        assertEquals("Stack updated with operation not existing", 4, stack.size());
+    }
 }

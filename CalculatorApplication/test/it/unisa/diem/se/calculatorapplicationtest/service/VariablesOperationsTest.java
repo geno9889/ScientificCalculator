@@ -97,24 +97,24 @@ public class VariablesOperationsTest {
     
     @Test
     public void testExecuteifExistsInvalidOperation() throws Exception{
-        Boolean r = operations.executeifExists("nogood", stackNumbers);
+        Boolean r = operations.executeIfExists("nogood", stackNumbers);
         assertFalse("Operation not existing",r);
     }
     
     @Test(expected = StackBadSizeException.class)
     public void testExecuteifExistsEmptyStackMajorX() throws Exception{
-        operations.executeifExists(">a", stackNumbers);
+        operations.executeIfExists(">a", stackNumbers);
     }
     
     @Test()
     public void testExecuteIfExistsMajorX() throws Exception{
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
-        Boolean r = operations.executeifExists(">c", stackNumbers);
+        Boolean r = operations.executeIfExists(">c", stackNumbers);
         assertTrue("The operation not exists",r);
         assertEquals("MajorX not executed", operations.getVariables().get('c'), new ComplexNumber(1, 1));
         assertEquals("MajorX not executed", 1, stackNumbers.size());
-        Boolean r2 = operations.executeifExists(">d", stackNumbers);
+        Boolean r2 = operations.executeIfExists(">d", stackNumbers);
         assertTrue("The operation not exists",r2);
         assertEquals("MajorX not executed", operations.getVariables().get('d'), new ComplexNumber(0, 0));
         assertEquals("MajorX not executed", 0, stackNumbers.size());
@@ -126,7 +126,7 @@ public class VariablesOperationsTest {
         stackNumbers.push(new ComplexNumber(4));
         stackNumbers.push(new ComplexNumber(2));
         operations.getVariables().put('x', new ComplexNumber(3));
-        Boolean r = operations.executeifExists("+x", stackNumbers);
+        Boolean r = operations.executeIfExists("+x", stackNumbers);
         assertTrue("The operation not exists",r);
         assertEquals("PlusX not executed", operations.getVariables().get('x'), new ComplexNumber(5, 0));
         assertEquals("PlusX not executed", 1, stackNumbers.size());
@@ -135,13 +135,13 @@ public class VariablesOperationsTest {
     
     @Test (expected = StackBadSizeException.class)
     public void testExecuteifExistsEmptyStackPlusX() throws Exception{
-        operations.executeifExists("+k", stackNumbers);
+        operations.executeIfExists("+k", stackNumbers);
     }
     
 
     @Test(expected = StackBadSizeException.class)
     public void testExecuteifExistsEmptyStackMinusrX() throws Exception{
-        operations.executeifExists("-x", stackNumbers);
+        operations.executeIfExists("-x", stackNumbers);
     }
     
     @Test
@@ -149,7 +149,7 @@ public class VariablesOperationsTest {
         stackNumbers.push(new ComplexNumber(0,0));
         stackNumbers.push(new ComplexNumber(1,1));
         operations.getVariables().put('x', new ComplexNumber(3,3));
-        Boolean r = operations.executeifExists("-x", stackNumbers);
+        Boolean r = operations.executeIfExists("-x", stackNumbers);
         assertTrue("The operation not exists",r);
         assertEquals("MinusX not executed", 1, stackNumbers.size());assertEquals("MajorX not executed", 1, stackNumbers.size());
         assertEquals("MinusX not executed", operations.getVariables().get('x'), new ComplexNumber(2, 2));
@@ -158,13 +158,13 @@ public class VariablesOperationsTest {
     
     @Test (expected = NullVariableException.class)
     public void testExecuteifExistsMinorXNullVariable() throws Exception{
-        operations.executeifExists("<x", stackNumbers);
+        operations.executeIfExists("<x", stackNumbers);
     }
     
     @Test
     public void testExecuteifExistsMinorX() throws Exception{
         operations.getVariables().put('x', new ComplexNumber(1,2));
-        Boolean r = operations.executeifExists("<x", stackNumbers);
+        Boolean r = operations.executeIfExists("<x", stackNumbers);
         assertTrue("The operation not exists",r);
         assertEquals("MinorX not executed",stackNumbers.peek(), new ComplexNumber(1,2));
     }
