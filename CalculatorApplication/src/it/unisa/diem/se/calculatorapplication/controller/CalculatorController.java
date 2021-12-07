@@ -80,7 +80,7 @@ public class CalculatorController {
     }
 
     private boolean insertComplexNumber(String input){
-        Pattern pattern = Pattern.compile("[+|-]?\\d+([.]\\d+)?(([+|-]\\d*)([.]\\d*)?[j])?$");  //pattern to match number(complex and not)
+        Pattern pattern = Pattern.compile("[+|-]?\\d+([.]\\d+)?([+|-]\\d*([.]?\\d+)?[j])?$");  //pattern to match number(complex and not)
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()){
             char firstSign = input.charAt(0);

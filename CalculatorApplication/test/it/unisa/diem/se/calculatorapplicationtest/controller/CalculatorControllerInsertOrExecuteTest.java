@@ -179,7 +179,7 @@ public class CalculatorControllerInsertOrExecuteTest {
     }
     
     @Test
-    public void testFloatRealNullImmaginary() throws Exception{
+    public void testFloatRealNullImaginary() throws Exception{
         controller.insertOrExecute("72.5");
         Stack<ComplexNumber> stackNumbers = controller.getStackNumbers();
         assertNotNull("stack is null", stackNumbers);
@@ -188,6 +188,11 @@ public class CalculatorControllerInsertOrExecuteTest {
         assertNotNull("number is null", number);
         assertEquals("Real part not expected", 72.5, number.getReal(), 0);
         assertEquals("Imaginary part not expected", 0.0, number.getImaginary(), 0);
+    }
+    
+    @Test(expected = InvalidInputException.class)
+    public void testValidRealInvalidImaginary() throws Exception{
+        controller.insertOrExecute("72+.j");
     }
     
     @Test(expected = InvalidInputException.class)
