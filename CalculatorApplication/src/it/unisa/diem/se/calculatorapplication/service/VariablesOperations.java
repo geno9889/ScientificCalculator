@@ -27,10 +27,11 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     private HashMap<String, String> operations;
     private HashMap<Character, ComplexNumber> variables;
-        
+    Stack<HashMap<Character, ComplexNumber>> temporanySave = new Stack<HashMap<Character, ComplexNumber>>();   
     public VariablesOperations(){
         operations = new HashMap<>();
         variables = new HashMap<>();
+        temporanySave = new Stack<>();
         
         for(int i = 97; i<=122; i++){   //initialize variables in Map through ASCII code
             variables.put((char) i, null);
@@ -98,6 +99,10 @@ public class VariablesOperations implements SingleOperationsInterface{
         String op = operationName.substring(0, 1);
         char variable = operationName.charAt(1);      
         return operations.containsKey(op) && variables.containsKey(variable);
+    }
+    
+    public void save(){
+        temporanySave.push(variables);
     }
 
 }

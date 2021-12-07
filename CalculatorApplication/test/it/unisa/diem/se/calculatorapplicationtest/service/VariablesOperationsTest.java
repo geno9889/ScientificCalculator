@@ -79,6 +79,7 @@ public class VariablesOperationsTest {
         alphabet.add('y');
         alphabet.add('z');
         assertEquals(alphabet, variables.keySet());
+        assertNotNull(operations.getTemporanySave());
         stackNumbers = new Stack<>();
         assertNotNull(stackNumbers);
     }
@@ -180,5 +181,12 @@ public class VariablesOperationsTest {
         Boolean r = operations.containsOperation("<a");
         assertTrue("Operation doesn't exists",r);
     }
-
+    
+    @Test
+    public void testSave(){
+        operations.save();
+        assertEquals("The size of temporanySave stack is not 1", 1, operations.getTemporanySave().size());
+        operations.save();
+        assertEquals("The size of temporanySave stack is not 2", 2, operations.getTemporanySave().size());
+    }
 }
