@@ -8,19 +8,22 @@ import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
-import it.unisa.diem.se.calculatorapplication.service.MultipleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
 import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,16 +44,15 @@ public class CalculatorController {
     
     private final Stack<ComplexNumber> stackNumbers;
     private final List<SingleOperationsInterface> singleOperations;
-    private final List<MultipleOperationsInterface> multipleOperations;
+    private final CustomOperations customOperations;
     
     public CalculatorController(){
         stackNumbers = new Stack<>();
         singleOperations = new LinkedList<>();
-        multipleOperations = new LinkedList<>();
+        customOperations = new CustomOperations(singleOperations);
         singleOperations.add(new MathematicalOperations());
         singleOperations.add(new StackOperations());
         singleOperations.add(new VariablesOperations());
-        multipleOperations.add(new CustomOperations(singleOperations));
     }
     
     public void insertOrExecute(String input) throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
@@ -67,12 +69,9 @@ public class CalculatorController {
                 }
             }
             if(existsOperation == false){
-                for(MultipleOperationsInterface op : multipleOperations){
-                    if(op.executeIfExists(input, stackNumbers)){
+                    if(customOperations.executeIfExists(input, stackNumbers)){
                         existsOperation = true;
-                        break;
                     }
-                }
                 if(existsOperation == false){
                     throw new InvalidInputException("Invalid input");
                 }
@@ -136,75 +135,65 @@ public class CalculatorController {
         }    
     }
     
-    public void addCustomOperations(String inputName, String inputOperation) throws InvalidInputException{  
-        CustomOperations custom = null;
-        for(MultipleOperationsInterface op : multipleOperations){
-            if(op instanceof CustomOperations){
-                if(!op.addOperation(inputName, inputOperation)){
-                    throw new InvalidInputException("Invalid sequence of operations or invalid operation name");
-                }
-                break;
-            }
+    public void addCustomOperations(String inputName, String inputOperation) throws InvalidInputException{
+        if(!customOperations.addOperation(inputName, inputOperation)){
+            throw new InvalidInputException("Invalid input. Possible causes:\n"
+                    + "- calculator doesn't support one operation in sequence\n "
+                    + "- name of custom operation is equal to name of an already existing operation)\n"
+                    + "- operation name contains the character \",\"(it's not allowed)");
         }
     }
     
-    public void modifyOperation(String newNameOperation, String oldNameOperation, String newOperation) throws InvalidInputException{ 
-        CustomOperations custom = null;
-        for(MultipleOperationsInterface op : multipleOperations){
-            if(op instanceof CustomOperations){
-                if(!op.modifyOperation(newNameOperation, oldNameOperation, newOperation)){
-                    throw new InvalidInputException("Invalid sequence of operations or invalid operation name");
-                }
-                break;
-            }
+    public void modifyCustomOperation(String newNameOperation, String oldNameOperation, String newOperation) throws InvalidInputException{ 
+        if(!customOperations.modifyOperation(newNameOperation, oldNameOperation, newOperation)){
+            throw new InvalidInputException("Invalid input. Possible causes:\n"
+                    + "- name of operation to modify not existing\n"
+                    + "- new name of custom operation is equal to name of an already existing operation\n"
+                    + "- calculator doesn't support one operation in sequence\n "
+                    + "- operation name contains the character \",\"(it's not allowed)");
         }
     }
     
-    public void deleteOperation(String nameOperation) throws InvalidInputException {
-        CustomOperations custom = null;
-        for(MultipleOperationsInterface op : multipleOperations){
-            if(op instanceof CustomOperations){
-                if(!op.deleteOperation(nameOperation)){
-                    throw new InvalidInputException("Invalid operation name");
-                }
-                break;
-            }
-        }
+    public void deleteCustomOperation(String nameOperation) throws InvalidInputException {
+        if(!customOperations.deleteOperation(nameOperation)){
+            throw new InvalidInputException("Invalid operation name");
+        }      
     }
     
     public void executeMultipleOperation(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
-        for(MultipleOperationsInterface op : multipleOperations){
-            if(op.executeIfExists(input, stackNumbers)){
-                break;
-            }
-        }
+        customOperations.executeIfExists(input, stackNumbers);
     }
     
-    public void saveOperationToFile(File file){
-        BufferedWriter bf = null;;
-        String s = new String();
-        try{
-            bf = new BufferedWriter( new FileWriter(file) );
-            for(Map.Entry<String, String[]> entry : ((CustomOperations)multipleOperations.get(0)).getCustomOperations().entrySet()){
-                for(int i = 0; i < entry.getValue().length; i++){
-                    s+=entry.getValue()[i];
-                    s+=" ";
-                }
-                bf.write( entry.getKey() + ", " + s );
-                bf.newLine();
+    public void saveCustomOperationToFile(File file) throws IOException{
+        BufferedWriter bf = null;
+        bf = new BufferedWriter(new FileWriter(file));
+        for (Map.Entry<String, String[]> entry : (customOperations).getMultipleOperations().entrySet()) {
+            String s = "";
+            for (int i = 0; i < entry.getValue().length; i++) {
+                s += " ";
+                s += entry.getValue()[i];
             }
-            bf.flush();
-        }catch(IOException e){
-            e.printStackTrace();
-        }finally{
-            try{
-                bf.close();
-            }catch(Exception e){}
+            bf.write(entry.getKey() + "," + s);
+            bf.newLine();
         }
+        bf.flush();
+
+        bf.close();
     }
 
     
-    public void reloadOperationFromFile(File file){
+    public void reloadCustomOperationFromFile(File file) throws IOException{
+        HashMap<String, String[]> multipleOperations = customOperations.getMultipleOperations();
+        multipleOperations.clear();
+
+        BufferedReader bf = new BufferedReader(new FileReader(file));
+        Scanner scanner = new Scanner(bf);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] pairNameOperations = line.split(",");
+            multipleOperations.put(pairNameOperations[0], pairNameOperations[1].split("\\s+"));
+        }
+        bf.close();
     }
     
 }

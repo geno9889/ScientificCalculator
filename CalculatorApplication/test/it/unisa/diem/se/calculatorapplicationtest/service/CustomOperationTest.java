@@ -48,14 +48,14 @@ public class CustomOperationTest {
     @After
     public void tearDown() {
         stack.clear();
-        customOperations.getCustomOperations().clear();
+        customOperations.getMultipleOperations().clear();
     }
     
     @Test
     public void testAddOperationValidInput(){
         Boolean result = customOperations.addOperation("ValidTest", "+ clear dup sqrt >e");
         assertTrue("Addition of the operation not successful", result);
-        HashMap<String,String[]> mapOperations = customOperations.getCustomOperations();
+        HashMap<String,String[]> mapOperations = customOperations.getMultipleOperations();
         assertTrue("Name of the operation doesn't exists", mapOperations.containsKey("ValidTest"));
         String[] singleOp = "+ clear dup sqrt >e".split("\\s+");
         assertTrue("Sequence of operations doesn't correspond to name", Arrays.equals(singleOp,mapOperations.get("ValidTest")));
@@ -77,10 +77,10 @@ public class CustomOperationTest {
     
     @Test
     public void testModifyOperationValidInput(){
-        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
+        customOperations.getMultipleOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ clear drop sqrt >e");
         assertTrue("Modification of the operation not success",result);
-        HashMap<String,String[]> mapOperations = customOperations.getCustomOperations();
+        HashMap<String,String[]> mapOperations = customOperations.getMultipleOperations();
         assertTrue("Name of the operation doesn't exists", mapOperations.containsKey("ValidTest"));
         assertTrue("Sequence of operations doesn't correspond to name", Arrays.equals("+ clear drop sqrt >e".split("\\s+"), mapOperations.get("ValidTest")));
     }
@@ -93,29 +93,29 @@ public class CustomOperationTest {
     
     @Test
     public void testModifyOperationInvalidNewOperation(){
-        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
+        customOperations.getMultipleOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ cleardrop sqrt >e");
         assertFalse("The sequence of the operation is valid",result);
     }
     
     @Test
     public void testModifyOperationInvalidNewName(){
-        customOperations.getCustomOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
-        customOperations.getCustomOperations().put("ValidTest2", "+ clear dup sqrt >e".split("\\s+"));
+        customOperations.getMultipleOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
+        customOperations.getMultipleOperations().put("ValidTest2", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest2", "+ clear swap sqrt >e");
         assertFalse("The name doesn't exists",result);
     }
     
     @Test
     public void testDeleteOperationValid(){
-    customOperations.getCustomOperations().put("ValidTest", "+".split("\\s+"));
+    customOperations.getMultipleOperations().put("ValidTest", "+".split("\\s+"));
     customOperations.deleteOperation("ValidTest");
-    assertEquals("Deletion not success",0,customOperations.getCustomOperations().size());
+    assertEquals("Deletion not success",0,customOperations.getMultipleOperations().size());
     }
     
     @Test
     public void testDeleteOperationInvalid(){
-    customOperations.getCustomOperations().put("ValidTest", "+".split("\\s+"));
+    customOperations.getMultipleOperations().put("ValidTest", "+".split("\\s+"));
     Boolean result = customOperations.deleteOperation("ValidTest1");
     assertFalse("Deletion success", result);
     }
@@ -125,7 +125,7 @@ public class CustomOperationTest {
         stack.add(new ComplexNumber(3.5, -2));
         stack.add(new ComplexNumber(1,0));
         stack.add(new ComplexNumber(33, 21));
-        customOperations.getCustomOperations().put("Op1", "+ >b dup * <b swap over".split("\\s+"));
+        customOperations.getMultipleOperations().put("Op1", "+ >b dup * <b swap over".split("\\s+"));
         Boolean result = customOperations.executeIfExists("Op1", stack);
         assertTrue("Operation not executed", result);
         ComplexNumber number = stack.peek();
@@ -139,9 +139,11 @@ public class CustomOperationTest {
         stack.add(new ComplexNumber(3.5, -2));
         stack.add(new ComplexNumber(1,0));
         stack.add(new ComplexNumber(33, 21));
-        customOperations.getCustomOperations().put("Op1", "+ >b dup * <b swap over".split("\\s+"));
+        customOperations.getMultipleOperations().put("Op1", "+ >b dup * <b swap over".split("\\s+"));
         Boolean result = customOperations.executeIfExists("Op2", stack);
         assertFalse("Operation executed but not existing", result);
         assertEquals("Stack updated with operation not existing", 4, stack.size());
     }
+    
+    
 }

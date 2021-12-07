@@ -11,7 +11,6 @@ import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
-import it.unisa.diem.se.calculatorapplication.service.MultipleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
@@ -39,21 +38,20 @@ public class CalculatorControllerExecuteSingleOperationTest {
         controller = new CalculatorController();
         assertNotNull("controller is null", controller);
         List<SingleOperationsInterface> singleOperations = controller.getSingleOperations();
-        List<MultipleOperationsInterface> multipleOperations = controller.getMultipleOperations();
+        CustomOperations customOperations = controller.getCustomOperations();
         assertNotNull("singleOperations is null" , singleOperations);
         assertEquals("singleOperations doesn't have three argument", 3, singleOperations.size());
         assertEquals("first item of singleOperations is not a MathematicalOperations", MathematicalOperations.class, singleOperations.get(0).getClass());
         assertEquals("first item of singleOperations is not a StackOperations", StackOperations.class, singleOperations.get(1).getClass());
         assertEquals("first item of singleOperations is not a VariablesOperations", VariablesOperations.class, singleOperations.get(2).getClass());
-        assertEquals("first item of singleOperations is not a VariablesOperations", CustomOperations.class, multipleOperations.get(0).getClass());
+        assertNotNull("CustomeOperations is null", customOperations);
         assertNotNull("stackNumbers is null", controller.getStackNumbers());
-        
     }
     
     @After
     public void clearStack(){
         controller.getStackNumbers().clear();
-        assertEquals(0, controller.getStackNumbers().size());
+        controller.getCustomOperations().getMultipleOperations().clear();
     }
     
     @Test(expected = StackBadSizeException.class)
