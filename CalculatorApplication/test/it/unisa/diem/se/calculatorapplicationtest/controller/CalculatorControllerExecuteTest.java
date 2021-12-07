@@ -57,30 +57,44 @@ public class CalculatorControllerExecuteTest {
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testMathematicalOperationsInValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
-        controller.insertOrExecute("+");
+    public void testMathematicalOperationsInValidSum() throws Exception{
+        controller.executeSingleOperation("+");
     }
     
     @Test
-    public void testMathematicalOperationsValidSum() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
+    public void testMathematicalOperationsValidSum() throws Exception{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
-        controller.insertOrExecute("+");
+        controller.executeSingleOperation("+");
         assertEquals("MathematicalOperation not executed", 1, stackNumbers.size());
     }
     
     @Test(expected = StackBadSizeException.class)
-    public void testStackOperationsInvalidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
-        controller.insertOrExecute("dup");
+    public void testStackOperationsInvalidDup() throws Exception{
+        controller.executeSingleOperation("dup");
     }
     
     @Test
-    public void testStackOperationsValidDup() throws InvalidInputException, StackBadSizeException, MathematicalException, NullVariableException{
+    public void testStackOperationsValidDup() throws Exception{
         Stack stackNumbers = controller.getStackNumbers();
         stackNumbers.push(new ComplexNumber(0, 0));
         stackNumbers.push(new ComplexNumber(0, 0));
-        controller.insertOrExecute("dup");
+        controller.executeSingleOperation("dup");
         assertEquals("StackOperation not executed", 3, stackNumbers.size());
+    }
+    
+    @Test(expected = StackBadSizeException.class)
+    public void testVariableOperationsInvalidMajorX() throws Exception{
+        controller.executeSingleOperation(">x");
+    }
+    
+    @Test
+    public void testVariableOperationsValidMajorX() throws Exception{
+        Stack stackNumbers = controller.getStackNumbers();
+        stackNumbers.push(new ComplexNumber(0, 0));
+        stackNumbers.push(new ComplexNumber(0, 0));
+        controller.executeSingleOperation(">x");
+        assertEquals("VariableOperation not executed", 1, stackNumbers.size());
     }
 }

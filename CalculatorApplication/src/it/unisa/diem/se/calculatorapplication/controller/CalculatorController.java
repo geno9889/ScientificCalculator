@@ -169,7 +169,7 @@ public class CalculatorController {
     
     public void saveOperationToFile(File file){
         BufferedWriter bf = null;;
-        
+        String s = new String();
         try{
             
             //create new BufferedWriter for the output file
@@ -178,8 +178,11 @@ public class CalculatorController {
             //iterate map entries
             for(Map.Entry<String, String[]> entry : ((CustomOperations)multipleOperations.get(0)).getCustomOperations().entrySet()){
                 
-                //put key and value separated by a colon
-                bf.write( entry.getKey() + ":" + entry.getValue().toString() );
+                for(int i = 0; i < entry.getValue().length; i++){
+                    s+=entry.getValue()[i];
+                    s+=" ";
+                }
+                bf.write( entry.getKey() + ", " + s );
                 
                 //new line
                 bf.newLine();

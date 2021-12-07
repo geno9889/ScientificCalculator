@@ -4,6 +4,7 @@
  */
 package it.unisa.diem.se.calculatorapplication;
 
+import it.unisa.diem.se.calculatorapplication.controller.CalculatorController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
