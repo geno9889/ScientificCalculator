@@ -105,4 +105,18 @@ public class CustomOperationTest {
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest2", "+ clear swap sqrt >e");
         assertFalse("The name doesn't exists",result);
     }
+    
+    @Test
+    public void testDeleteOperationValid(){
+    customOperations.getCustomOperations().put("ValidTest", "+".split("\\s+"));
+    customOperations.deleteOperation("ValidTest");
+    assertEquals("Deletion not success",0,customOperations.getCustomOperations().size());
+    }
+    
+    @Test
+    public void testDeleteOperationInvalid(){
+    customOperations.getCustomOperations().put("ValidTest", "+".split("\\s+"));
+    Boolean result = customOperations.deleteOperation("ValidTest1");
+    assertFalse("Deletion success", result);
+    }
 }

@@ -87,7 +87,11 @@ public class CustomOperations implements MultipleOperationsInterface{
 
     @Override
     public boolean deleteOperation(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(customOperations.containsKey(name)){
+            customOperations.remove(name);
+        return true;
+        }
+        else return false;
     }
 
     @Override

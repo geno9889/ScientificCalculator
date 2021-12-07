@@ -147,7 +147,16 @@ public class CalculatorController {
         }
     }
     
-    public void deleteOperation(String nameOperation) {
+    public void deleteOperation(String nameOperation) throws InvalidInputException {
+        CustomOperations custom = null;
+        for(MultipleOperationsInterface op : multipleOperations){
+            if(op instanceof CustomOperations){
+                if(!op.deleteOperation(nameOperation)){
+                    throw new InvalidInputException("Invalid operation name");
+                }
+                break;
+            }
+        }
     }
     
     public void executeMultipleOperation(String operation){
