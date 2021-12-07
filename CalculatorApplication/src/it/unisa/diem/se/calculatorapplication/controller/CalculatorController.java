@@ -169,32 +169,25 @@ public class CalculatorController {
     
     public void saveOperationToFile(File file){
         BufferedWriter bf = null;;
-        
-        try{
-            
-            //create new BufferedWriter for the output file
-            bf = new BufferedWriter( new FileWriter(file) );
- 
-            //iterate map entries
-            for(Map.Entry<String, String[]> entry : ((CustomOperations)multipleOperations.get(0)).getCustomOperations().entrySet()){
-                
-                //put key and value separated by a colon
-                bf.write( entry.getKey() + ":" + entry.getValue().toString() );
-                
-                //new line
+        try {
+            bf = new BufferedWriter(new FileWriter(file));
+            for (Map.Entry<String, String[]> entry : ((CustomOperations) multipleOperations.get(0)).getCustomOperations().entrySet()) {
+                String s = "";
+                for (int i = 0; i < entry.getValue().length; i++) {
+                    s += entry.getValue()[i];
+                    s += " ";
+                }
+                bf.write(entry.getKey() + ", " + s);
                 bf.newLine();
             }
-            
             bf.flush();
- 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally{
-            
-            try{
-                //always close the writer
+        } finally {
+            try {
                 bf.close();
-            }catch(Exception e){}
+            } catch (Exception e) {
+            }
         }
     }
 
