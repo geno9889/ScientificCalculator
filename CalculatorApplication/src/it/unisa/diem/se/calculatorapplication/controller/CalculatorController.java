@@ -14,8 +14,13 @@ import it.unisa.diem.se.calculatorapplication.service.SingleOperationsInterface;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
 import it.unisa.diem.se.calculatorapplication.service.StackOperations;
 import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -162,10 +167,39 @@ public class CalculatorController {
     public void executeMultipleOperation(String operation){
     }
     
-    public void saveOperationToFile(){
+    public void saveOperationToFile(File file){
+        BufferedWriter bf = null;;
+        
+        try{
+            
+            //create new BufferedWriter for the output file
+            bf = new BufferedWriter( new FileWriter(file) );
+ 
+            //iterate map entries
+            for(Map.Entry<String, String[]> entry : ((CustomOperations)multipleOperations.get(0)).getCustomOperations().entrySet()){
+                
+                //put key and value separated by a colon
+                bf.write( entry.getKey() + ":" + entry.getValue().toString() );
+                
+                //new line
+                bf.newLine();
+            }
+            
+            bf.flush();
+ 
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            
+            try{
+                //always close the writer
+                bf.close();
+            }catch(Exception e){}
+        }
     }
+
     
-    public void reloadOperationFromFile(String filename){
+    public void reloadOperationFromFile(File file){
     }
     
 }
