@@ -76,6 +76,15 @@ public class CustomOperationTest {
     }
     
     @Test
+    public void testAddOperationCustomInCustom(){
+        HashMap<String,String[]> multipleOperations = customOperations.getMultipleOperations();
+        multipleOperations.put("Op1", "+".split("\\s+"));
+        Boolean result = customOperations.addOperation("Op2", "dup Op1 - +");
+        assertTrue("Sequence of operations is not valid", result);
+        assertTrue("Sequence of operations is not valid", multipleOperations.containsKey("Op2"));
+    }
+    
+    @Test
     public void testModifyOperationValidInput(){
         customOperations.getMultipleOperations().put("ValidTest", "+ clear dup sqrt >e".split("\\s+"));
         Boolean result = customOperations.modifyOperation("ValidTest", "ValidTest", "+ clear drop sqrt >e");

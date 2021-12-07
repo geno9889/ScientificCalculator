@@ -76,9 +76,12 @@ public class CustomOperations{
                     break;
                 }
             }
+            if(multipleOperations.containsKey(singleOp)){
+                flag = true;
+            }
             if(flag == false){
                 return false;
-           }else{
+            }else{
                 flag = false;
             }
         }
