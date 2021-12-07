@@ -108,6 +108,9 @@ public class CustomOperations{
                         break;
                     }
                 }
+                if(multipleOperations.containsKey(singleOperation)){
+                    executeIfExists(singleOperation, stackNumbers);
+                }    
             }
             return true;
         }

@@ -42,7 +42,7 @@ import lombok.ToString;
 @ToString
 public class CalculatorController {
     
-    private final Stack<ComplexNumber> stackNumbers;
+    private Stack<ComplexNumber> stackNumbers;
     private final List<SingleOperationsInterface> singleOperations;
     private final CustomOperations customOperations;
     
@@ -69,12 +69,18 @@ public class CalculatorController {
                 }
             }
             if(existsOperation == false){
+                Stack<ComplexNumber> clone = (Stack<ComplexNumber>) stackNumbers.clone();
+                try{
                     if(customOperations.executeIfExists(input, stackNumbers)){
                         existsOperation = true;
                     }
-                if(existsOperation == false){
-                    throw new InvalidInputException("Invalid input");
+                }catch(StackBadSizeException | MathematicalException | NullVariableException ex){
+                    stackNumbers = clone;
+                    throw ex;
                 }
+            }
+            if(existsOperation == false){
+                throw new InvalidInputException("Invalid input");
             }
         }
     }
@@ -159,8 +165,14 @@ public class CalculatorController {
         }      
     }
     
-    public void executeMultipleOperation(String input) throws StackBadSizeException, MathematicalException, NullVariableException{
-        customOperations.executeIfExists(input, stackNumbers);
+    public void executeMultipleOperation(String input) throws InvalidInputException {
+        Stack<ComplexNumber> clone = (Stack<ComplexNumber>) stackNumbers.clone();
+        try {
+            customOperations.executeIfExists(input, stackNumbers);
+        } catch (StackBadSizeException | MathematicalException | NullVariableException ex) {
+            stackNumbers = clone;
+            throw new InvalidInputException("Size of stack doesn't allow the execution of the custom operation");
+        }
     }
     
     public void saveCustomOperationToFile(File file) throws IOException{
