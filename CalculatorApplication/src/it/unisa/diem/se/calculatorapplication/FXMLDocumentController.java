@@ -251,7 +251,7 @@ public class FXMLDocumentController implements Initializable {
             Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
             String op = sourceButton.getText();
             c.executeSingleOperation(op);
-            final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            final Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initStyle(StageStyle.UTILITY);
             alert.setTitle("Save");
             alert.setHeaderText("Successful save");

@@ -46,6 +46,15 @@ public class VariablesOperations implements SingleOperationsInterface{
     @Override
     public boolean executeIfExists(String operationName, Stack stackNumbers) throws StackBadSizeException, NullVariableException {
         Method m1;
+       if(operationName.equals("save")){
+            try {
+                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
+                m1.invoke(this);
+            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException | NoSuchMethodException ex1) {
+                Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            return true;
+        }        
         if (containsOperation(operationName) ){
             String op = operationName.substring(0, 1);
             char variable = operationName.charAt(1);
@@ -59,15 +68,6 @@ public class VariablesOperations implements SingleOperationsInterface{
                     throw (StackBadSizeException)ex2.getCause();
                 if(ex2.getCause() instanceof NullVariableException)
                     throw (NullVariableException) ex2.getCause();
-            }
-            return true;
-        }
-        if(operationName.equals("save")){
-            try {
-                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
-                m1.invoke(this);
-            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException | NoSuchMethodException ex1) {
-                Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return true;
         }
