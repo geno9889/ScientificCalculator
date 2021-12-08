@@ -189,4 +189,10 @@ public class VariablesOperationsTest {
         operations.save();
         assertEquals("The size of temporanySave stack is not 2", 2, operations.getTemporanySave().size());
     }
+    
+    @Test
+    public void testRestore(){
+        stackNumbers.push(new ComplexNumber(0,1));
+        assertEquals("Restore not executed", operations.getTemporanySave().get('a'), new ComplexNumber(0, 1));
+    }
 }
