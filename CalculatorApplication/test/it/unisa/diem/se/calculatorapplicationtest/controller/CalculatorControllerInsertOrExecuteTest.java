@@ -233,7 +233,7 @@ public class CalculatorControllerInsertOrExecuteTest {
         assertEquals("StackOperation not executed", 3, stackNumbers.size());
     }
     
-    @Test(expected = StackBadSizeException.class)
+    @Test(expected = InvalidInputException.class)
     public void testCustomOperationsInvalidSum() throws Exception{
         HashMap<String,String[]> multipleOperations = controller.getCustomOperations().getMultipleOperations();
         multipleOperations.put("Op1", ">b +".split("\\s+"));

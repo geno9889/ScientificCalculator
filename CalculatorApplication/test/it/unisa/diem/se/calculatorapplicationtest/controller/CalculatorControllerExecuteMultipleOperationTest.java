@@ -6,6 +6,7 @@
 package it.unisa.diem.se.calculatorapplicationtest.controller;
 
 import it.unisa.diem.se.calculatorapplication.controller.CalculatorController;
+import it.unisa.diem.se.calculatorapplication.controller.InvalidInputException;
 import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.service.CustomOperations;
 import it.unisa.diem.se.calculatorapplication.service.MathematicalOperations;
@@ -52,7 +53,7 @@ public class CalculatorControllerExecuteMultipleOperationTest {
         controller.getCustomOperations().getMultipleOperations().clear();
     }
     
-    @Test(expected = StackBadSizeException.class)
+    @Test(expected = InvalidInputException.class)
     public void testCustomOperationsInvalidSum() throws Exception{
         HashMap<String,String[]> multipleOperations = controller.getCustomOperations().getMultipleOperations();
         multipleOperations.put("Op1", ">b +".split("\\s+"));
