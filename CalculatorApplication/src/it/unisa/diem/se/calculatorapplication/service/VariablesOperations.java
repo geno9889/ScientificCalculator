@@ -34,7 +34,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         temporanyStack = new Stack<>();
         
         for(int i = 97; i<=122; i++){   //initialize variables in Map through ASCII code
-            variables.put((char) i, null);
+            variables.put((char) i, new ComplexNumber(0, 0));
         }
         operations.put(">", "majorX");
         operations.put("<", "minorX");
