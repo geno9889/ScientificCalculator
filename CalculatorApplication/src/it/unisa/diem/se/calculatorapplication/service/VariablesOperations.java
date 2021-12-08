@@ -41,7 +41,6 @@ public class VariablesOperations implements SingleOperationsInterface{
         operations.put("+", "plusX");
         operations.put("-", "minusX");
         operations.put("save", "save");
-        operations.put("restore", "restore");
     }
     
     @Override
