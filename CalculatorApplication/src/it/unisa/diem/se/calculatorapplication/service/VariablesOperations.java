@@ -63,16 +63,11 @@ public class VariablesOperations implements SingleOperationsInterface{
             }
             return true;
         }
-        return false;
-    }
-    
-    public boolean saveOrRestore(String operationName) throws NoSuchMethodException{
-        Method m1;
         if(operationName.equals("save")){
             try {
                 m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
                 m1.invoke(this);
-            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException ex1) {
+            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException | NoSuchMethodException ex1) {
                 Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return true;
@@ -117,6 +112,7 @@ public class VariablesOperations implements SingleOperationsInterface{
     }
     
     private void save(){
+        System.out.println("sesso");
         temporanySave.push(variables);
     }
     
@@ -125,5 +121,6 @@ public class VariablesOperations implements SingleOperationsInterface{
         ComplexNumber number = (ComplexNumber) temporanyStack.pop();
         variables.put(variable, number);
     }
+    
 
 }

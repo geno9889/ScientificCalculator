@@ -348,6 +348,11 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
+                                          <Button layoutX="538.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableStackOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="restore">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
                                        </children>
                                     </HBox>
                                  </children>

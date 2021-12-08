@@ -184,10 +184,10 @@ public class VariablesOperationsTest {
     }
     
     @Test
-    public void testSave() throws NoSuchMethodException{
-        operations.saveOrRestore("save");
+    public void testSave() throws NoSuchMethodException, StackBadSizeException, NullVariableException{
+        operations.executeIfExists("save", stackNumbers);
         assertEquals("The size of temporanySave stack is not 1", 1, operations.getTemporanySave().size());
-        operations.saveOrRestore("save");
+        operations.executeIfExists("save", stackNumbers);
         assertEquals("The size of temporanySave stack is not 2", 2, operations.getTemporanySave().size());
     }
     
