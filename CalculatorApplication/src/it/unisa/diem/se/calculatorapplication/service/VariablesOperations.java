@@ -103,6 +103,9 @@ public class VariablesOperations implements SingleOperationsInterface{
     @Override
     public boolean containsOperation(String operationName) {
         if(operationName.length() != 2){
+            if(operations.containsKey(operationName)){
+                return true;
+            }
             return false;
         }   
         String op = operationName.substring(0, 1);
