@@ -34,7 +34,6 @@ import static org.junit.Assert.*;
 @EqualsAndHashCode
 @ToString
 public class VariablesOperationsTest {
-    
     private static VariablesOperations operations;
     
     private static Stack<ComplexNumber> stackNumbers;
@@ -50,6 +49,7 @@ public class VariablesOperationsTest {
         assertTrue(op.containsKey("-"));
         assertTrue(op.containsKey("<"));
         assertTrue(op.containsKey("save"));
+        assertTrue(op.containsKey("restore"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -80,7 +80,7 @@ public class VariablesOperationsTest {
         alphabet.add('y');
         alphabet.add('z');
         assertEquals(alphabet, variables.keySet());
-        Stack<HashMap<Character, ComplexNumber>> temporanySave =operations.getTemporanySave();
+        Stack<HashMap<Character, ComplexNumber>> temporanySave =operations.getTemporanyStack();
         assertNotNull(temporanySave);
         stackNumbers = new Stack<>();
         assertNotNull(stackNumbers);
@@ -185,10 +185,13 @@ public class VariablesOperationsTest {
     }
     
     @Test
-    public void testSave() throws NoSuchMethodException{
-        operations.saveOrRestore("save");
-        assertEquals("The size of temporanySave stack is not 1", 1, operations.getTemporanySave().size());
-        operations.saveOrRestore("save");
-        assertEquals("The size of temporanySave stack is not 2", 2, operations.getTemporanySave().size());
+    public void testSave() throws Exception{
+        Stack stackRestore = operations.getTemporanyStack();
+        Boolean r = operations.executeIfExists("save", stackNumbers);
+        assertTrue("Operation doesn't exists",r);
+        assertEquals("The size of temporanyStack stack is not 1", 1, stackRestore.size());
+        operations.executeIfExists("save", stackNumbers);
+        assertEquals("The size of temporanyStack stack is not 2", 2, stackRestore.size());
+        stackRestore.clear();
     }
 }

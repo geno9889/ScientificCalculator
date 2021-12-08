@@ -27,11 +27,11 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     private HashMap<String, String> operations;
     private HashMap<Character, ComplexNumber> variables;
-    private Stack<HashMap<Character, ComplexNumber>> temporanySave;
+    private Stack<HashMap<Character, ComplexNumber>> temporanyStack;
     public VariablesOperations(){
         operations = new HashMap<>();
         variables = new HashMap<>();
-        temporanySave = new Stack<>();
+        temporanyStack = new Stack<>();
         
         for(int i = 97; i<=122; i++){   //initialize variables in Map through ASCII code
             variables.put((char) i, null);
@@ -41,6 +41,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         operations.put("+", "plusX");
         operations.put("-", "minusX");
         operations.put("save", "save");
+        operations.put("restore", "restore");
     }
     
     @Override
@@ -62,23 +63,17 @@ public class VariablesOperations implements SingleOperationsInterface{
             }
             return true;
         }
-        return false;
-    }
-    
-    public boolean saveOrRestore(String operationName) throws NoSuchMethodException{
-        Method m1;
-        if(operationName.equals("save") ){
+        if(operationName.equals("save") || operationName.equals("restore")){
             try {
                 m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
                 m1.invoke(this);
-            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException ex1) {
+            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException | NoSuchMethodException ex1) {
                 Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return true;
         }
         return false;
     }
-    
     
     private void majorX(Stack stackNumbers, Character variable) throws StackBadSizeException{
         if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
@@ -117,7 +112,14 @@ public class VariablesOperations implements SingleOperationsInterface{
     }
     
     private void save(){
-        temporanySave.push(variables);
+        temporanyStack.push(variables);
     }
+    
+    private void restore() throws StackBadSizeException{
+        if(temporanyStack.isEmpty()) throw new StackBadSizeException("There is no one element into restore stack variables");
+        variables.clear();
+        variables = ((HashMap<Character, ComplexNumber>)temporanyStack.pop());
+    }
+    
 
 }

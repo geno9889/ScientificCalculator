@@ -47,7 +47,6 @@ import javafx.stage.Stage;
  * @author Giuseppe
  */
 public class FXMLDocumentController implements Initializable {
-    
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -250,8 +249,8 @@ public class FXMLDocumentController implements Initializable {
         try {
             Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
             String op = sourceButton.getText();
-            ((VariablesOperations)c.getSingleOperations().get(2)).saveOrRestore(op);
-        } catch (NoSuchMethodException ex) {
+            c.executeSingleOperation(op);
+        } catch (StackBadSizeException | MathematicalException | NullVariableException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
             al.setHeaderText("Save/restore error");
