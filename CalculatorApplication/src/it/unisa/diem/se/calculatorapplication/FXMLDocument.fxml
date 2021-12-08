@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.se.calculatorapplication.FXMLDocumentController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.se.calculatorapplication.FXMLDocumentController">
    <children>
-      <SplitPane dividerPositions="0.37374860956618466" layoutY="1.0" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.37374860956618466" layoutY="1.0" prefHeight="900.0" prefWidth="1050.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane maxWidth="350.0" minWidth="350.0" prefHeight="848.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
                <children>
@@ -35,11 +35,11 @@
                   </VBox>
                </children>
             </AnchorPane>
-          <AnchorPane maxWidth="650.0" minHeight="0.0" minWidth="600.0" prefHeight="748.0" prefWidth="650.0" SplitPane.resizableWithParent="false">
+          <AnchorPane maxWidth="650.0" minHeight="0.0" minWidth="700.0" prefHeight="748.0" prefWidth="700.0" SplitPane.resizableWithParent="false">
                <children>
-                  <VBox alignment="CENTER" layoutX="7.0" prefHeight="748.0" prefWidth="590.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" layoutX="7.0" prefHeight="898.0" prefWidth="700.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="resultLabel" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="550.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Label fx:id="resultLabel" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="53.0" prefWidth="639.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font size="36.0" />
                            </font>
@@ -49,12 +49,12 @@
                         </Label>
                         <HBox prefHeight="44.0" prefWidth="550.0" spacing="20.0">
                            <children>
-                              <TextField fx:id="txtfield" alignment="CENTER" maxWidth="500.0" onAction="#insertValue" prefHeight="30.0" prefWidth="412.0" promptText="Insert input here ...">
+                              <TextField fx:id="txtfield" alignment="CENTER" maxWidth="500.0" onAction="#insertValue" prefHeight="30.0" prefWidth="480.0" promptText="Insert input here ...">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </TextField>
-                              <Button fx:id="insertbtn" alignment="CENTER" mnemonicParsing="false" onAction="#insertValue" prefHeight="40.0" prefWidth="144.0" style="-fx-background-color: orange;" text="Insert">
+                              <Button fx:id="insertbtn" alignment="CENTER" mnemonicParsing="false" onAction="#insertValue" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: orange;" text="Insert">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -66,7 +66,7 @@
                         </HBox>
                         <VBox alignment="CENTER" prefHeight="442.0" prefWidth="578.0" spacing="20.0">
                            <children>
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="591.0" text="Input buttons:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="642.0" text="Input buttons:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -76,27 +76,27 @@
                               </Label>
                               <HBox prefHeight="100.0" prefWidth="415.0" spacing="20.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="1">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="2">
+                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="2">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="3">
+                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="3">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="4">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="4">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="5">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="5">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -105,27 +105,27 @@
                               </HBox>
                               <HBox layoutX="40.0" layoutY="10.0" prefHeight="100.0" prefWidth="530.0" spacing="20.0">
                                  <children>
-                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="6">
+                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="6">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="7">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="7">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="8">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="8">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="9">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="9">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="0">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="0">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -134,32 +134,32 @@
                               </HBox>
                               <HBox layoutX="40.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="+">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="+">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="-">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="-">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text=".">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text=".">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="110.0" text="j">
+                                    <Button mnemonicParsing="false" onAction="#write" prefHeight="60.0" prefWidth="120.0" text="j">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="60.0" prefWidth="110.0" style="-fx-background-color: #aeaeae;" text="CANC">
+                                    <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #aeaeae;" text="CANC">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#deleteLastCharacter" prefHeight="60.0" prefWidth="110.0" style="-fx-background-color: #aeaeae;" text="«-">
+                                    <Button mnemonicParsing="false" onAction="#deleteLastCharacter" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #aeaeae;" text="«-">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -167,7 +167,7 @@
                                  </children>
                               </HBox>
                               <HBox layoutX="40.0" layoutY="157.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="41.0" layoutY="346.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="586.0" text="Mathematical operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="41.0" layoutY="346.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="646.0" text="Mathematical operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -177,39 +177,39 @@
                               </Label>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="+">
+                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="+">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="-">
+                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="-">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="*">
+                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="*">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="/">
+                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="/">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="sqrt">
+                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="sqrt">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="+-">
+                                    <Button mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="+-">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
                                  </children>
                               </HBox>
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.0" prefWidth="585.0" text="Stack operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="642.0" text="Stack operations:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -219,27 +219,27 @@
                               </Label>
                               <HBox layoutX="40.0" layoutY="217.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="clear">
+                                    <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="clear">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="dup">
+                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="dup">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="drop">
+                                    <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="drop">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="swap">
+                                    <Button layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="swap">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="over">
+                                    <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#eventOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="over">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -258,39 +258,12 @@
                                     </Label>
                                     <HBox prefHeight="39.0" prefWidth="567.0" spacing="40.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#showVariablesData" prefHeight="39.0" prefWidth="353.0" style="-fx-background-color: yellow;" text="Show variables datas">
+                                          <Button mnemonicParsing="false" onAction="#showVariablesData" prefHeight="35.0" prefWidth="235.0" style="-fx-background-color: yellow;" text="Show variables datas">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <HBox alignment="CENTER" prefHeight="39.0" prefWidth="272.0" spacing="1.0" style="-fx-border-color: white;">
-                                             <children>
-                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="123.0" text="Setted variable:  " textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="DEFAULT" />
-                                                   </cursor>
-                                                </Label>
-                                                <Label fx:id="settedVariable" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="41.0" text="None" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                                   <font>
-                                                      <Font name="System Bold" size="16.0" />
-                                                   </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="DEFAULT" />
-                                                   </cursor>
-                                                </Label>
-                                             </children>
-                                             <HBox.margin>
-                                                <Insets right="10.0" />
-                                             </HBox.margin>
-                                          </HBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                                       <children>
-                                          <MenuButton fx:id="variableSetter" alignment="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="146.0" text="Variable setter">
+                                          <MenuButton fx:id="variableSetter" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="178.0" text="Variable setter">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -323,22 +296,54 @@
                                                 <CheckMenuItem mnemonicParsing="false" onAction="#selectedOption" text="z" />
                                              </items>
                                           </MenuButton>
-                                          <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="&gt;x">
+                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="224.0" spacing="1.0" style="-fx-border-color: white;">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="123.0" text="Setted variable:  " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </Label>
+                                                <Label fx:id="settedVariable" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="41.0" text="None" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Button layoutX="120.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="&gt;x">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="&lt;x">
+                                          <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="&lt;x">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button layoutX="272.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="+x">
+                                          <Button layoutX="272.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="+x">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="-x">
+                                          <Button layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="-x">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Button>
+                                          <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#variableStackOp" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: orange;" text="save">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -347,19 +352,19 @@
                                     </HBox>
                                  </children>
                               </VBox>
+                              <Button mnemonicParsing="false" onAction="#showOperationsManager" prefHeight="39.0" prefWidth="565.0" style="-fx-background-color: yellow;" text="Custom operations manager">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                            <padding>
                               <Insets left="30.0" right="30.0" />
                            </padding>
                         </VBox>
-                        <Button mnemonicParsing="false" onAction="#showOperationsManager" prefHeight="39.0" prefWidth="565.0" style="-fx-background-color: yellow;" text="Custom operations manager">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                   </VBox>
                </children>

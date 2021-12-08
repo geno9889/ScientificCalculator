@@ -49,6 +49,7 @@ public class VariablesOperationsTest {
         assertTrue(op.containsKey("+"));
         assertTrue(op.containsKey("-"));
         assertTrue(op.containsKey("<"));
+        assertTrue(op.containsKey("save"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -183,10 +184,10 @@ public class VariablesOperationsTest {
     }
     
     @Test
-    public void testSave(){
-        operations.save();
+    public void testSave() throws NoSuchMethodException{
+        operations.saveOrRestore("save");
         assertEquals("The size of temporanySave stack is not 1", 1, operations.getTemporanySave().size());
-        operations.save();
+        operations.saveOrRestore("save");
         assertEquals("The size of temporanySave stack is not 2", 2, operations.getTemporanySave().size());
     }
     

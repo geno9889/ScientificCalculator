@@ -41,6 +41,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         operations.put("<", "minorX");
         operations.put("+", "plusX");
         operations.put("-", "minusX");
+        operations.put("save", "save");
     }
     
     @Override
@@ -65,6 +66,19 @@ public class VariablesOperations implements SingleOperationsInterface{
         return false;
     }
     
+    public boolean saveOrRestore(String operationName) throws NoSuchMethodException{
+        Method m1;
+        if(operationName.equals("save")){
+            try {
+                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
+                m1.invoke(this);
+            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException ex1) {
+                Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            return true;
+        }
+        return false;
+    }
     
     private void majorX(Stack stackNumbers, Character variable) throws StackBadSizeException{
         if(stackNumbers.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
@@ -102,7 +116,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         return operations.containsKey(op) && variables.containsKey(variable);
     }
     
-    public void save(){
+    private void save(){
         temporanySave.push(variables);
     }
     
