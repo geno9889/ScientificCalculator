@@ -40,6 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 /**
@@ -139,7 +140,7 @@ public class FXMLDocumentController implements Initializable {
         try {
                 Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
                 c.executeSingleOperation(sourceButton.getText());
-                if (sourceButton.getText().contentEquals("clear") || ( sourceButton.getText().contentEquals("drop") && c.getStackNumbers().size() == 1)){     //case of operation "clear" and particulare case of drop  of StackOperations
+                if (sourceButton.getText().contentEquals("clear") || ( sourceButton.getText().contentEquals("drop") && c.getStackNumbers().size() == 1) || ( sourceButton.getText().contentEquals("drop") && c.getStackNumbers().size() == 0)){     //case of operation "clear" and particulare case of drop  of StackOperations
                     stackNumbers.clear();
                     stackNumbers.add("");
                 }
@@ -250,6 +251,11 @@ public class FXMLDocumentController implements Initializable {
             Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
             String op = sourceButton.getText();
             c.executeSingleOperation(op);
+            final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initStyle(StageStyle.UTILITY);
+            alert.setTitle("Save");
+            alert.setHeaderText("Successful save");
+            alert.show();
         } catch (StackBadSizeException | MathematicalException | NullVariableException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
