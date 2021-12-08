@@ -112,7 +112,6 @@ public class VariablesOperations implements SingleOperationsInterface{
     }
     
     private void save(){
-        System.out.println("sesso");
         temporanySave.push(variables);
     }
     
