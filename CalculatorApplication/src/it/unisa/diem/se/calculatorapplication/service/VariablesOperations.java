@@ -27,8 +27,7 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     private HashMap<String, String> operations;
     private HashMap<Character, ComplexNumber> variables;
-    private Stack<HashMap<Character, ComplexNumber>> temporanyStack;   
-    
+    private Stack<HashMap<Character, ComplexNumber>> temporanyStack;
     public VariablesOperations(){
         operations = new HashMap<>();
         variables = new HashMap<>();
@@ -118,7 +117,8 @@ public class VariablesOperations implements SingleOperationsInterface{
     
     private void restore() throws StackBadSizeException{
         if(temporanyStack.isEmpty()) throw new StackBadSizeException("There is no one element into restore stack variables");
-        variables = (HashMap<Character, ComplexNumber>)temporanyStack.pop();
+        variables.clear();
+        variables = ((HashMap<Character, ComplexNumber>)temporanyStack.pop());
     }
     
 

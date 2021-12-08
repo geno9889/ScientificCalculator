@@ -81,7 +81,8 @@ public class VariablesOperationsTest {
         alphabet.add('y');
         alphabet.add('z');
         assertEquals(alphabet, variables.keySet());
-        assertNotNull(operations.getTemporanyStack());
+        Stack<HashMap<Character, ComplexNumber>> temporanySave =operations.getTemporanyStack();
+        assertNotNull(temporanySave);
         stackNumbers = new Stack<>();
         assertNotNull(stackNumbers);
     }
@@ -186,35 +187,35 @@ public class VariablesOperationsTest {
     
     @Test
     public void testSave() throws Exception{
+        Stack stackRestore = operations.getTemporanyStack();
         Boolean r = operations.executeIfExists("save", stackNumbers);
         assertTrue("Operation doesn't exists",r);
-        assertEquals("The size of temporanyStack stack is not 1", 1, operations.getTemporanyStack().size());
+        assertEquals("The size of temporanyStack stack is not 1", 1, stackRestore.size());
         operations.executeIfExists("save", stackNumbers);
-        assertEquals("The size of temporanyStack stack is not 2", 2, operations.getTemporanyStack().size());
-        operations.getTemporanyStack().clear();
+        assertEquals("The size of temporanyStack stack is not 2", 2, stackRestore.size());
+        stackRestore.clear();
     }
     
     @Test
     public void testValidRestore() throws Exception{
         Stack stackRestore = operations.getTemporanyStack();
-        stackRestore.push(new HashMap<>());
-        stackRestore.push(new HashMap<>());
+        stackRestore.push(operations.getVariables());
+        stackRestore.push(operations.getVariables());
         Boolean r = operations.executeIfExists("restore", stackNumbers);
         assertTrue("Operation doesn't exists",r);
         assertEquals("Restore not executed", 1, stackRestore.size() );
-        operations.getTemporanyStack().clear();
+        stackRestore.clear();
     }
-    
-    @Test(expected = StackBadSizeException.class)
+
+    @Test (expected = StackBadSizeException.class)
     public void testInvalidRestore() throws Exception{
         Stack stackRestore = operations.getTemporanyStack();
-        stackRestore.push(new HashMap<>());
-        stackRestore.push(new HashMap<>());
+        stackRestore.push(operations.getVariables());
+        stackRestore.push(operations.getVariables());
         Boolean r = operations.executeIfExists("restore", stackNumbers);
         assertTrue("Operation doesn't exists",r);
-        Boolean z = operations.executeIfExists("restore", stackNumbers);
-        assertTrue("Operation doesn't exists",z);
+        r = operations.executeIfExists("restore", stackNumbers);
+        assertTrue("Operation doesn't exists",r);
         operations.executeIfExists("restore", stackNumbers);
-        operations.getTemporanyStack().clear();
     }
 }
