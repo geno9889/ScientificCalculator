@@ -63,7 +63,7 @@ public class VariablesOperations implements SingleOperationsInterface{
             }
             return true;
         }
-        if(operationName.equals("save") || operationName.equals("restore")){
+        if(operationName.equals("save")){
             try {
                 m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
                 m1.invoke(this);
@@ -115,11 +115,6 @@ public class VariablesOperations implements SingleOperationsInterface{
         temporanyStack.push(variables);
     }
     
-    private void restore() throws StackBadSizeException{
-        if(temporanyStack.isEmpty()) throw new StackBadSizeException("There is no one element into restore stack variables");
-        variables.clear();
-        variables = ((HashMap<Character, ComplexNumber>)temporanyStack.pop());
-    }
     
 
 }
