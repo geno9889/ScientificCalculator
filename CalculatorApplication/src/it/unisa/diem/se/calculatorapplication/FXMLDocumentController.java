@@ -132,7 +132,7 @@ public class FXMLDocumentController implements Initializable {
         if(txtfield.getText().compareTo("") != 0){
             al.setTitle("Error");
             al.setHeaderText("Input error");
-            al.setContentText("Can't use operations in input");
+            al.setContentText("Can't execute operation with input text field not empty");
             al.show();
             return;
         }
