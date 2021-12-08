@@ -50,6 +50,7 @@ public class VariablesOperationsTest {
         assertTrue(op.containsKey("-"));
         assertTrue(op.containsKey("<"));
         assertTrue(op.containsKey("save"));
+        assertTrue(op.containsKey("restore"));
         HashMap<Character, ComplexNumber> variables = operations.getVariables();
         assertNotNull(variables);
         Set<Character> alphabet = new HashSet<>();
@@ -80,7 +81,7 @@ public class VariablesOperationsTest {
         alphabet.add('y');
         alphabet.add('z');
         assertEquals(alphabet, variables.keySet());
-        assertNotNull(operations.getTemporanySave());
+        assertNotNull(operations.getTemporanyStack());
         stackNumbers = new Stack<>();
         assertNotNull(stackNumbers);
     }
@@ -184,16 +185,36 @@ public class VariablesOperationsTest {
     }
     
     @Test
-    public void testSave() throws NoSuchMethodException, StackBadSizeException, NullVariableException{
+    public void testSave() throws Exception{
+        Boolean r = operations.executeIfExists("save", stackNumbers);
+        assertTrue("Operation doesn't exists",r);
+        assertEquals("The size of temporanyStack stack is not 1", 1, operations.getTemporanyStack().size());
         operations.executeIfExists("save", stackNumbers);
-        assertEquals("The size of temporanySave stack is not 1", 1, operations.getTemporanySave().size());
-        operations.executeIfExists("save", stackNumbers);
-        assertEquals("The size of temporanySave stack is not 2", 2, operations.getTemporanySave().size());
+        assertEquals("The size of temporanyStack stack is not 2", 2, operations.getTemporanyStack().size());
+        operations.getTemporanyStack().clear();
     }
     
     @Test
-    public void testRestore(){
-        stackNumbers.push(new ComplexNumber(0,1));
-        assertEquals("Restore not executed", operations.getTemporanySave().get('a'), new ComplexNumber(0, 1));
+    public void testValidRestore() throws Exception{
+        Stack stackRestore = operations.getTemporanyStack();
+        stackRestore.push(new HashMap<>());
+        stackRestore.push(new HashMap<>());
+        Boolean r = operations.executeIfExists("restore", stackNumbers);
+        assertTrue("Operation doesn't exists",r);
+        assertEquals("Restore not executed", 1, stackRestore.size() );
+        operations.getTemporanyStack().clear();
+    }
+    
+    @Test(expected = StackBadSizeException.class)
+    public void testInvalidRestore() throws Exception{
+        Stack stackRestore = operations.getTemporanyStack();
+        stackRestore.push(new HashMap<>());
+        stackRestore.push(new HashMap<>());
+        Boolean r = operations.executeIfExists("restore", stackNumbers);
+        assertTrue("Operation doesn't exists",r);
+        Boolean z = operations.executeIfExists("restore", stackNumbers);
+        assertTrue("Operation doesn't exists",z);
+        operations.executeIfExists("restore", stackNumbers);
+        operations.getTemporanyStack().clear();
     }
 }

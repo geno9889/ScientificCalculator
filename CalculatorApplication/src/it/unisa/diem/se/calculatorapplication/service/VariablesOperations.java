@@ -27,12 +27,12 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     private HashMap<String, String> operations;
     private HashMap<Character, ComplexNumber> variables;
-    Stack<HashMap<Character, ComplexNumber>> temporanySave = new Stack<HashMap<Character, ComplexNumber>>();   
+    private Stack<HashMap<Character, ComplexNumber>> temporanyStack;   
     
     public VariablesOperations(){
         operations = new HashMap<>();
         variables = new HashMap<>();
-        temporanySave = new Stack<>();
+        temporanyStack = new Stack<>();
         
         for(int i = 97; i<=122; i++){   //initialize variables in Map through ASCII code
             variables.put((char) i, null);
@@ -42,6 +42,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         operations.put("+", "plusX");
         operations.put("-", "minusX");
         operations.put("save", "save");
+        operations.put("restore", "restore");
     }
     
     @Override
@@ -63,7 +64,7 @@ public class VariablesOperations implements SingleOperationsInterface{
             }
             return true;
         }
-        if(operationName.equals("save")){
+        if(operationName.equals("save") || operationName.equals("restore")){
             try {
                 m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
                 m1.invoke(this);
@@ -112,13 +113,12 @@ public class VariablesOperations implements SingleOperationsInterface{
     }
     
     private void save(){
-        temporanySave.push(variables);
+        temporanyStack.push(variables);
     }
     
-    private void restore(Stack temporanyStack, Character variable) throws StackBadSizeException{
-        if(temporanyStack.isEmpty()) throw new StackBadSizeException("There is no one element into stack");
-        ComplexNumber number = (ComplexNumber) temporanyStack.pop();
-        variables.put(variable, number);
+    private void restore() throws StackBadSizeException{
+        if(temporanyStack.isEmpty()) throw new StackBadSizeException("There is no one element into restore stack variables");
+        variables = (HashMap<Character, ComplexNumber>)temporanyStack.pop();
     }
     
 
