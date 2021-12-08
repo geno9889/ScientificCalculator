@@ -27,11 +27,12 @@ public class VariablesOperations implements SingleOperationsInterface{
 
     private HashMap<String, String> operations;
     private HashMap<Character, ComplexNumber> variables;
-    private Stack<HashMap<Character, ComplexNumber>> temporanySave;   
+    private Stack<HashMap<Character, ComplexNumber>> temporanySave;
     public VariablesOperations(){
         operations = new HashMap<>();
         variables = new HashMap<>();
         temporanySave = new Stack<>();
+        
         for(int i = 97; i<=122; i++){   //initialize variables in Map through ASCII code
             variables.put((char) i, null);
         }
@@ -39,6 +40,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         operations.put("<", "minorX");
         operations.put("+", "plusX");
         operations.put("-", "minusX");
+        operations.put("save", "save");
     }
     
     @Override
@@ -57,6 +59,20 @@ public class VariablesOperations implements SingleOperationsInterface{
                     throw (StackBadSizeException)ex2.getCause();
                 if(ex2.getCause() instanceof NullVariableException)
                     throw (NullVariableException) ex2.getCause();
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean saveOrRestore(String operationName) throws NoSuchMethodException{
+        Method m1;
+        if(operationName.equals("save") ){
+            try {
+                m1 = VariablesOperations.class.getDeclaredMethod(operations.get(operationName));
+                m1.invoke(this);
+            } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InvocationTargetException ex1) {
+                Logger.getLogger(VariablesOperations.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return true;
         }
@@ -100,7 +116,7 @@ public class VariablesOperations implements SingleOperationsInterface{
         return operations.containsKey(op) && variables.containsKey(variable);
     }
     
-    public void save(){
+    private void save(){
         temporanySave.push(variables);
     }
 

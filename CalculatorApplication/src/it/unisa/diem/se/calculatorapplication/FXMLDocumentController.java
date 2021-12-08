@@ -11,6 +11,7 @@ import it.unisa.diem.se.calculatorapplication.entity.ComplexNumber;
 import it.unisa.diem.se.calculatorapplication.entity.MathematicalException;
 import it.unisa.diem.se.calculatorapplication.service.NullVariableException;
 import it.unisa.diem.se.calculatorapplication.service.StackBadSizeException;
+import it.unisa.diem.se.calculatorapplication.service.VariablesOperations;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -247,16 +248,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void variableStackOp(ActionEvent event) {
         try {
-                Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
-                String op = sourceButton.getText();
-                c.executeSingleOperation(op);
-                if(c.getStackNumbers().empty()){
-                    stackNumbers.clear();
-                    stackNumbers.add("");
-                }
-                else
-                    recreateStack();
-        } catch (NullVariableException | StackBadSizeException | MathematicalException ex) {
+            Button sourceButton = (Button) event.getSource();       //understand which button is clicked 
+            String op = sourceButton.getText();
+            ((VariablesOperations)c.getSingleOperations().get(2)).saveOrRestore(op);
+        } catch (NoSuchMethodException ex) {
             Alert al= new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
             al.setHeaderText("Save/restore error");
