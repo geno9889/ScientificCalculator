@@ -27,7 +27,7 @@ public class CalculatorApplication extends Application {
         Image image = new Image("/images/calculatorimage.png");
         stage.getIcons().add(image);
         stage.setScene(scene);
-        stage.setMaxWidth(950);
+        stage.setMaxWidth(1050);
         stage.setMaxHeight(950);
         stage.setResizable(false);
         stage.show();

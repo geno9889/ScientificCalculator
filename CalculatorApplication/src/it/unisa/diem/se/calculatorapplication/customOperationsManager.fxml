@@ -15,11 +15,11 @@
    <children>
       <VBox prefHeight="450.0" prefWidth="600.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="settingBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black;">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Label text="Operation name:" textFill="WHITE">
+                        <Label fx:id="nameLabel" text="Operation name:" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -33,7 +33,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
-                        <Label text="Sequence of operations:" textFill="WHITE">
+                        <Label fx:id="sequenceLabel" text="Sequence of operations:" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
